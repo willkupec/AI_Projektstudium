@@ -13,3 +13,5 @@ curl -L -o /usr/bin/jq.exe https://github.com/stedolan/jq/releases/latest/downlo
 in git bash rein pasten
 3.
 jq --version
+Beispiel für die Benutzung:
+<Valid CURL here please> | jq 
