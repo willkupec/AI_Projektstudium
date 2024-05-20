@@ -13,13 +13,13 @@
 		E6451F382BF7D2A900E8F481 /* CampusEventAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6451F372BF7D2A900E8F481 /* CampusEventAppTests.swift */; };
 		E6451F422BF7D2A900E8F481 /* CampusEventAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6451F412BF7D2A900E8F481 /* CampusEventAppUITests.swift */; };
 		E6451F442BF7D2A900E8F481 /* CampusEventAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6451F432BF7D2A900E8F481 /* CampusEventAppUITestsLaunchTests.swift */; };
-		E6451F532BF7D30900E8F481 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6451F512BF7D30900E8F481 /* LoginView.swift */; };
-		E6451F552BF7D31400E8F481 /* SignUpView_0.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6451F542BF7D31400E8F481 /* SignUpView_0.swift */; };
-		E6451F572BF7D31D00E8F481 /* SignUpView_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6451F562BF7D31D00E8F481 /* SignUpView_1.swift */; };
 		E6451F592BF7D43100E8F481 /* HomeView_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6451F582BF7D43100E8F481 /* HomeView_1.swift */; };
 		E6451F5B2BF7D47700E8F481 /* HomeView_0.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6451F5A2BF7D47700E8F481 /* HomeView_0.swift */; };
 		E6451F5F2BF7D92900E8F481 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6451F5E2BF7D92900E8F481 /* CustomTabBar.swift */; };
 		E6451F612BF7DCEE00E8F481 /* HomeView_CustomTabBar_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6451F602BF7DCEE00E8F481 /* HomeView_CustomTabBar_Test.swift */; };
+		E67AAD572BFB647100DFE963 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67AAD562BFB647100DFE963 /* LoginView.swift */; };
+		E67AAD592BFB648300DFE963 /* SignUpView_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67AAD582BFB648300DFE963 /* SignUpView_1.swift */; };
+		E67AAD5B2BFB649100DFE963 /* SignUpView_0.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67AAD5A2BFB649100DFE963 /* SignUpView_0.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,13 +49,13 @@
 		E6451F3D2BF7D2A900E8F481 /* CampusEventAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CampusEventAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6451F412BF7D2A900E8F481 /* CampusEventAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusEventAppUITests.swift; sourceTree = "<group>"; };
 		E6451F432BF7D2A900E8F481 /* CampusEventAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusEventAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		E6451F512BF7D30900E8F481 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = ../../TestApp/TestApp/LoginView.swift; sourceTree = "<group>"; };
-		E6451F542BF7D31400E8F481 /* SignUpView_0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignUpView_0.swift; path = ../../TestApp/TestApp/SignUpView_0.swift; sourceTree = "<group>"; };
-		E6451F562BF7D31D00E8F481 /* SignUpView_1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignUpView_1.swift; path = ../../TestApp/TestApp/SignUpView_1.swift; sourceTree = "<group>"; };
 		E6451F582BF7D43100E8F481 /* HomeView_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView_1.swift; sourceTree = "<group>"; };
 		E6451F5A2BF7D47700E8F481 /* HomeView_0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView_0.swift; sourceTree = "<group>"; };
 		E6451F5E2BF7D92900E8F481 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		E6451F602BF7DCEE00E8F481 /* HomeView_CustomTabBar_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView_CustomTabBar_Test.swift; sourceTree = "<group>"; };
+		E67AAD562BFB647100DFE963 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = "../../../../../Desktop/AI_Projektstudium-main/CampusEventApp/CampusEventApp/LoginView.swift"; sourceTree = "<group>"; };
+		E67AAD582BFB648300DFE963 /* SignUpView_1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignUpView_1.swift; path = "../../../../../Desktop/AI_Projektstudium-main/CampusEventApp/CampusEventApp/SignUpView_1.swift"; sourceTree = "<group>"; };
+		E67AAD5A2BFB649100DFE963 /* SignUpView_0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignUpView_0.swift; path = "../../../../../Desktop/AI_Projektstudium-main/CampusEventApp/CampusEventApp/SignUpView_0.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,9 +109,9 @@
 				E6451F262BF7D2A800E8F481 /* CampusEventAppApp.swift */,
 				E6451F5A2BF7D47700E8F481 /* HomeView_0.swift */,
 				E6451F582BF7D43100E8F481 /* HomeView_1.swift */,
-				E6451F512BF7D30900E8F481 /* LoginView.swift */,
-				E6451F562BF7D31D00E8F481 /* SignUpView_1.swift */,
-				E6451F542BF7D31400E8F481 /* SignUpView_0.swift */,
+				E67AAD562BFB647100DFE963 /* LoginView.swift */,
+				E67AAD582BFB648300DFE963 /* SignUpView_1.swift */,
+				E67AAD5A2BFB649100DFE963 /* SignUpView_0.swift */,
 				E6451F5E2BF7D92900E8F481 /* CustomTabBar.swift */,
 				E6451F602BF7DCEE00E8F481 /* HomeView_CustomTabBar_Test.swift */,
 				E6451F2A2BF7D2A800E8F481 /* Assets.xcassets */,
@@ -275,12 +275,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E67AAD592BFB648300DFE963 /* SignUpView_1.swift in Sources */,
 				E6451F612BF7DCEE00E8F481 /* HomeView_CustomTabBar_Test.swift in Sources */,
-				E6451F572BF7D31D00E8F481 /* SignUpView_1.swift in Sources */,
-				E6451F552BF7D31400E8F481 /* SignUpView_0.swift in Sources */,
+				E67AAD572BFB647100DFE963 /* LoginView.swift in Sources */,
 				E6451F5F2BF7D92900E8F481 /* CustomTabBar.swift in Sources */,
 				E6451F5B2BF7D47700E8F481 /* HomeView_0.swift in Sources */,
-				E6451F532BF7D30900E8F481 /* LoginView.swift in Sources */,
+				E67AAD5B2BFB649100DFE963 /* SignUpView_0.swift in Sources */,
 				E6451F272BF7D2A800E8F481 /* CampusEventAppApp.swift in Sources */,
 				E6451F592BF7D43100E8F481 /* HomeView_1.swift in Sources */,
 			);
