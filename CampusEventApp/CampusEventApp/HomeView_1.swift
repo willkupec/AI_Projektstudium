@@ -13,7 +13,7 @@ struct HomeView_1: View {
             //HeaderView
             
             ScrollView(.vertical, showsIndicators: false){
-                LoginView()
+                // LoginView()
                 //ScrollView
             }
             
