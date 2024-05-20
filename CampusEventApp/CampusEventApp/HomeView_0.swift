@@ -19,7 +19,7 @@ struct HomeView_0: View {
                     }
                     .tag(0)
             
-                LoginView()  //war nur zum ausprobieren
+                // LoginView()  //war nur zum ausprobieren
                     .tabItem {
                         Image(systemName: "magnifyingglass")
                         Text("Search")

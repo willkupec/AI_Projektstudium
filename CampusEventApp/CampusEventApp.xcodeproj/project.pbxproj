@@ -85,6 +85,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E081576E2BF957E80009B59E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E081576F2BF9580B0009B59E /* HomeView.swift */,
+				E08157712BF958490009B59E /* ChatView.swift */,
+				E08157732BF959C30009B59E /* NewsView.swift */,
+				E08157752BF959D80009B59E /* NotificationView.swift */,
+				E08157772BF959E80009B59E /* AccountView.swift */,
+				E08157792BF961EB0009B59E /* LoginView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		E6451F1A2BF7D2A800E8F481 = {
 			isa = PBXGroup;
 			children = (
@@ -114,11 +127,14 @@
 				E0EF5AF02BFBD6EA00F99C59 /* SignUpView_1.swift */,
 				E6451F262BF7D2A800E8F481 /* CampusEventAppApp.swift */,
 				E6451F5A2BF7D47700E8F481 /* HomeView_0.swift */,
+				E08157692BF94F510009B59E /* SignUpView_1.swift */,
 				E6451F582BF7D43100E8F481 /* HomeView_1.swift */,
 				E6451F5E2BF7D92900E8F481 /* CustomTabBar.swift */,
+				E6451F262BF7D2A800E8F481 /* CampusEventAppApp.swift */,
 				E6451F602BF7DCEE00E8F481 /* HomeView_CustomTabBar_Test.swift */,
 				E6451F2A2BF7D2A800E8F481 /* Assets.xcassets */,
 				E6451F2C2BF7D2A800E8F481 /* Preview Content */,
+				E081576B2BF957260009B59E /* MainView.swift */,
 			);
 			path = CampusEventApp;
 			sourceTree = "<group>";
@@ -282,6 +298,7 @@
 				E0EF5AF12BFBD6EA00F99C59 /* SignUpView_0.swift in Sources */,
 				E6451F612BF7DCEE00E8F481 /* HomeView_CustomTabBar_Test.swift in Sources */,
 				E6451F5F2BF7D92900E8F481 /* CustomTabBar.swift in Sources */,
+				E08157722BF958490009B59E /* ChatView.swift in Sources */,
 				E6451F5B2BF7D47700E8F481 /* HomeView_0.swift in Sources */,
 				E6451F272BF7D2A800E8F481 /* CampusEventAppApp.swift in Sources */,
 				E0EF5AF22BFBD6EA00F99C59 /* LoginView.swift in Sources */,
