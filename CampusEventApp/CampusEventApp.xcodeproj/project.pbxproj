@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E0EF5AF12BFBD6EA00F99C59 /* SignUpView_0.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EF5AEE2BFBD6EA00F99C59 /* SignUpView_0.swift */; };
+		E0EF5AF22BFBD6EA00F99C59 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EF5AEF2BFBD6EA00F99C59 /* LoginView.swift */; };
+		E0EF5AF32BFBD6EA00F99C59 /* SignUpView_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EF5AF02BFBD6EA00F99C59 /* SignUpView_1.swift */; };
+		E0EF5AF52BFBD74500F99C59 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = E0EF5AF42BFBD74500F99C59 /* .gitignore */; };
 		E6451F272BF7D2A800E8F481 /* CampusEventAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6451F262BF7D2A800E8F481 /* CampusEventAppApp.swift */; };
 		E6451F2B2BF7D2A800E8F481 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6451F2A2BF7D2A800E8F481 /* Assets.xcassets */; };
 		E6451F2E2BF7D2A800E8F481 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6451F2D2BF7D2A800E8F481 /* Preview Assets.xcassets */; };
@@ -17,9 +21,6 @@
 		E6451F5B2BF7D47700E8F481 /* HomeView_0.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6451F5A2BF7D47700E8F481 /* HomeView_0.swift */; };
 		E6451F5F2BF7D92900E8F481 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6451F5E2BF7D92900E8F481 /* CustomTabBar.swift */; };
 		E6451F612BF7DCEE00E8F481 /* HomeView_CustomTabBar_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6451F602BF7DCEE00E8F481 /* HomeView_CustomTabBar_Test.swift */; };
-		E67AAD572BFB647100DFE963 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67AAD562BFB647100DFE963 /* LoginView.swift */; };
-		E67AAD592BFB648300DFE963 /* SignUpView_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67AAD582BFB648300DFE963 /* SignUpView_1.swift */; };
-		E67AAD5B2BFB649100DFE963 /* SignUpView_0.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67AAD5A2BFB649100DFE963 /* SignUpView_0.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E0EF5AEE2BFBD6EA00F99C59 /* SignUpView_0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView_0.swift; sourceTree = "<group>"; };
+		E0EF5AEF2BFBD6EA00F99C59 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		E0EF5AF02BFBD6EA00F99C59 /* SignUpView_1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView_1.swift; sourceTree = "<group>"; };
+		E0EF5AF42BFBD74500F99C59 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		E6451F232BF7D2A800E8F481 /* CampusEventApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampusEventApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6451F262BF7D2A800E8F481 /* CampusEventAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusEventAppApp.swift; sourceTree = "<group>"; };
 		E6451F2A2BF7D2A800E8F481 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -53,9 +58,6 @@
 		E6451F5A2BF7D47700E8F481 /* HomeView_0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView_0.swift; sourceTree = "<group>"; };
 		E6451F5E2BF7D92900E8F481 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		E6451F602BF7DCEE00E8F481 /* HomeView_CustomTabBar_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView_CustomTabBar_Test.swift; sourceTree = "<group>"; };
-		E67AAD562BFB647100DFE963 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = "../../../../../Desktop/AI_Projektstudium-main/CampusEventApp/CampusEventApp/LoginView.swift"; sourceTree = "<group>"; };
-		E67AAD582BFB648300DFE963 /* SignUpView_1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignUpView_1.swift; path = "../../../../../Desktop/AI_Projektstudium-main/CampusEventApp/CampusEventApp/SignUpView_1.swift"; sourceTree = "<group>"; };
-		E67AAD5A2BFB649100DFE963 /* SignUpView_0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignUpView_0.swift; path = "../../../../../Desktop/AI_Projektstudium-main/CampusEventApp/CampusEventApp/SignUpView_0.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 		E6451F1A2BF7D2A800E8F481 = {
 			isa = PBXGroup;
 			children = (
+				E0EF5AF42BFBD74500F99C59 /* .gitignore */,
 				E6451F252BF7D2A800E8F481 /* CampusEventApp */,
 				E6451F362BF7D2A900E8F481 /* CampusEventAppTests */,
 				E6451F402BF7D2A900E8F481 /* CampusEventAppUITests */,
@@ -106,12 +109,12 @@
 		E6451F252BF7D2A800E8F481 /* CampusEventApp */ = {
 			isa = PBXGroup;
 			children = (
+				E0EF5AEF2BFBD6EA00F99C59 /* LoginView.swift */,
+				E0EF5AEE2BFBD6EA00F99C59 /* SignUpView_0.swift */,
+				E0EF5AF02BFBD6EA00F99C59 /* SignUpView_1.swift */,
 				E6451F262BF7D2A800E8F481 /* CampusEventAppApp.swift */,
 				E6451F5A2BF7D47700E8F481 /* HomeView_0.swift */,
 				E6451F582BF7D43100E8F481 /* HomeView_1.swift */,
-				E67AAD562BFB647100DFE963 /* LoginView.swift */,
-				E67AAD582BFB648300DFE963 /* SignUpView_1.swift */,
-				E67AAD5A2BFB649100DFE963 /* SignUpView_0.swift */,
 				E6451F5E2BF7D92900E8F481 /* CustomTabBar.swift */,
 				E6451F602BF7DCEE00E8F481 /* HomeView_CustomTabBar_Test.swift */,
 				E6451F2A2BF7D2A800E8F481 /* Assets.xcassets */,
@@ -250,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6451F2E2BF7D2A800E8F481 /* Preview Assets.xcassets in Resources */,
+				E0EF5AF52BFBD74500F99C59 /* .gitignore in Resources */,
 				E6451F2B2BF7D2A800E8F481 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,14 +279,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E67AAD592BFB648300DFE963 /* SignUpView_1.swift in Sources */,
+				E0EF5AF12BFBD6EA00F99C59 /* SignUpView_0.swift in Sources */,
 				E6451F612BF7DCEE00E8F481 /* HomeView_CustomTabBar_Test.swift in Sources */,
-				E67AAD572BFB647100DFE963 /* LoginView.swift in Sources */,
 				E6451F5F2BF7D92900E8F481 /* CustomTabBar.swift in Sources */,
 				E6451F5B2BF7D47700E8F481 /* HomeView_0.swift in Sources */,
-				E67AAD5B2BFB649100DFE963 /* SignUpView_0.swift in Sources */,
 				E6451F272BF7D2A800E8F481 /* CampusEventAppApp.swift in Sources */,
+				E0EF5AF22BFBD6EA00F99C59 /* LoginView.swift in Sources */,
 				E6451F592BF7D43100E8F481 /* HomeView_1.swift in Sources */,
+				E0EF5AF32BFBD6EA00F99C59 /* SignUpView_1.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
