@@ -11,8 +11,7 @@ import SwiftUI
 struct CampusEventAppApp: App {
     var body: some Scene {
         WindowGroup {
-                //SignUpView_1()
-                LoginView()
+            MainView()
         }
     }
 }
