@@ -26,7 +26,7 @@ struct ChatRow: View {
                         
                         Spacer()
                         
-                        Text(chat.messages.last?.date.description ?? "")
+                        Text(chat.messages.last?.date.descriptiveString() ?? "")
                         
                     }
                     
