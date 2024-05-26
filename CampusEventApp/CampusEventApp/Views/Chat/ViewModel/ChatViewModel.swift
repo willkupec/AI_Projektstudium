@@ -24,6 +24,30 @@ class ChatsViewModel: ObservableObject {
         return sortedChats.filter { $0.person.name.lowercased().contains(query.lowercased()) }
     }
     
+    func getSectionMessages(for chat: Chat) -> [[Message]] {  //Seperates messages in sections
+        
+        var res = [[Message]]()
+        var tmp = [Message]()
+        
+        for message in chat.messages {
+            if let firstMessage = tmp.first {
+                let daysBetween = firstMessage.date.daysBetween(date: message.date)
+                if daysBetween >= 1 {
+                    res.append(tmp)
+                    tmp.removeAll()
+                    tmp.append(message)
+                } else {
+                    tmp.append(message)
+                }
+            } else {
+                tmp.append(message)
+            }
+        }
+        res.append(tmp)
+        return res
+    }
+    
+    
     func markAsUnread(_ newValue: Bool, chat: Chat) {    //Nachrichten als Read makieren wenn Chat geöffnet wird
         if let index = chats.firstIndex(where: { $0.id == chat.id }) {
             chats[index].hasUnreadMessage = newValue
