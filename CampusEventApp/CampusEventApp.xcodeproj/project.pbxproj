@@ -32,6 +32,8 @@
 		E67AAD862C025E1900DFE963 /* DateHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67AAD852C025E1900DFE963 /* DateHelpers.swift */; };
 		E67AAD882C0262E600DFE963 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67AAD872C0262E600DFE963 /* ChatViewModel.swift */; };
 		E67AAD8A2C02677A00DFE963 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67AAD892C02677A00DFE963 /* MessageView.swift */; };
+		E67AAD8E2C03D75700DFE963 /* HomeTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67AAD8D2C03D75700DFE963 /* HomeTokens.swift */; };
+		E67AAD902C03D77500DFE963 /* HomeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67AAD8F2C03D77500DFE963 /* HomeInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +82,8 @@
 		E67AAD852C025E1900DFE963 /* DateHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelpers.swift; sourceTree = "<group>"; };
 		E67AAD872C0262E600DFE963 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		E67AAD892C02677A00DFE963 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		E67AAD8D2C03D75700DFE963 /* HomeTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTokens.swift; sourceTree = "<group>"; };
+		E67AAD8F2C03D77500DFE963 /* HomeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,9 +179,9 @@
 		E67AAD612BFBF51B00DFE963 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E67AAD8B2C03D6A000DFE963 /* HomeView */,
 				E67AAD6B2BFCE5DD00DFE963 /* Chat */,
 				E67AAD5C2BFBF51B00DFE963 /* AccountView.swift */,
-				E67AAD5E2BFBF51B00DFE963 /* HomeView.swift */,
 				E67AAD5F2BFBF51B00DFE963 /* NewsView.swift */,
 				E67AAD602BFBF51B00DFE963 /* NotificationView.swift */,
 			);
@@ -211,6 +215,24 @@
 				E67AAD872C0262E600DFE963 /* ChatViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E67AAD8B2C03D6A000DFE963 /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				E67AAD5E2BFBF51B00DFE963 /* HomeView.swift */,
+				E67AAD8C2C03D6BB00DFE963 /* Components */,
+			);
+			path = HomeView;
+			sourceTree = "<group>";
+		};
+		E67AAD8C2C03D6BB00DFE963 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E67AAD8D2C03D75700DFE963 /* HomeTokens.swift */,
+				E67AAD8F2C03D77500DFE963 /* HomeInfo.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -344,6 +366,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E67AAD902C03D77500DFE963 /* HomeInfo.swift in Sources */,
 				E0EF5AF12BFBD6EA00F99C59 /* SignUpView_0.swift in Sources */,
 				E67AAD682BFBF52800DFE963 /* MainView.swift in Sources */,
 				E6451F612BF7DCEE00E8F481 /* HomeView_CustomTabBar_Test.swift in Sources */,
@@ -356,6 +379,7 @@
 				E67AAD642BFBF51B00DFE963 /* HomeView.swift in Sources */,
 				E6451F272BF7D2A800E8F481 /* CampusEventAppApp.swift in Sources */,
 				E67AAD8A2C02677A00DFE963 /* MessageView.swift in Sources */,
+				E67AAD8E2C03D75700DFE963 /* HomeTokens.swift in Sources */,
 				E0EF5AF22BFBD6EA00F99C59 /* LoginView.swift in Sources */,
 				E67AAD622BFBF51B00DFE963 /* AccountView.swift in Sources */,
 				E67AAD652BFBF51B00DFE963 /* NewsView.swift in Sources */,
