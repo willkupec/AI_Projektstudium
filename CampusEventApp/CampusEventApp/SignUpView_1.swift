@@ -6,10 +6,16 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct SignUpView_1: View {
     @State private var email = ""
     @State private var password = ""
+    
+    init() {
+        FirebaseApp.configure()
+    }
+    
     
     var body: some View {
         VStack{
@@ -44,7 +50,7 @@ struct SignUpView_1: View {
                 
                 HStack{
                     
-                    SecureField("Code", text: $password)
+                    SecureField("Passwort", text: $password)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .cornerRadius(20)
                         .frame(height: 50)
@@ -52,22 +58,11 @@ struct SignUpView_1: View {
                         .padding(.trailing, 10)
                         .shadow(radius: 5, x:0, y:5)
                     
-                    Button(action: {
-                        //perfome stuff
-                    }){
-                        Text("Get Code")
-                            .foregroundColor(.white)
-                            .frame(width: 100, height: 40)
-                            .background(Color.green)
-                            .cornerRadius(20)
-                            .shadow(radius: 5, x:0 , y:5)
-                            .padding(.trailing, 30)
-                    }
                     
                 }
                 
                 Button(action: {
-                    //perform Login
+                    createUser()
                 }){
                     Text("Create Account")
                         .foregroundColor(.white)
@@ -99,6 +94,20 @@ struct SignUpView_1: View {
                 .resizable()
                 .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
                 .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/))
+    }
+    
+    
+    
+    
+    func createUser() {
+        Auth.auth().createUser(withEmail: email, password: password) {
+            result, err in
+            if let err = err {
+                print("Failed to create User", err)
+            }
+            
+            print("Successfully created user: \(result?.user.uid ?? "")")
+        }
     }
 }
 

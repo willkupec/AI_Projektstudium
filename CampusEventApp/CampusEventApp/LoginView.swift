@@ -12,6 +12,7 @@ import FirebaseCore
 struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
+    @State private var isSignedIn  = false
     
     init() {
         FirebaseApp.configure()
@@ -58,7 +59,7 @@ struct LoginView: View {
                         .shadow(radius: 5, x:0, y:5)
                     
                     Button(action: {
-                        //perform Login
+                        loginUser()
                     }){
                         Text("Login")
                             .foregroundColor(.white)
@@ -93,7 +94,21 @@ struct LoginView: View {
                 
     }
     
+    private func loginUser() {
+        Auth.auth().signIn(withEmail: email, password: password) {
+            result, err in
+            if let err = err {
+                print("Failed to log in", err)
+                return
+            }
+            print("Sucessful logged in as user: \(result?.user.uid ?? "")")
+            isSignedIn = true
+        }
+    }
+    
 }
+
+
 
     
 struct LoginView_Previews: PreviewProvider {

@@ -13,7 +13,7 @@ import FirebaseCore
 struct CampusEventAppApp: App {
     var body: some Scene {
         WindowGroup {
-            MainView()
+            LoginView()
         }
     }
 }
