@@ -9,13 +9,12 @@ import SwiftUI
 import Firebase
 
 struct SignUpView_1: View {
-    @State private var email = ""
-    @State private var password = ""
     
     init() {
         FirebaseApp.configure()
     }
-    
+    @State private var email = ""
+    @State private var password = ""
     
     var body: some View {
         VStack{
