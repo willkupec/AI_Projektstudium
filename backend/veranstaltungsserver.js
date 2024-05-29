@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static('public'));
 
-let mongooseStuff = ""
+let mongooseStuff = "mongodb+srv://canwrob:mopsmopsmops@cluster0.tv4rxwp.mongodb.net/Projektstudium"
 
 mongoose.connect(mongooseStuff, {
     useNewUrlParser: true,
