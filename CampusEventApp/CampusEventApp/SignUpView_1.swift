@@ -6,8 +6,13 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct SignUpView_1: View {
+    
+    init() {
+        FirebaseApp.configure()
+    }
     @State private var email = ""
     @State private var password = ""
     
@@ -44,29 +49,19 @@ struct SignUpView_1: View {
                 
                 HStack{
                     
-                    SecureField("Code", text: $password)
+                    SecureField("Passwort", text: $password)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .cornerRadius(20)
                         .frame(height: 50)
                         .padding(.leading, 30)
                         .padding(.trailing, 10)
                         .shadow(radius: 5, x:0, y:5)
-                    
-                    Button(action: {
-                        //perfome stuff
-                    }){
-                        Text("Get Code")
-                            .foregroundColor(.white)
-                            .frame(width: 100, height: 40)
-                            .background(Color.green)
-                            .cornerRadius(20)
-                            .shadow(radius: 5, x:0 , y:5)
-                            .padding(.trailing, 30)
-                    }
+        
                     
                 }
                 
                 Button(action: {
+                    Auth.auth().createUser()
                     //perform Login
                 }){
                     Text("Create Account")
