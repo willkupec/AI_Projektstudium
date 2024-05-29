@@ -165,11 +165,10 @@ struct MessageView: View {
     func sectionHeader(firstMessages message: Message) -> some View {
         ZStack {
             Text(message.date.descriptiveString(dateStyle: .medium))
-                .foregroundColor(.white)
+                .foregroundColor(.black)
                 .font(.system(size: 14, weight: .regular))
                 .frame(width: 120)
                 .padding(.vertical, 5)
-                .background(Capsule().foregroundColor(.blue))
         }
         .padding(.vertical, 5)
         .frame(maxWidth: .infinity)
