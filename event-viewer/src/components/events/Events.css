@@ -1,0 +1,47 @@
+.events-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  .event-row {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    width: 100%;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    gap: 10px;
+  }
+  
+  .event-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  .event-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px;
+    flex-grow: 1;
+  }
+  
+  .event-title {
+    font-size: 18px;
+    margin: 0;
+  }
+  
+  .event-dates {
+    font-size: 14px;
+    color: #555;
+    margin: 5px 0 0;
+  }
+  
