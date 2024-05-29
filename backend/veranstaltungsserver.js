@@ -28,7 +28,8 @@ const veranstaltungSchema = new mongoose.Schema({
     ende: { type: String, default: "" },
     typ: { type: String, default: "" },
     foto: { type: String, default: "" },
-    ort: { type: String, default: "" }
+    ort: { type: String, default: "" },
+    istLehrveranstaltung: { type: Boolean, default: false }
 });
 
 const Veranstaltung = mongoose.model('Veranstaltung', veranstaltungSchema, 'Veranstaltungen');
