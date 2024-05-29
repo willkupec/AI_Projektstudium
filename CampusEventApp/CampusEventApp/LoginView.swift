@@ -6,10 +6,17 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseCore
 
 struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
+    
+    init() {
+        FirebaseApp.configure()
+    }
+    
 
     var body: some View {
             VStack {
