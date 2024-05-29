@@ -12,42 +12,42 @@ struct HomeView_0: View {
     
     var body: some View {
         TabView(selection: $selectedTab) {
-                TabItemView(title: "Home")
+                HomeView()
                     .tabItem {
                         Image(systemName: "house.fill")
                         Text("Home")
                     }
                     .tag(0)
             
-                // LoginView()  //war nur zum ausprobieren
+                NewsView()
                     .tabItem {
                         Image(systemName: "magnifyingglass")
                         Text("Search")
                     }
                     .tag(1)
                 
-                Text("Reels")
+                ChatView()
                     .tabItem {
                         Image(systemName: "message")
                         Text("Reels")
                     }
                     .tag(2)
                 
-                Text("Activity")
+                NotificationView()
                     .tabItem {
                         Image(systemName: "newspaper")
                         Text("Activity")
                     }
                     .tag(3)
                 
-                Text("Profile")
+                AccountView()
                     .tabItem {
                         Image(systemName: "person.fill")
                         Text("Profile")
                     }
                     .tag(4)
             }
-            .accentColor(.purple) // Farbe der Tab-Leiste anpassen
+            .accentColor(.green) // Farbe der Tab-Leiste anpassen
             .buttonStyle(PlainButtonStyle())
             
         }

@@ -17,39 +17,43 @@ struct MainView: View {
     
     var body: some View {
         
-         TabView {
-         HomeView()
-         .tabItem() {
-         Image(systemName: "house.fill")
-         Text("Home")
-         }
-         
-         NewsView()
-         .tabItem() {
-         Image(systemName: "newspaper.fill")
-         Text("HTW News")
-         }
-         
-         ChatView()
-         .tabItem() {
-         Image(systemName: "message.fill")
-         Text("Chats")
-         }
-         
-         NotificationView()
-         .tabItem() {
-         Image(systemName: "bell.fill")
-         Text("Notifications")
-         }
-         
-         
-         AccountView()
-         .tabItem() {
-         Image(systemName: "person.fill")
-         Text("My Account")
-         }
-         
-         } 
+        
+    NavigationView{ //trying to hidde navbar
+            TabView {
+                HomeView()
+                    .tabItem() {
+                        Image(systemName: "house.fill")
+                        Text("Home")
+                    }
+                
+                NewsView()
+                    .tabItem() {
+                        Image(systemName: "newspaper.fill")
+                        Text("HTW News")
+                    }
+                
+                ChatView()
+                    .tabItem() {
+                        Image(systemName: "message.fill")
+                        Text("Chats")
+                    }
+                
+                NotificationView()
+                    .tabItem() {
+                        Image(systemName: "bell.fill")
+                        Text("Notifications")
+                    }
+                
+                
+                AccountView()
+                    .tabItem() {
+                        Image(systemName: "person.fill")
+                        Text("My Account")
+                    }
+                
+            }
+            .accentColor(.green)
+        }
     }
 }
 
