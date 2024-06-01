@@ -8,12 +8,6 @@
 import SwiftUI
 
 struct MainView: View {
-    @State private var username = ""
-    @State private var password = ""
-    @State private var wrongUsername = 0
-    @State private var wrongPassword = 0
-    @State private var showingLoginScreen = false
-    
     
     var body: some View {
         
@@ -38,8 +32,8 @@ struct MainView: View {
                         Text("Chats")
                     }
                 
-                NotificationView()
-                    .tabItem() {
+                EventsView()
+                    .tabItem {
                         Image(systemName: "bell.fill")
                         Text("Notifications")
                     }

@@ -6,18 +6,11 @@
 //
 
 import SwiftUI
-import Firebase
-import FirebaseCore
 
-struct LoginView: View {
+struct SignUpView: View {
     @State private var email = ""
     @State private var password = ""
-    @State private var isSignedIn  = false
-    
-    init() {
-        FirebaseApp.configure()
-    }
-    
+
     var body: some View {
         ZStack {
             Image("hintergrund")
@@ -25,7 +18,7 @@ struct LoginView: View {
                 .scaledToFill()
                 .ignoresSafeArea()
             
-            
+        
             VStack {
                 Image("Logo_HTW_Berlin.svg")
                     .resizable()
@@ -37,12 +30,12 @@ struct LoginView: View {
                 
                 VStack{
                     HStack {
-                        Text("Login")
+                        Text("Sign up")
                             .font(.largeTitle)
                             .fontWeight(.bold)
                             .frame(alignment: .leading)
                     }
-                    
+        
                     
                     TextField("Email/Matrikelnummer", text: $email)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -56,9 +49,8 @@ struct LoginView: View {
                         .frame(width: 300, height: 40)
                         .shadow(radius: 5, x:0, y:5)
                     Button(action: {
-                        //loginUser()
                     }, label: {
-                        Text("Login")
+                        Text("Create account")
                             .frame(width: 300, height: 40)
                             .foregroundColor(.black)
                             .background(Color.green)
@@ -71,25 +63,13 @@ struct LoginView: View {
                 .cornerRadius(30)
                 
             }
-            
-            /*
-             private func loginUser() {
-             Auth.auth().signIn(withEmail: email, password: password) {
-             result, err in
-             if let err = err {
-             print("Failed to log in", err)
-             return
-             }
-             print("Sucessful logged in as user: \(result?.user.uid ?? "")")
-             isSignedIn = true
-             }
-             }*/
-        }
-        
-    }
-struct LoginView_Previews: PreviewProvider {
-            static var previews: some View {
-                LoginView()
-            }
         }
     }
+}
+
+    
+struct SignUpView_Previews: PreviewProvider {
+    static var previews: some View {
+        SignUpView()
+    }
+}
