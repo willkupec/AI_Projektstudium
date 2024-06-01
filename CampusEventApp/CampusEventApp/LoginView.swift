@@ -25,7 +25,6 @@ struct LoginView: View {
                 .scaledToFill()
                 .ignoresSafeArea()
             
-            
             VStack {
                 Image("Logo_HTW_Berlin.svg")
                     .resizable()
@@ -35,7 +34,7 @@ struct LoginView: View {
                     .padding(.leading, 30)
                     .padding(.trailing, 30)
                 
-                VStack{
+                VStack {
                     HStack {
                         Text("Login")
                             .font(.largeTitle)
@@ -43,20 +42,20 @@ struct LoginView: View {
                             .frame(alignment: .leading)
                     }
                     
-                    
                     TextField("Email/Matrikelnummer", text: $email)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .cornerRadius(20)
                         .frame(width: 300, height: 40)
-                        .shadow(radius: 5, x:0, y:5)
+                        .shadow(radius: 5, x: 0, y: 5)
                     
                     SecureField("Password", text: $password)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .cornerRadius(20)
                         .frame(width: 300, height: 40)
-                        .shadow(radius: 5, x:0, y:5)
+                        .shadow(radius: 5, x: 0, y: 5)
+                    
                     Button(action: {
-                        //loginUser()
+                        loginUser()
                     }, label: {
                         Text("Login")
                             .frame(width: 300, height: 40)
@@ -64,32 +63,29 @@ struct LoginView: View {
                             .background(Color.green)
                     })
                     .cornerRadius(50)
-                    .shadow(radius: 5, x:0 , y:5)
+                    .shadow(radius: 5, x: 0, y: 5)
                 }
                 .frame(width: 350, height: 300, alignment: .center)
                 .background(Color.gray.opacity(0.2))
                 .cornerRadius(30)
-                
             }
-            
-            /*
-             private func loginUser() {
-             Auth.auth().signIn(withEmail: email, password: password) {
-             result, err in
-             if let err = err {
-             print("Failed to log in", err)
-             return
-             }
-             print("Sucessful logged in as user: \(result?.user.uid ?? "")")
-             isSignedIn = true
-             }
-             }*/
         }
-        
     }
+    
+    func loginUser() {
+        Auth.auth().signIn(withEmail: email, password: password) { result, err in
+            if let err = err {
+                print("Failed to log in", err)
+                return
+            }
+            print("Successfully logged in as user: \(result?.user.uid ?? "")")
+            isSignedIn = true
+        }
+    }
+}
+
 struct LoginView_Previews: PreviewProvider {
-            static var previews: some View {
-                LoginView()
-            }
-        }
+    static var previews: some View {
+        LoginView()
     }
+}
