@@ -7,16 +7,25 @@
 
 import SwiftUI
 import Firebase
-import FirebaseCore
+
+class FirebaseManager: NSObject {    //This is a fix for previewing the ios app otherwise it would not load
+    
+    let auth: Auth
+    
+    static let shared = FirebaseManager()  //Singelton object
+    
+    override init() {
+        FirebaseApp.configure()
+        self.auth = Auth.auth()
+        super.init()
+    }
+}
+
 
 struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var isSignedIn  = false
-    
-    init() {
-        FirebaseApp.configure()
-    }
     
     var body: some View {
         ZStack {
@@ -73,7 +82,7 @@ struct LoginView: View {
     }
     
     func loginUser() {
-        Auth.auth().signIn(withEmail: email, password: password) { result, err in
+        FirebaseManager.shared.auth.signIn(withEmail: email, password: password) { result, err in
             if let err = err {
                 print("Failed to log in", err)
                 return
