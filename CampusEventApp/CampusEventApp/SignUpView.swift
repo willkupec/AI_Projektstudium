@@ -75,8 +75,8 @@ struct SignUpView: View {
                 print("failed to create user: ", err)
                 return;
             }
-            
             print("Successfully created user: \(result?.user.uid ?? "")")
+            
         }
     }
     

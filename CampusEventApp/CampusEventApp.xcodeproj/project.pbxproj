@@ -60,6 +60,7 @@
 		E67AAE482C0DF4EF00DFE963 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = E67AAE472C0DF4EF00DFE963 /* FirebaseStorage */; };
 		E67AAE4A2C0DF4EF00DFE963 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = E67AAE492C0DF4EF00DFE963 /* FirebaseStorageCombine-Community */; };
 		E67AAE4C2C0DF4EF00DFE963 /* FirebaseVertexAI-Preview in Frameworks */ = {isa = PBXBuildFile; productRef = E67AAE4B2C0DF4EF00DFE963 /* FirebaseVertexAI-Preview */; };
+		E67AAE4E2C0E7FC700DFE963 /* LoginSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67AAE4D2C0E7FC700DFE963 /* LoginSignUpView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,7 @@
 		E6451F5E2BF7D92900E8F481 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		E6451F602BF7DCEE00E8F481 /* HomeView_CustomTabBar_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView_CustomTabBar_Test.swift; sourceTree = "<group>"; };
 		E67AAD912C07622400DFE963 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E67AAE4D2C0E7FC700DFE963 /* LoginSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSignUpView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +230,7 @@
 				E0C930942BFD39400098DB5B /* EventsView.swift */,
 				E0C930872BFD23860098DB5B /* AccountView.swift */,
 				E0C9308A2BFD23860098DB5B /* NewsView.swift */,
+				E67AAE4D2C0E7FC700DFE963 /* LoginSignUpView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -478,6 +481,7 @@
 				E00E1D5E2C0774AE00FD87C1 /* MessageView.swift in Sources */,
 				E0C930912BFD23860098DB5B /* NewsView.swift in Sources */,
 				E00E1D612C0774AE00FD87C1 /* DateHelpers.swift in Sources */,
+				E67AAE4E2C0E7FC700DFE963 /* LoginSignUpView.swift in Sources */,
 				E00E1D5D2C0774AE00FD87C1 /* ChatRow.swift in Sources */,
 				E00E1D602C0774AE00FD87C1 /* ChatViewModel.swift in Sources */,
 			);

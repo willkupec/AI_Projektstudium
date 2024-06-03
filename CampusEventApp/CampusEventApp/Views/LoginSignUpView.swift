@@ -1,25 +1,47 @@
 //
-//  ContentView.swift
-//  TestApp
+//  LoginSignUpView.swift
+//  CampusEventApp
 //
-//  Created on 14.05.24.
+//  Created on 04.06.24.
 //
 
 import SwiftUI
 import Firebase
 
+class FirebaseManager: NSObject {    //This is a fix for previewing the ios app otherwise it would not load
+    
+    let auth: Auth
+    
+    static let shared = FirebaseManager()  //Singelton object
+    
+    override init() {
+        FirebaseApp.configure()
+        self.auth = Auth.auth()
+        super.init()
+    }
+}
 
-struct LoginView: View {
+
+struct LoginSignUpView: View {
     @State private var email = ""
     @State private var password = ""
     
     @Binding var isLoggedIn: Bool // here is the Binding
     
-    
+    @State var isLoginMode = true;
     
     var body: some View {
         
-     
+        NavigationView{
+            ScrollView{
+                
+                Picker(selection: $isLoginMode, label: Text("Picker here")) {
+                    Text("Login")
+                        .tag(true)
+                    Text("Create Account")
+                        .tag(false)
+                }.pickerStyle(SegmentedPickerStyle())
+                    .padding()
                 
                 
                 
@@ -35,10 +57,17 @@ struct LoginView: View {
                         VStack {
                             HStack {
                                 
-                                Text("Login")
-                                    .font(.largeTitle)
-                                    .fontWeight(.bold)
-                                    .frame(alignment: .leading)
+                                if isLoginMode {
+                                    Text("Login")
+                                        .font(.largeTitle)
+                                        .fontWeight(.bold)
+                                        .frame(alignment: .leading)
+                                } else {
+                                    Text("Sign In")
+                                        .font(.largeTitle)
+                                        .fontWeight(.bold)
+                                        .frame(alignment: .leading)
+                                }
                             }
                             
                             TextField("Email/Matrikelnummer", text: $email)
@@ -53,7 +82,7 @@ struct LoginView: View {
                                 .frame(width: 300, height: 40)
                                 .shadow(radius: 5, x: 0, y: 5)
                             
-                            
+                            if isLoginMode {
                                 Button(action: {
                                     loginUser()
                                 }, label: {
@@ -64,14 +93,41 @@ struct LoginView: View {
                                 })
                                 .cornerRadius(50)
                                 .shadow(radius: 5, x: 0, y: 5)
-                            
+                            } else {
+                                Button(action: {
+                                    createNewAccount()
+                                }, label: {
+                                    Text("Create Account")
+                                        .frame(width: 300, height: 40)
+                                        .foregroundColor(.black)
+                                        .background(Color.green)
+                                })
+                                .cornerRadius(50)
+                                .shadow(radius: 5, x: 0, y: 5)
+                            }
                         }
                         .frame(width: 350, height: 300, alignment: .center)
                         .background(Color.gray.opacity(0.2))
                         .cornerRadius(30)
                     }
                 }
+        }
         
+    }
+    
+    
+    private func createNewAccount(){
+        FirebaseManager.shared.auth.createUser(withEmail: email, password: password){
+            result, err in
+            if let err = err {
+                print("failed to create user: ", err)
+                return;
+            }
+            print("Successfully created user: \(result?.user.uid ?? "")")
+            
+        }
+    }
+    
     
     
     func loginUser() {
@@ -86,11 +142,11 @@ struct LoginView: View {
     }
 }
 
-struct LoginView_Previews: PreviewProvider {
+struct LoginSignUpView_Previews: PreviewProvider {
     
      @State static var isLoggedIn = false
 
     static var previews: some View {
-        LoginView(isLoggedIn: $isLoggedIn)
+        LoginSignUpView(isLoggedIn: $isLoggedIn)
     }
 }
