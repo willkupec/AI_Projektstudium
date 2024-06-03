@@ -6,10 +6,16 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseCore
 
 struct SignUpView: View {
     @State private var email = ""
     @State private var password = ""
+    
+    init() {
+        FirebaseApp.configure()
+    }
 
     var body: some View {
         ZStack {
@@ -49,6 +55,7 @@ struct SignUpView: View {
                         .frame(width: 300, height: 40)
                         .shadow(radius: 5, x:0, y:5)
                     Button(action: {
+                        createNewAccount()
                     }, label: {
                         Text("Create account")
                             .frame(width: 300, height: 40)
@@ -65,6 +72,20 @@ struct SignUpView: View {
             }
         }
     }
+    
+    
+    private func createNewAccount(){
+        Auth.auth().createUser(withEmail: email, password: password){
+            result, err in
+            if let err = err {
+                print("failed to create user: ", err)
+                return;
+            }
+            
+            print("Successfully created user: \(result?.user.uid ?? "")")
+        }
+    }
+    
 }
 
     
