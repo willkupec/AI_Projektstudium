@@ -60,6 +60,7 @@
 		E67AAE482C0DF4EF00DFE963 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = E67AAE472C0DF4EF00DFE963 /* FirebaseStorage */; };
 		E67AAE4A2C0DF4EF00DFE963 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = E67AAE492C0DF4EF00DFE963 /* FirebaseStorageCombine-Community */; };
 		E67AAE4C2C0DF4EF00DFE963 /* FirebaseVertexAI-Preview in Frameworks */ = {isa = PBXBuildFile; productRef = E67AAE4B2C0DF4EF00DFE963 /* FirebaseVertexAI-Preview */; };
+		E67AAE522C0FB77E00DFE963 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67AAE512C0FB77E00DFE963 /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,7 @@
 		E6451F5E2BF7D92900E8F481 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		E6451F602BF7DCEE00E8F481 /* HomeView_CustomTabBar_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView_CustomTabBar_Test.swift; sourceTree = "<group>"; };
 		E67AAD912C07622400DFE963 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E67AAE512C0FB77E00DFE963 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,10 +225,10 @@
 		E0C9308C2BFD23860098DB5B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E67AAE4F2C0FB6DA00DFE963 /* AccountView */,
 				E00E1D592C0774AE00FD87C1 /* Chat */,
 				E00E1D502C0774AE00FD87C1 /* HomeView */,
 				E0C930942BFD39400098DB5B /* EventsView.swift */,
-				E0C930872BFD23860098DB5B /* AccountView.swift */,
 				E0C9308A2BFD23860098DB5B /* NewsView.swift */,
 			);
 			path = Views;
@@ -295,6 +297,23 @@
 				E6451F432BF7D2A900E8F481 /* CampusEventAppUITestsLaunchTests.swift */,
 			);
 			path = CampusEventAppUITests;
+			sourceTree = "<group>";
+		};
+		E67AAE4F2C0FB6DA00DFE963 /* AccountView */ = {
+			isa = PBXGroup;
+			children = (
+				E67AAE502C0FB75100DFE963 /* AccountModel */,
+				E0C930872BFD23860098DB5B /* AccountView.swift */,
+			);
+			path = AccountView;
+			sourceTree = "<group>";
+		};
+		E67AAE502C0FB75100DFE963 /* AccountModel */ = {
+			isa = PBXGroup;
+			children = (
+				E67AAE512C0FB77E00DFE963 /* ImagePicker.swift */,
+			);
+			path = AccountModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -469,6 +488,7 @@
 				E00E1D5F2C0774AE00FD87C1 /* ChatModel.swift in Sources */,
 				E6451F612BF7DCEE00E8F481 /* HomeView_CustomTabBar_Test.swift in Sources */,
 				E6451F5F2BF7D92900E8F481 /* CustomTabBar.swift in Sources */,
+				E67AAE522C0FB77E00DFE963 /* ImagePicker.swift in Sources */,
 				E6451F272BF7D2A800E8F481 /* CampusEventAppApp.swift in Sources */,
 				E00E1D5A2C0774AE00FD87C1 /* HomeInfo.swift in Sources */,
 				E00E1D482C0770F800FD87C1 /* SignUpView.swift in Sources */,
