@@ -1,6 +1,6 @@
 import Header from "../components/Header"
 
-const Home = () => {
+const Bahn = () => {
   return (
     <div>
       <Header />
@@ -8,4 +8,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Bahn
