@@ -1,6 +1,6 @@
 import Header from "../components/Header"
 
-const Events = () => {
+const Mensa = () => {
   return (
     <div>
       <Header />
@@ -8,4 +8,4 @@ const Events = () => {
   )
 }
 
-export default Events
+export default Mensa

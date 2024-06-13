@@ -29,30 +29,25 @@ const Header = () => {
     <AppBar position="static" sx={{ backgroundColor: "#9fe68b" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            sx={{
-              mr: 8,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            HTW Helper
-          </Typography>
+          <Button component={Link} to="/">
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              sx={{
+                mr: 8,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "monospace",
+                fontWeight: 700,
+                color: "white",
+                textDecoration: "none",
+              }}
+            >
+              HTW Helper
+            </Typography>
+          </Button>
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <Button
-              component={Link}
-              to="/events"
-              sx={{ my: 2, color: "white", display: "block" }}
-            >
-              Events
-            </Button>
             <Button
               component={Link}
               to="/bahn"
@@ -60,9 +55,16 @@ const Header = () => {
             >
               Bahn
             </Button>
+            <Button
+              component={Link}
+              to="/mensa"
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              Mensa
+            </Button>
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          {/*           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -90,7 +92,7 @@ const Header = () => {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
+          </Box> */}
         </Toolbar>
       </Container>
     </AppBar>
