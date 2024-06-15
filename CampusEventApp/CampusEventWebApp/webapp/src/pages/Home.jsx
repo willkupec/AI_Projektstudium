@@ -4,6 +4,7 @@ import ListEvent from "../components/ListEvent"
 import { Grid } from "@mui/material"
 
 const event1 = {
+  id: 1,
   title: "Jazz Party",
   date: "10.02.2024",
   time: "14:30",
@@ -13,6 +14,7 @@ const event1 = {
 }
 
 const event2 = {
+  id: 2,
   title: "Quiz Night",
   date: "12.02.2024",
   time: "19:00",

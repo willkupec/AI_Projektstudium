@@ -5,6 +5,7 @@ import Home from "./pages/Home"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Mensa from "./pages/Mensa"
 import Bahn from "./pages/Bahn"
+import Event from "./pages/Event"
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
@@ -12,6 +13,7 @@ root.render(
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/event/*" element={<Event />} />
         <Route path="/bahn" element={<Bahn />} />
         <Route path="/mensa" element={<Mensa />} />
       </Routes>
