@@ -77,7 +77,32 @@ struct SignUpView: View {
             }
             
             print("Successfully created user: \(result?.user.uid ?? "")")
+            
+            let userData = ["name" : "", "username" : "", "email" : email, "uid" : result?.user.uid ?? "", "bio" : "", "profileImageURL": "", "links" : ["", ""]] as [String : Any]
+            FirebaseManager.shared.firestore.collection("users")
+                .document(result?.user.uid ?? "").setData(userData) { err in
+                    if let err = err {
+                        print(err)
+                        return
+                    }
+                    print("Successfully stored UserData")
+                }
         }
+    }
+    
+    private func storeUserInformationAfterSignUp() {
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
+            return
+        }
+        let userData = ["name" : "", "username" : "", "email" : email, "uid" : uid, "bio" : "", "profileImageURL": "", "links" : ["", ""]] as [String : Any]
+        FirebaseManager.shared.firestore.collection("users")
+            .document(uid).setData(userData) { err in
+                if let err = err {
+                    print(err)
+                    return
+                }
+                print("Successfully stored UserData")
+            }
     }
     
 }

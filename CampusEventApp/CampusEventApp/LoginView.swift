@@ -12,11 +12,15 @@ class FirebaseManager: NSObject {    //This is a fix for previewing the ios app 
     
     let auth: Auth
     
+    let firestore: Firestore
+    
     static let shared = FirebaseManager()  //Singelton object
     
     override init() {
         FirebaseApp.configure()
         self.auth = Auth.auth()
+        self.firestore = Firestore.firestore()
+        
         super.init()
     }
 }
@@ -91,6 +95,8 @@ struct LoginView: View {
             isSignedIn = true
         }
     }
+    
+
 }
 
 struct LoginView_Previews: PreviewProvider {
