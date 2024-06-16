@@ -50,16 +50,43 @@ const ListEvent = ({ event }) => {
           </Typography>
         </Paper>
       </IconButton> */}
-      <Accordion sx={{height: "150px", textAlign:"start", alignContent: "center", pl: "60px", borderRadius: "10px"}}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          id={id}
-        >
-          <Typography variant="h3">{title}</Typography>
+      <Accordion
+        sx={{
+          height: "150px",
+          textAlign: "start",
+          alignContent: "center",
+          pl: "60px",
+          borderRadius: "10px",
+        }}
+      >
+        <AccordionSummary expandIcon={<ExpandMoreIcon />} id={id}>
+          <Grid container columnSpacing={8}>
+            <Grid item>
+              <Typography variant="h3">{title}</Typography>
+            </Grid>
+            <Grid item>
+              <Typography variant="h3">{date}</Typography>
+            </Grid>
+            <Grid item>
+              <Typography variant="h3">{time}</Typography>
+            </Grid>
+            <Grid item>
+            <Box
+            component="img"
+            src={src}
+            alt={title}
+            sx={{
+/*               width: "400px",
+              height: "130px",
+              maxWidth: "400px",
+              maxHeight: "150px", */
+              overflow: "hidden",
+            }}
+          ></Box>
+            </Grid>
+          </Grid>
         </AccordionSummary>
-        <AccordionDetails>
-          {details}
-        </AccordionDetails>
+        <AccordionDetails>{details}</AccordionDetails>
       </Accordion>
     </Grid>
   )
