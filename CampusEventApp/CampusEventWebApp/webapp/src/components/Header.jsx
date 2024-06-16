@@ -7,7 +7,7 @@ import { Avatar, Stack } from "@mui/material"
 const Header = () => {
   return (
     <AppBar position="static" sx={{ backgroundColor: "#6FD95D" }}>
-      <Toolbar disableGutters alignItems="center" justifyContent="flex-end" sx={{right: "25px"}}>
+      <Toolbar disableGutters sx={{ right: "25px", justifyContent: "end" }}>
         <Stack direction="row" spacing={2}>
           <Avatar
             alt="Mensa"

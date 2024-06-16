@@ -20,7 +20,7 @@ const ListEvent = ({ event }) => {
             "&:hover": {
               transform: "scale(0.95)",
             },
-            width: "80vw",
+            width: "30vw",
           }}
         >
           <Box

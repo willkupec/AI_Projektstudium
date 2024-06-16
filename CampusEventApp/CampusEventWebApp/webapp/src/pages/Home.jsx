@@ -1,7 +1,7 @@
 import { map } from "lodash"
 import Header from "../components/Header"
 import ListEvent from "../components/ListEvent"
-import { Grid } from "@mui/material"
+import { Box, Grid, Paper, Typography } from "@mui/material"
 
 const event1 = {
   id: 1,
@@ -29,17 +29,55 @@ const Home = () => {
   return (
     <>
       <Header />
-      <Grid
-        container
-        direction="column"
-        rowSpacing={6}
-        alignItems="center"
-        justifyContent="center"
-        //sx={{ minHeight: '100vh' }}
-      >
-        {map(events, (event) => {
-          return <ListEvent event={event} />
-        })}
+      <Grid container padding={2}>
+        <Grid
+          container
+          item
+          direction="column"
+          rowSpacing={2}
+          xs={3}
+          //alignItems="center"
+          //justifyContent="center"
+        >
+          <Grid item>
+            <Paper
+              component="img"
+              alt="htw_logo"
+              src="https://i.imgur.com/K1Jc19l.png"
+              width="400px"
+              borderRadius="10px"
+              elevation={5}
+            ></Paper>
+          </Grid>
+          <Grid item>
+            <Paper
+              component="img"
+              alt="campus_banner"
+              src="https://i.imgur.com/omsunDN.jpg"
+              width="400px"
+              borderRadius="10px"
+              elevation={5}
+            ></Paper>
+          </Grid>
+        </Grid>
+        <Grid
+          item
+          borderRadius="10px"
+          xs={9}
+          sx={{ backgroundColor: "#6FD95D" }}
+        >
+          <Paper
+            elevation={10}
+            sx={{ backgroundColor: "#15A46E", height: "150px", textAlign:"start", alignContent: "center", pl: "60px" }}
+          >
+            <Typography variant="h2" color="white">HTW Berlin Campus Events</Typography>
+          </Paper>
+          <Grid container direction="column">
+            {map(events, (event) => {
+              return <ListEvent event={event} />
+            })}
+          </Grid>
+        </Grid>
       </Grid>
     </>
   )
