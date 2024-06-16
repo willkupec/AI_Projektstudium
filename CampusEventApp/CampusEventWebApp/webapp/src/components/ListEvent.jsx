@@ -1,26 +1,28 @@
-import { Box, Grid, IconButton, Paper, Typography } from "@mui/material"
-import { useNavigate } from "react-router-dom"
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Grid,
+  IconButton,
+  Paper,
+  Typography,
+} from "@mui/material"
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 
 const ListEvent = ({ event }) => {
   const { id, title, date, time, src, details } = event
-  const navigate = useNavigate()
 
   return (
     <Grid item xs={12}>
-      <IconButton>
+      {/*       <IconButton>
         <Paper
           elevation={10}
-          onClick={() => navigate(`/event/${id}`)}
           sx={{
             backgroundColor: "#93a397",
             display: "flex",
             alignItems: "center",
             overflow: "hidden",
-            transition: "transform .2s",
-            "&:hover": {
-              transform: "scale(0.95)",
-            },
-            width: "30vw",
           }}
         >
           <Box
@@ -47,7 +49,18 @@ const ListEvent = ({ event }) => {
             {time}
           </Typography>
         </Paper>
-      </IconButton>
+      </IconButton> */}
+      <Accordion sx={{height: "150px", textAlign:"start", alignContent: "center", pl: "60px", borderRadius: "10px"}}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          id={id}
+        >
+          <Typography variant="h3">{title}</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          {details}
+        </AccordionDetails>
+      </Accordion>
     </Grid>
   )
 }

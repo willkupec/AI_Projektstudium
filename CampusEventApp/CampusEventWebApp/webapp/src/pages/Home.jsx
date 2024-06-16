@@ -1,7 +1,7 @@
 import { map } from "lodash"
 import Header from "../components/Header"
 import ListEvent from "../components/ListEvent"
-import { Box, Grid, Paper, Typography } from "@mui/material"
+import { Grid, Paper, Typography } from "@mui/material"
 
 const event1 = {
   id: 1,
@@ -36,8 +36,6 @@ const Home = () => {
           direction="column"
           rowSpacing={2}
           xs={3}
-          //alignItems="center"
-          //justifyContent="center"
         >
           <Grid item>
             <Paper
@@ -72,7 +70,7 @@ const Home = () => {
           >
             <Typography variant="h2" color="white">HTW Berlin Campus Events</Typography>
           </Paper>
-          <Grid container direction="column">
+          <Grid container direction="column" spacing={3} padding={3}>
             {map(events, (event) => {
               return <ListEvent event={event} />
             })}
