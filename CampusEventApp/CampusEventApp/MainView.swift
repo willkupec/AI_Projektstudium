@@ -9,6 +9,9 @@ import SwiftUI
 
 struct MainView: View {
     
+    @Binding var isLoggedIn: Bool
+    
+    
     var body: some View {
         
         
@@ -39,7 +42,7 @@ struct MainView: View {
                     }
                 
                 
-                AccountView()
+                AccountView(isLoggedIn: $isLoggedIn)
                     .tabItem() {
                         Image(systemName: "person.fill")
                         Text("My Account")
@@ -51,6 +54,4 @@ struct MainView: View {
     }
 }
 
-#Preview {
-    MainView()
-}
+

@@ -90,21 +90,6 @@ struct SignUpView: View {
         }
     }
     
-    private func storeUserInformationAfterSignUp() {
-        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
-            return
-        }
-        let userData = ["name" : "", "username" : "", "email" : email, "uid" : uid, "bio" : "", "profileImageURL": "", "links" : ["", ""]] as [String : Any]
-        FirebaseManager.shared.firestore.collection("users")
-            .document(uid).setData(userData) { err in
-                if let err = err {
-                    print(err)
-                    return
-                }
-                print("Successfully stored UserData")
-            }
-    }
-    
 }
 
 struct SignUpView_Previews: PreviewProvider {

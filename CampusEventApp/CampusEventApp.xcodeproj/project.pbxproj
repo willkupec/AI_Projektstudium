@@ -27,6 +27,8 @@
 		E60C23A02C176E0400B2F7FE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E60C239F2C176E0400B2F7FE /* FirebaseAuth */; };
 		E60C23A22C176E0400B2F7FE /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E60C23A12C176E0400B2F7FE /* FirebaseFirestore */; };
 		E60C23A42C176E0400B2F7FE /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = E60C23A32C176E0400B2F7FE /* FirebaseStorage */; };
+		E60C23A62C1F361D00B2F7FE /* LoginSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60C23A52C1F361D00B2F7FE /* LoginSignUpView.swift */; };
+		E60C23A82C1F79A000B2F7FE /* SignUpLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60C23A72C1F79A000B2F7FE /* SignUpLoginView.swift */; };
 		E6451F272BF7D2A800E8F481 /* CampusEventAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6451F262BF7D2A800E8F481 /* CampusEventAppApp.swift */; };
 		E6451F2B2BF7D2A800E8F481 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6451F2A2BF7D2A800E8F481 /* Assets.xcassets */; };
 		E6451F2E2BF7D2A800E8F481 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6451F2D2BF7D2A800E8F481 /* Preview Assets.xcassets */; };
@@ -74,6 +76,8 @@
 		E0C930942BFD39400098DB5B /* EventsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsView.swift; sourceTree = "<group>"; };
 		E0EF5AEF2BFBD6EA00F99C59 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		E0EF5AF42BFBD74500F99C59 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		E60C23A52C1F361D00B2F7FE /* LoginSignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginSignUpView.swift; sourceTree = "<group>"; };
+		E60C23A72C1F79A000B2F7FE /* SignUpLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpLoginView.swift; sourceTree = "<group>"; };
 		E6451F232BF7D2A800E8F481 /* CampusEventApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampusEventApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6451F262BF7D2A800E8F481 /* CampusEventAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusEventAppApp.swift; sourceTree = "<group>"; };
 		E6451F2A2BF7D2A800E8F481 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -175,11 +179,13 @@
 		E0C9308C2BFD23860098DB5B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E60C23A52C1F361D00B2F7FE /* LoginSignUpView.swift */,
 				E67AAE4F2C0FB6DA00DFE963 /* AccountView */,
 				E00E1D592C0774AE00FD87C1 /* Chat */,
 				E00E1D502C0774AE00FD87C1 /* HomeView */,
 				E0C930942BFD39400098DB5B /* EventsView.swift */,
 				E0C9308A2BFD23860098DB5B /* NewsView.swift */,
+				E60C23A72C1F79A000B2F7FE /* SignUpLoginView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -412,7 +418,9 @@
 				E0C930932BFD23860098DB5B /* MainView.swift in Sources */,
 				E00E1D5F2C0774AE00FD87C1 /* ChatModel.swift in Sources */,
 				E6451F612BF7DCEE00E8F481 /* HomeView_CustomTabBar_Test.swift in Sources */,
+				E60C23A62C1F361D00B2F7FE /* LoginSignUpView.swift in Sources */,
 				E6451F5F2BF7D92900E8F481 /* CustomTabBar.swift in Sources */,
+				E60C23A82C1F79A000B2F7FE /* SignUpLoginView.swift in Sources */,
 				E67AAE522C0FB77E00DFE963 /* ImagePicker.swift in Sources */,
 				E6451F272BF7D2A800E8F481 /* CampusEventAppApp.swift in Sources */,
 				E00E1D5A2C0774AE00FD87C1 /* HomeInfo.swift in Sources */,

@@ -10,10 +10,18 @@ import SwiftUI
 
 @main
 struct CampusEventAppApp: App {
+    
+    @State var isLoggedIn: Bool = false
+    
     var body: some Scene {
         WindowGroup {
-            SignUpView()
-           // MainView()
+            if !isLoggedIn {
+                //LoginSignUpView(isLoggedIn: $isLoggedIn)
+                SignUpLoginView(isLoggedIn: $isLoggedIn)
+            } else {
+                MainView(isLoggedIn: $isLoggedIn)
+            }
+            
         }
     }
 }
