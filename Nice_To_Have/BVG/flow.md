@@ -50,6 +50,12 @@ curl -G 'https://vbb.demo.hafas.de/fahrinfo/restproxy/2.32/departureBoard' \
 
 ```
 
+curl -G 'https://vbb.demo.hafas.de/fahrinfo/restproxy/2.32/departureBoard' \
+     --data-urlencode 'accessId=htw-6e3e-4a39-86ac-1c6222a26f0b' \
+     --data-urlencode 'id=900162004' \
+     --data-urlencode 'type=DEP' \
+     --data-urlencode 'format=xml'
+
 Das können wir nun verwenden
 
 

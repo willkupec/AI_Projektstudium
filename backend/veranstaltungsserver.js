@@ -109,5 +109,8 @@ app.post('/users', async (req, res) => {
     res.send(userWithoutPassword);
 });
 
+const commentRoutes = require('./posts');
+app.use(commentRoutes);
+
 const PORT = 80;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
