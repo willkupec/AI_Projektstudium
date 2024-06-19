@@ -10,9 +10,7 @@ const Events = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        // const response = await axios.get('http://malina.f4.htw-berlin.de/events/');
-        // const response = await axios.get('http://localhost/events/');
-        const response = await axios.get('http://localhost:8080/api/clowns/');
+        const response = await axios.get('http://malina.f4.htw-berlin.de/events/');
         setEvents(response.data);
       } catch (error) {
         console.error('Error fetching events:', error);
@@ -29,18 +27,16 @@ const Events = () => {
   return (
     <div className="events-container">
       {events.map(event => (
-        // <div className="event-row" key={event._id} onClick={() => handleEventClick(event._id)}>
-        //   <img src={event.foto} alt={event.titel} className="event-image" />
-        //   <div className="event-details">
-        //     <h2 className="event-title">{event.titel}</h2>
-        //     <p className="event-dates">
-        //       <strong>Start:</strong> {event.start}
-        //       <br />
-        //       <strong>Ende:</strong> {event.ende}
-        //     </p>
         <div className="event-row" key={event._id} onClick={() => handleEventClick(event._id)}>
-        <img src={event.bild} alt={event.genre} className="event-image" />
-
+          <img src={event.foto} alt={event.titel} className="event-image" />
+          <div className="event-details">
+            <h2 className="event-title">{event.titel}</h2>
+            <p className="event-dates">
+              <strong>Start:</strong> {event.start}
+              <br />
+              <strong>Ende:</strong> {event.ende}
+            </p>
+          </div>
         </div>
       ))}
     </div>

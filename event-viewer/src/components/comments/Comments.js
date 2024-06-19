@@ -23,9 +23,10 @@ const Comments = () => {
   const postComment = async () => {
     if (newComment.trim() !== "") {
       try {
+        let username = "this.username";
         const response = await axios.post(`http://malina.f4.htw-berlin.de/events/${id}/comments`, {
           text: newComment,
-          posterUsername: "YourUsername" // Hier solltest du die Logik für die Identifikation des Benutzernamens einfügen
+          posterUsername: username, // Hier solltest du die Logik für die Identifikation des Benutzernamens einfügen
         });
         setComments([...comments, response.data]);
         setNewComment("");
@@ -36,23 +37,25 @@ const Comments = () => {
   };
 
   return (
-    <div>
-      <h2>Kommentare</h2>
-      <div>
-        {comments.map(comment => (
-          <div key={comment._id}>
-            <p>{comment.posterUsername}: {comment.text}</p>
-          </div>
-        ))}
-      </div>
-      <textarea
-        value={newComment}
-        onChange={(e) => setNewComment(e.target.value)}
-        placeholder="Schreibe einen Kommentar..."
-      />
-      <button onClick={postComment}>Kommentar absenden</button>
+    <div className="comments-container">
+        <h2 className="comments-header">Chat</h2>
+        <div>
+            {comments.map(comment => (
+                <div key={comment._id} className="comment">
+                    <p><strong>{comment.posterUsername}:</strong> {comment.text}</p>
+                </div>
+            ))}
+        </div>
+        <div className="new-comment">
+            <textarea
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+                placeholder="Schreibe einen Kommentar..."
+            />
+            <button onClick={postComment}>Kommentar absenden</button>
+        </div>
     </div>
-  );
+);
 };
 
 export default Comments;

@@ -14,3 +14,8 @@ curl -X POST http://malina.f4.htw-berlin.de/events \
     "foto": "http://example.com/foto.jpg",
     "ort": "Berlin"
 }'
+
+
+curl -X POST http://malina.f4.htw-berlin.de/events/6644ad6bae5715422bf7241e/comments -H 'Content-Type: application/json' -d '{"posterUsername": "User 1988", "text": "Hallo an alle!"}'
+
+

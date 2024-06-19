@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import './EventDetail.css';
 
 const EventDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [event, setEvent] = useState(null);
 
   useEffect(() => {
@@ -20,6 +21,10 @@ const EventDetail = () => {
     fetchEvent();
   }, [id]);
 
+  const navigateToComments = () => {
+    navigate(`/events/${id}/comments`);
+  };
+
   if (!event) {
     return <div>Loading...</div>;
   }
@@ -34,8 +39,10 @@ const EventDetail = () => {
       <p><strong>Uhrzeit:</strong> {event.start} - {event.ende}</p>
       <p><strong>Ort:</strong> {event.ort}</p>
       <p><strong>Typ:</strong> {event.typ}</p>
+      <button onClick={navigateToComments}>Zum Chat</button>
     </div>
   );
 };
+
 
 export default EventDetail;

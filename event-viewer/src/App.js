@@ -5,6 +5,8 @@ import Navbar from './components/navbar/Navbar';
 import MainMenu from './components/MainMenu';
 import Events from './components/events/Events';
 import EventDetail from './components/eventdetail/EventDetail';
+import Comments from './components/comments/Comments';
+
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 
 function App() {
@@ -18,6 +20,8 @@ function App() {
           <Route path="/Events" element={<Events />} />
           <Route path="/events/:id" element={<EventDetail />} />
           <Route path="/Lehrveranstaltungen" element={<div>Lehrveranstaltungen Component</div>} />
+          <Route path="/events/:id/comments" element={<Comments />} />
+
         </Routes>
         <Navbar />
       </div>
