@@ -1,33 +1,24 @@
-//
-//  MainView.swift
-//  CampusEventApp
-//
-//  Created by Reinardus on 18.05.24.
-//
-
 import SwiftUI
 
 struct MainView: View {
     
     var body: some View {
-        
-        
-    NavigationView{ //trying to hidde navbar
+        NavigationView {
             TabView {
                 HomeView()
-                    .tabItem() {
+                    .tabItem {
                         Image(systemName: "house.fill")
                         Text("Home")
                     }
                 
                 NewsView()
-                    .tabItem() {
+                    .tabItem {
                         Image(systemName: "newspaper.fill")
                         Text("HTW News")
                     }
                 
                 ChatView()
-                    .tabItem() {
+                    .tabItem {
                         Image(systemName: "message.fill")
                         Text("Chats")
                     }
@@ -35,18 +26,22 @@ struct MainView: View {
                 EventsView()
                     .tabItem {
                         Image(systemName: "bell.fill")
-                        Text("Notifications")
+                        Text("Events")
                     }
                 
-                
                 AccountView()
-                    .tabItem() {
+                    .tabItem {
                         Image(systemName: "person.fill")
                         Text("My Account")
                     }
-                
             }
             .accentColor(.green)
+            .onAppear {
+                let appearance = UITabBarAppearance()
+                appearance.configureWithOpaqueBackground()
+                appearance.backgroundColor = UIColor.white
+                UITabBar.appearance().scrollEdgeAppearance = appearance
+            }
         }
     }
 }
