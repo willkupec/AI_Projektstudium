@@ -29,7 +29,7 @@ const Home = () => {
   return (
     <>
       <Header />
-      <Grid container padding={2}>
+      <Grid container padding={2} paddingBottom={0}>
         <Grid
           container
           item
