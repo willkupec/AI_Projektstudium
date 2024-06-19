@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A0B173CB2C22E38700C94530 /* QRCodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B173CA2C22E38700C94530 /* QRCodeScannerView.swift */; };
+		A0B173CD2C22E45000C94530 /* QRCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B173CC2C22E45000C94530 /* QRCodeGenerator.swift */; };
+		A0B173CF2C22E47A00C94530 /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B173CE2C22E47A00C94530 /* QRCodeView.swift */; };
 		E00E1D482C0770F800FD87C1 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00E1D472C0770F700FD87C1 /* SignUpView.swift */; };
 		E00E1D5A2C0774AE00FD87C1 /* HomeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00E1D4C2C0774AE00FD87C1 /* HomeInfo.swift */; };
 		E00E1D5B2C0774AE00FD87C1 /* HomeTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00E1D4D2C0774AE00FD87C1 /* HomeTokens.swift */; };
@@ -81,6 +84,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A0B173CA2C22E38700C94530 /* QRCodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerView.swift; sourceTree = "<group>"; };
+		A0B173CC2C22E45000C94530 /* QRCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGenerator.swift; sourceTree = "<group>"; };
+		A0B173CE2C22E47A00C94530 /* QRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
 		E00E1D462C07678E00FD87C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E00E1D472C0770F700FD87C1 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		E00E1D4C2C0774AE00FD87C1 /* HomeInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeInfo.swift; sourceTree = "<group>"; };
@@ -229,7 +235,9 @@
 				E00E1D592C0774AE00FD87C1 /* Chat */,
 				E00E1D502C0774AE00FD87C1 /* HomeView */,
 				E0C930942BFD39400098DB5B /* EventsView.swift */,
+				A0B173CA2C22E38700C94530 /* QRCodeScannerView.swift */,
 				E0C9308A2BFD23860098DB5B /* NewsView.swift */,
+				A0B173CE2C22E47A00C94530 /* QRCodeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -267,6 +275,7 @@
 				E00E1D472C0770F700FD87C1 /* SignUpView.swift */,
 				E6451F5E2BF7D92900E8F481 /* CustomTabBar.swift */,
 				E6451F262BF7D2A800E8F481 /* CampusEventAppApp.swift */,
+				A0B173CC2C22E45000C94530 /* QRCodeGenerator.swift */,
 				E6451F602BF7DCEE00E8F481 /* HomeView_CustomTabBar_Test.swift */,
 				E6451F2A2BF7D2A800E8F481 /* Assets.xcassets */,
 				E6451F2C2BF7D2A800E8F481 /* Preview Content */,
@@ -490,9 +499,12 @@
 				E6451F5F2BF7D92900E8F481 /* CustomTabBar.swift in Sources */,
 				E67AAE522C0FB77E00DFE963 /* ImagePicker.swift in Sources */,
 				E6451F272BF7D2A800E8F481 /* CampusEventAppApp.swift in Sources */,
+				A0B173CB2C22E38700C94530 /* QRCodeScannerView.swift in Sources */,
 				E00E1D5A2C0774AE00FD87C1 /* HomeInfo.swift in Sources */,
 				E00E1D482C0770F800FD87C1 /* SignUpView.swift in Sources */,
 				E0EF5AF22BFBD6EA00F99C59 /* LoginView.swift in Sources */,
+				A0B173CD2C22E45000C94530 /* QRCodeGenerator.swift in Sources */,
+				A0B173CF2C22E47A00C94530 /* QRCodeView.swift in Sources */,
 				E00E1D622C0774AE00FD87C1 /* ChatView.swift in Sources */,
 				E0C9308E2BFD23860098DB5B /* AccountView.swift in Sources */,
 				E00E1D5E2C0774AE00FD87C1 /* MessageView.swift in Sources */,
