@@ -24,6 +24,8 @@ struct SignUpLoginView: View {
     @Binding var isLoggedIn: Bool
     @State private var isLoginMode: Bool = true
     
+    @State private var showAlert = false
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -52,6 +54,7 @@ struct SignUpLoginView: View {
                             loginUser()
                         } else {
                             createNewAccount()
+                            showAlert = true
                         }
                     }) {
                         Text(isLoginMode ? "Login" : "Sign Up")
@@ -86,6 +89,9 @@ struct SignUpLoginView: View {
             } else {
                 isLoginMode = true
             }
+        }
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("Account erstellt!"), message: Text("Ihr Account wurde erstellt und erfolgreich gespeichert"), dismissButton: .default(Text("OK")))
         }
     }
     

@@ -6,14 +6,24 @@ struct ChatUser {
     let links: [String]
 }
 
+struct User {
+    var name: String?
+    var username: String
+    var email: String
+    var bio: String?
+    var links: [String]? = ["", ""]
+    var imageURL: URL?
+}
+
 class ProfileViewModel: ObservableObject {
     @Published var chatUser: ChatUser?
+
     
     init() {
         fetchCurrentUser()
     }
     
-    private func fetchCurrentUser() {
+    func fetchCurrentUser() {
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
             print("Could not fetch uid")
             return
@@ -40,6 +50,7 @@ class ProfileViewModel: ObservableObject {
             let profileImageURL = data["profileImageURL"] as? String ?? ""
             let links = data["links"] as? [String] ?? ["", ""]
             
+            
             DispatchQueue.main.async {
                 self.chatUser = ChatUser(name: name, username: username, email: email, uid: uid, bio: bio, profileImageURL: profileImageURL, links: links)
             }
@@ -52,17 +63,21 @@ struct AccountView: View {
     
     @Binding var isLoggedIn: Bool
     
+    
     @State private var name: String = ""
     @State private var username: String = ""
     @State private var email: String = ""
     @State private var bio: String = ""
     @State private var links: [String] = ["", ""]
-    
     @State private var imageURL: URL?
+    
+    @State private var showAlert = false
     
     //@State private var selectedImage: UIImage?
     
     @State private var isImagePickerPresented = false
+    
+
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -218,7 +233,7 @@ struct AccountView: View {
                                     print("ImageURL hat nicht geklappt")
                                     storeUserInformation(imageProfileURL: nil)
                                 }
-                        
+                                showAlert = true
                         }, label: {
                             Text("Speichern")
                                 .frame(width: 200, height: 40)
@@ -242,54 +257,37 @@ struct AccountView: View {
                     }
                 }
                 .onAppear {
-                    if let chatUser = vm.chatUser {
-                        name = chatUser.name
-                        username = chatUser.username
-                        email = chatUser.email
-                        bio = chatUser.bio
-                        links = chatUser.links
-                        
-                        guard let profileImageURL = URL(string: chatUser.profileImageURL) else {
-                            // Wenn der String keine gültige URL ist oder leer ist
-                            print("Ungültige URL oder profileImageURL ist leer")
-                            return
-                        }
-                        
-                        imageURL = profileImageURL
-                        // imageURL ist jetzt eine gültige URL, die du verwenden kannst
-                        print("Gültige URL: \(profileImageURL)")
-                    }
+                    vm.fetchCurrentUser()
                 }
                 .onReceive(vm.$chatUser) { chatUser in
                     if let chatUser = chatUser {
-                        name = chatUser.name
-                        username = chatUser.username
-                        email = chatUser.email
-                        bio = chatUser.bio
-                        links = chatUser.links
-                        
-                        guard let profileImageURL = URL(string: chatUser.profileImageURL) else {
-                            // Wenn der String keine gültige URL ist oder leer ist
-                            print("Ungültige URL oder profileImageURL ist leer")
-                            return
-                        }
-                        
-                        imageURL = profileImageURL
-                        // imageURL ist jetzt eine gültige URL, die du verwenden kannst
-                        print("Gültige URL: \(profileImageURL)")
+                        updateStateWithChatUser(chatUser)
                     }
                 }
             }
         }
         .navigationBarTitle("Title")
+        .alert(isPresented: $showAlert) {
+                    Alert(title: Text("Gespeichert"), message: Text("Ihre Änderungen wurden erfolgreich gespeichert"), dismissButton: .default(Text("OK")))
+                }
     }
     
     
     
-    func editProfileImage() -> Void {
-        // NOT YET IMPLEMENTED
-        return
+    private func updateStateWithChatUser(_ chatUser: ChatUser) {
+        name = chatUser.name
+        username = chatUser.username
+        email = chatUser.email
+        bio = chatUser.bio
+        links = chatUser.links
+        
+        if let profileImageURL = URL(string: chatUser.profileImageURL) {
+            imageURL = profileImageURL
+        } else {
+            print("Ungültige URL oder profileImageURL ist leer")
+        }
     }
+    
     /*
     private func persistImageStorage() {
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid
