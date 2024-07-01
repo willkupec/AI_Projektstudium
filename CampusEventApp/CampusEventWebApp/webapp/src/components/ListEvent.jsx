@@ -22,6 +22,7 @@ const ListEvent = ({ event }) => {
           alignContent: "center",
           pl: "60px",
           borderRadius: "10px",
+          //justifyContent: "center",
         }}
       >
         <AccordionSummary expandIcon={<ExpandMoreIcon />} id={_id}>
@@ -29,11 +30,11 @@ const ListEvent = ({ event }) => {
             <Grid item>
               <Typography variant="h4">{titel}</Typography>
             </Grid>
-            <Grid item>
+            <Grid item xs>
             </Grid>
-              <Typography variant="h4">{formattedDate}</Typography>
+              <Typography variant="h5">{formattedDate}</Typography>
             <Grid item>
-              <Typography variant="h4">{`${start} - ${ende}`}</Typography>
+              <Typography variant="h5">{`${start} - ${ende}`}</Typography>
             </Grid>
             <Grid item>
               <Box
