@@ -7,9 +7,12 @@ import {
   Typography,
 } from "@mui/material"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
+import moment from "moment"
 
 const ListEvent = ({ event }) => {
-  const { id, title, date, time, src, details } = event
+  const { _id, titel, tag, start, ende, foto, beschreibung } = event
+  const tagMoment = moment(tag)
+  const formattedDate = tagMoment.utc().format("DD.MM.YYYY")
 
   return (
     <Grid item xs={12} sx={{}}>
@@ -21,24 +24,24 @@ const ListEvent = ({ event }) => {
           borderRadius: "10px",
         }}
       >
-        <AccordionSummary expandIcon={<ExpandMoreIcon />} id={id}>
-          <Grid container columnSpacing={8} sx={{alignItems: "center"}}>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />} id={_id}>
+          <Grid container columnSpacing={8} sx={{ alignItems: "center" }}>
             <Grid item>
-              <Typography variant="h3">{title}</Typography>
+              <Typography variant="h4">{titel}</Typography>
             </Grid>
             <Grid item>
-              <Typography variant="h3">{date}</Typography>
             </Grid>
+              <Typography variant="h4">{formattedDate}</Typography>
             <Grid item>
-              <Typography variant="h3">{time}</Typography>
+              <Typography variant="h4">{`${start} - ${ende}`}</Typography>
             </Grid>
             <Grid item>
               <Box
                 component="img"
-                src={src}
-                alt={title}
+                src={foto}
+                alt={titel}
                 sx={{
-                  width: "450px",
+                  width: "200px",
                   height: "125px",
                 }}
               ></Box>
@@ -46,7 +49,7 @@ const ListEvent = ({ event }) => {
           </Grid>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography variant="body1">{details}</Typography>
+          <Typography variant="body1">{beschreibung}</Typography>
         </AccordionDetails>
       </Accordion>
     </Grid>

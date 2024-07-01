@@ -1,22 +1,19 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
-import "./index.css"
-import Home from "./pages/Home"
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import Mensa from "./pages/Mensa"
-import Bahn from "./pages/Bahn"
-import Event from "./pages/Event"
+import { BrowserRouter as Router } from "react-router-dom"
+import CssBaseline from "@mui/material/CssBaseline"
+import { ThemeProvider } from "@mui/material/styles"
+import App from "./App"
+import theme from "./theme"
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
   <React.StrictMode>
     <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/event/*" element={<Event />} />
-        <Route path="/bahn" element={<Bahn />} />
-        <Route path="/mensa" element={<Mensa />} />
-      </Routes>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <App />
+      </ThemeProvider>
     </Router>
   </React.StrictMode>
 )
