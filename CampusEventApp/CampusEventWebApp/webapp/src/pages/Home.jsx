@@ -1,4 +1,4 @@
-import { map } from "lodash"
+import { map, merge } from "lodash"
 import Header from "../components/Header"
 import ListEvent from "../components/ListEvent"
 import { Grid, Paper, Typography } from "@mui/material"
@@ -18,11 +18,11 @@ const getEvents = async (setEvents) => {
 const Home = () => {
   const [events, setEvents] = useState([])
 
-  console.log("events:", events)
 
   useEffect(() => {
     getEvents(setEvents)
   }, [])
+
 
   return (
     <>
@@ -50,38 +50,36 @@ const Home = () => {
             ></Paper>
           </Grid>
         </Grid>
-        <Grid
-          item
-          borderRadius="10px"
-          xs={9}
-          sx={{ backgroundColor: "#6FD95D" }}
-        >
-          <Paper
-            elevation={10}
-            sx={{
-              backgroundColor: "#15A46E",
-              height: "150px",
-              textAlign: "start",
-              alignContent: "center",
-              pl: "60px",
-              fontFamily: "HTW-Regular"
-            }}
-          >
-            <Typography variant="h2" color="white">
-              HTW Berlin Campus Events
-            </Typography>
+        <Grid item xs={9}>
+          <Paper borderRadius="10px" sx={{ backgroundColor: "#6FD95D", height: "100%" }}>
+            <Paper
+              elevation={10}
+              sx={{
+                backgroundColor: "#15A46E",
+                height: "150px",
+                textAlign: "start",
+                alignContent: "center",
+                pl: "60px",
+                fontFamily: "HTW-Regular",
+              }}
+            >
+              <Typography variant="h2" color="white">
+                HTW Berlin Campus Events
+              </Typography>
+            </Paper>
+            <Grid
+              container
+              direction="row"
+              spacing={2}
+              padding={3}
+              sx={{ overflowY: "scroll" }}
+            >
+              {map(events, (event) => {
+
+                return <ListEvent event={event} />
+              })}
+            </Grid>
           </Paper>
-          <Grid
-            container
-            direction="row"
-            spacing={3}
-            padding={3}
-            sx={{ overflowY: "scroll", height: "77vh" }}
-          >
-            {map(events, (event) => {
-              return <ListEvent event={event} />
-            })}
-          </Grid>
         </Grid>
       </Grid>
     </>

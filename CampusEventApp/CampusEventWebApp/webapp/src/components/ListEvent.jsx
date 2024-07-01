@@ -15,14 +15,13 @@ const ListEvent = ({ event }) => {
   const formattedDate = tagMoment.utc().format("DD.MM.YYYY")
 
   return (
-    <Grid item xs={12} sx={{}}>
+    <Grid item xs={12}>
       <Accordion
         disableGutters
         sx={{
           alignContent: "center",
           pl: "60px",
           borderRadius: "10px",
-          //justifyContent: "center",
         }}
       >
         <AccordionSummary expandIcon={<ExpandMoreIcon />} id={_id}>
