@@ -3,6 +3,7 @@ import AppBar from "@mui/material/AppBar"
 import Toolbar from "@mui/material/Toolbar"
 import { Link } from "react-router-dom"
 import { Avatar, Stack } from "@mui/material"
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth"
 
 const Header = () => {
   return (
@@ -23,10 +24,13 @@ const Header = () => {
           />
           <Avatar
             alt="Events"
-            src="https://i.imgur.com/66iKABg.png"
+            //src="https://i.imgur.com/66iKABg.png"
             component={Link}
             to="/"
-          />
+            sx={{ bgcolor: "#15A46E" }}
+          >
+            <CalendarMonthIcon />
+          </Avatar>
         </Stack>
       </Toolbar>
     </AppBar>

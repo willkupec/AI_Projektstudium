@@ -1,4 +1,4 @@
-import { map, merge } from "lodash"
+import { map } from "lodash"
 import Header from "../components/Header"
 import ListEvent from "../components/ListEvent"
 import { Grid, Paper, Typography } from "@mui/material"
@@ -60,10 +60,9 @@ const Home = () => {
                 textAlign: "start",
                 alignContent: "center",
                 pl: "60px",
-                fontFamily: "HTW-Regular",
               }}
             >
-              <Typography variant="h2" color="white">
+              <Typography variant="h2" color="white" fontFamily={"monospace"}>
                 HTW Berlin Campus Events
               </Typography>
             </Paper>
