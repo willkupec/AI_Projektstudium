@@ -14,11 +14,14 @@ struct CreateEventView: View {
     @State private var showTypePicker: Bool = false
     @State private var errorMessage: String? = nil
     
+<<<<<<< HEAD
     @State private var nameError: String? = nil
     @State private var typeError: String? = nil
     @State private var descriptionError: String? = nil
     @State private var locationError: String? = nil
     
+=======
+>>>>>>> 9bad943 (Integrated authentification with events / posts)
     var eventController: EventController
     @Environment(\.presentationMode) var presentationMode
 
@@ -115,7 +118,11 @@ struct CreateEventView: View {
                     Button(action: {
                         do {
                             try createEvent()
+<<<<<<< HEAD
                             errorMessage = nil 
+=======
+                            errorMessage = nil // Clear error message on success
+>>>>>>> 9bad943 (Integrated authentification with events / posts)
                         } catch {
                             errorMessage = error.localizedDescription
                         }
@@ -169,6 +176,7 @@ struct CreateEventView: View {
         }
     }
 
+<<<<<<< HEAD
     private func validateFields() -> Bool {
         var isValid = true
         if name.isEmpty {
@@ -202,19 +210,29 @@ struct CreateEventView: View {
         return isValid
     }
 
+=======
+>>>>>>> 9bad943 (Integrated authentification with events / posts)
     private func createEvent() throws {
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "HH:mm"
         
         guard let uid = Auth.auth().currentUser?.uid else {
+<<<<<<< HEAD
             throw EventCreationError.missingUserInfo
         }
         
         if !validateFields() {
+=======
+            print("No user logged in")
+>>>>>>> 9bad943 (Integrated authentification with events / posts)
             return
         }
         
         getUsername { username in
+<<<<<<< HEAD
+=======
+            
+>>>>>>> 9bad943 (Integrated authentification with events / posts)
             let event = Event(
                 id: UUID().uuidString,
                 name: name,
@@ -230,9 +248,17 @@ struct CreateEventView: View {
                 posts: []
             )
             
+<<<<<<< HEAD
             eventController.createEvent(event: event)
             eventController.shouldReloadEvents = true
             presentationMode.wrappedValue.dismiss()
+=======
+            
+            eventController.createEvent(event: event)
+            eventController.shouldReloadEvents = true
+            presentationMode.wrappedValue.dismiss()
+            
+>>>>>>> 9bad943 (Integrated authentification with events / posts)
         }
     }
     
