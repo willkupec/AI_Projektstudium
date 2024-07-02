@@ -19,7 +19,7 @@ struct PostView: View {
                             
                             VStack(alignment: .leading) {
                                 HStack(alignment: .bottom) {
-                                    Text(post.author)
+                                    Text(post.authorName)
                                         .font(.headline)
                                     
                                     Text(post.time, style: .date)
@@ -124,7 +124,7 @@ struct PostView: View {
 
 struct PostView_Previews: PreviewProvider {
     static var previews: some View {
-        let samplePost = Post(id: "post-1", eventId: "1", author: "Max Muster", title: "Anyone up for drinks?", content: "We are gathering at table 2 in the conference room. Come with us for some drinks!", time: Date())
+        let samplePost = Post(id: "post-1", eventId: "1", authorId: "123", authorName: "Max Muster", title: "Anyone up for drinks?", content: "We are gathering at table 2 in the conference room. Come with us for some drinks!", time: Date(), isOnceEdited: false)
         
         NavigationView {
             PostView(post: samplePost)

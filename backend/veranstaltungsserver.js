@@ -20,16 +20,16 @@ mongoose.connect(mongooseStuff, {
 .catch(err => console.log(err));
 
 const veranstaltungSchema = new mongoose.Schema({
-    veranstalter: { type: String, default: "" },
+    veranstalterId: { type: String, default: "" },
+    veranstalterName: { type: String, default: ""},
     titel: { type: String, default: "" },
     beschreibung: { type: String, default: "" },
-    tag: { type: Date, default: Date.now },  // Hier als Beispiel das aktuelle Datum als Default-Wert
+    tag: { type: Date, default: Date.now }, 
     start: { type: String, default: "" },
     ende: { type: String, default: "" },
     typ: { type: String, default: "" },
     foto: { type: String, default: "" },
-    ort: { type: String, default: "" },
-    istLehrveranstaltung: { type: Boolean, default: false }
+    ort: { type: String, default: "" }
 });
 
 const Veranstaltung = mongoose.model('Veranstaltung', veranstaltungSchema, 'Veranstaltungen');
@@ -90,24 +90,106 @@ app.delete('/events/:id', async (req, res) => {
     }
 });
 
-const User = mongoose.model('User', new mongoose.Schema({
-    username: String,
-    password: String, // Ekelhaft, der sollte gehasht werden
-    role: String
-}), 'usr'); // Collection name
+// POSTS
 
-app.post('/users', async (req, res) => {
-    const { username, password } = req.body;
-    const user = await User.findOne({ username, password });
-
-    if (!user) {
-        return res.status(401).send('Unauthorized');
-    }
-
-    // Sendet Benutzerdaten ohne Passwort zurück
-    const { password: _, ...userWithoutPassword } = user.toObject();
-    res.send(userWithoutPassword);
+const postSchema = new mongoose.Schema({
+    eventId: { type: String, required: true },
+    authorId: { type: String, required: true },
+    authorName: { type: String, required: true },
+    title: { type: String, required: true },
+    content: { type: String, required: true },
+    createdAt: { type: Date, default: Date.now },
+    isOnceEdited: { type: Boolean, default: false },
 });
+
+const Post = mongoose.model('Post', postSchema, 'Posts');
+
+// Route to fetch posts by eventID
+app.get('/events/:eventID/posts', async (req, res) => {
+    try {
+        const posts = await Post.find({ eventId: req.params.eventID });
+        res.send(posts);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
+app.post('/events/:eventID/posts', async (req, res) => {
+    const { eventID } = req.params;
+    const { authorId, authorName, title, content } = req.body;
+    
+    const newPost = new Post({
+        eventId: eventID,
+        authorId,
+        authorName,
+        title,
+        content
+    });
+    
+    try {
+        await newPost.save();
+        res.status(201).send(newPost);
+    } catch (error) {
+        res.status(400).send(error);
+    }
+});
+
+app.put('/events/:eventID/posts/:postID', async (req, res) => {
+    const { postID } = req.params;
+    
+    try {
+        const post = await Post.findByIdAndUpdate(postID, req.body, { new: true, runValidators: true });
+        if (!post) {
+            return res.status(404).send();
+        }
+        res.status(204).send();
+    } catch (error) {
+        res.status(400).send(error);
+    }
+});
+
+// UPDATE AUTHOR INFO for posts and events when user updates name
+
+app.delete('/events/:eventID/posts/:postID', async (req, res) => {
+    const { postID } = req.params;
+    
+    try {
+        const post = await Post.findByIdAndDelete(postID);
+        if (!post) {
+            return res.status(404).send();
+        }
+        res.status(204).send();
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
+app.put('/users/:userID/update-posts', async (req, res) => {
+    const { userID } = req.params;
+    const { newAuthorName } = req.body;
+
+    try {
+        const result = await Post.updateMany({ authorId: userID }, { authorName: newAuthorName, isOnceEdited: true });
+        res.send(result);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
+app.put('/users/:userID/update-events', async (req, res) => {
+    const { userID } = req.params;
+    const { newOrganizerName } = req.body;
+
+    try {
+        const result = await Veranstaltung.updateMany({ veranstalterId: userID }, { veranstalterName: newOrganizerName });
+        res.send(result);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
+
+
 
 const PORT = 80;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

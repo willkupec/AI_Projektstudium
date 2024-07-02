@@ -8,7 +8,8 @@ struct Event: Identifiable, Hashable {
     let date: Date
     let type: String
     let description: String
-    let organizer: String
+    let organizerId: String
+    let organizerName: String
     let location: String
     let photo: String
     var posts: [Post]
@@ -17,10 +18,12 @@ struct Event: Identifiable, Hashable {
 struct Post: Identifiable, Hashable {
     let id: String
     let eventId: String
-    let author: String
+    let authorId: String
+    let authorName: String
     let title: String
     let content: String
     let time: Date 
+    let isOnceEdited: Bool
     //var comments: [PostComment]
 }
 

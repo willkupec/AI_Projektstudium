@@ -7,7 +7,8 @@ struct UpdateEventView: View {
     @State private var date: Date
     @State private var type: String
     @State private var description: String
-    @State private var organizer: String
+    @State private var organizerId: String
+    @State private var organizerName: String
     @State private var location: String
     //@State private var photo: UIImage? = nil
     @State private var photo: String = ""
@@ -35,7 +36,8 @@ struct UpdateEventView: View {
         _type = State(initialValue: event.type)
         _photo = State(initialValue: event.photo)
         _description = State(initialValue: event.description)
-        _organizer = State(initialValue: event.organizer)
+        _organizerId = State(initialValue: event.organizerId)
+        _organizerName = State(initialValue: event.organizerName)
         _location = State(initialValue: event.location)
     }
 
@@ -110,19 +112,6 @@ struct UpdateEventView: View {
                             .background(Color(UIColor.systemGray6))
                             .cornerRadius(10)
                             .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
-                        /*if let photo = photo {
-                            Image(uiImage: photo)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(height: 200)
-                                .cornerRadius(10)
-                        }
-                        Button(action: {
-                            showImagePicker = true
-                        }) {
-                            Text(photo == nil ? "Upload Photo" : "Change Photo")
-                                .foregroundColor(.blue)
-                        }*/
                     }
 
                     Button(action: {
@@ -140,9 +129,6 @@ struct UpdateEventView: View {
             }
             .background(Color.white)
             .navigationTitle("Update Event")
-            /*.sheet(isPresented: $showImagePicker) {
-                ImagePicker(image: $photo)
-            }*/
             .sheet(isPresented: $showTypePicker) {
                 VStack {
                     Text("Select Event Type")
@@ -175,9 +161,6 @@ struct UpdateEventView: View {
     }
 
     private func updateEvent() {
-
-        //print("\(photo.jpegData(compressionQuality: 0.2)?.base64EncodedString() ?? "")")
-
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "HH:mm"
 
@@ -189,7 +172,8 @@ struct UpdateEventView: View {
             date: date,
             type: type,
             description: description,
-            organizer: organizer,
+            organizerId: organizerId,
+            organizerName: organizerName,
             location: location,
             photo: photo,
             posts: event.posts
@@ -205,7 +189,7 @@ struct UpdateEventView: View {
 struct UpdateEventView_Previews: PreviewProvider {
     static var previews: some View {
         UpdateEventView(
-            event: Event(id: "1", name: "Sample Event 1", start: "10:00", end: "11:00", date: Date(), type: "Conference", description: "A sample conference event", organizer: "Organizer 1", location: "Location 1", photo: "", posts: []),
+            event: Event(id: "1", name: "Sample Event 1", start: "10:00", end: "11:00", date: Date(), type: "Conference", description: "A sample conference event", organizerId: "123", organizerName: "Organizer 1", location: "Location 1", photo: "", posts: []),
             eventController: EventController()
         )
     }

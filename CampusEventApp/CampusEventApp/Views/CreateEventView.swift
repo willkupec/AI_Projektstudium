@@ -1,4 +1,5 @@
 import SwiftUI
+import FirebaseAuth
 
 struct CreateEventView: View {
     @State private var name: String = ""
@@ -9,10 +10,11 @@ struct CreateEventView: View {
     @State private var description: String = ""
     @State private var organizer: String = ""
     @State private var location: String = ""
-    //@State private var photo: UIImage? = nil
     @State private var photo: String = ""
     @State private var showImagePicker: Bool = false
     @State private var showTypePicker: Bool = false
+    @State private var errorMessage: String? = nil
+    
     var eventController: EventController
     @Environment(\.presentationMode) var presentationMode
 
@@ -89,24 +91,15 @@ struct CreateEventView: View {
                             .background(Color(UIColor.systemGray6))
                             .cornerRadius(10)
                             .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
-                        
-                        /*if let photo = photo {
-                            Image(uiImage: photo)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(height: 200)
-                                .cornerRadius(10)
-                        }
-                        Button(action: {
-                            showImagePicker = true
-                        }) {
-                            Text(photo == nil ? "Upload Photo" : "Change Photo")
-                                .foregroundColor(.blue)
-                        }*/
                     }
 
                     Button(action: {
-                        createEvent()
+                        do {
+                            try createEvent()
+                            errorMessage = nil // Clear error message on success
+                        } catch {
+                            errorMessage = error.localizedDescription
+                        }
                     }) {
                         Text("Create Event")
                             .foregroundColor(.white)
@@ -115,14 +108,17 @@ struct CreateEventView: View {
                             .background(Color.green)
                             .cornerRadius(10)
                     }
+
+                    if let errorMessage = errorMessage {
+                        Text(errorMessage)
+                            .foregroundColor(.red)
+                            .padding(.top, 10)
+                    }
                 }
                 .padding()
             }
             .background(Color.white)
             .navigationTitle("Create a HTW event")
-            /*.sheet(isPresented: $showImagePicker) {
-                ImagePicker(image: $photo)
-            }*/
             .sheet(isPresented: $showTypePicker) {
                 VStack {
                     Text("Select Event Type")
@@ -154,38 +150,49 @@ struct CreateEventView: View {
         }
     }
 
-    private func createEvent() {
-
+    private func createEvent() throws {
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "HH:mm"
-
-        let event = Event(
-            id: UUID().uuidString,
-            name: name,
-            start: timeFormatter.string(from: start),
-            end: timeFormatter.string(from: end),
-            date: date,
-            type: type,
-            description: description,
-            organizer: organizer,
-            location: location,
-            photo: photo,
-            posts: []
-        )
         
-        eventController.createEvent(event: event)
+        guard let uid = Auth.auth().currentUser?.uid else {
+            print("No user logged in")
+            return
+        }
+        
+        getUsername { username in
+            
+            let event = Event(
+                id: UUID().uuidString,
+                name: name,
+                start: timeFormatter.string(from: start),
+                end: timeFormatter.string(from: end),
+                date: date,
+                type: type,
+                description: description,
+                organizerId: uid,
+                organizerName: username,
+                location: location,
+                photo: photo,
+                posts: []
+            )
+            
+            
+            eventController.createEvent(event: event)
             eventController.shouldReloadEvents = true
             presentationMode.wrappedValue.dismiss()
-
-        /*
-        eventController.createEventWithPhoto(event: event, photo: photo) { success in
-            if success {
-                presentationMode.wrappedValue.dismiss()
-            } else {
+            
+        }
+    }
+    
+    enum EventCreationError: Error, LocalizedError {
+        case missingUserInfo
+        
+        var errorDescription: String? {
+            switch self {
+            case .missingUserInfo:
+                return NSLocalizedString("Organizer information is missing. Please log in again.", comment: "")
             }
-        }*/
-        
-        
+        }
     }
 }
 

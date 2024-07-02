@@ -252,15 +252,27 @@ struct AccountView: View {
         
         let imageURLString = imageProfileURL?.absoluteString ?? ""
         
-        let userData = ["name" : self.name, "username" : self.username, "email" : self.email, "uid" : uid, "bio" : self.bio, "profileImageURL": imageURLString, "links" : self.links] as [String : Any]
-        FirebaseManager.shared.firestore.collection("users")
-            .document(uid).setData(userData) { err in
-                if let err = err {
-                    print(err)
-                    return
-                }
-                print("Successfully stored UserData")
+        let userData = [
+            "name": self.name,
+            "username": self.username,
+            "email": self.email,
+            "uid": uid,
+            "bio": self.bio,
+            "profileImageURL": imageURLString,
+            "links": self.links
+        ] as [String: Any]
+        
+        FirebaseManager.shared.firestore.collection("users").document(uid).setData(userData) { err in
+            if let err = err {
+                print(err)
+                return
             }
+            print("Successfully stored UserData")
+            
+            // Authornamen von evenrts oder posts aktualisieren
+            updatePostsAuthorName(userID: uid, newAuthorName: self.name)
+            updateEventsOrganizerName(userID: uid, newOrganizerName: self.name)
+        }
     }
     
     private func logOut() {

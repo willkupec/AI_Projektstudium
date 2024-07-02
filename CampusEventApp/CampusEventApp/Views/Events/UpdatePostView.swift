@@ -1,12 +1,19 @@
 import SwiftUI
 import FirebaseAuth
 
-struct CreatePostView: View {
-    let event: Event
-    @State private var title: String = ""
-    @State private var content: String = ""
+struct UpdatePostView: View {
+    @State var post: Post
     var eventController: EventController
     @Environment(\.presentationMode) var presentationMode
+    @State private var title: String
+    @State private var content: String
+    
+    init(post: Post, eventController: EventController) {
+        self.post = post
+        self.eventController = eventController
+        _title = State(initialValue: post.title)
+        _content = State(initialValue: post.content)
+    }
     
     var body: some View {
         NavigationStack {
@@ -32,13 +39,13 @@ struct CreatePostView: View {
                 }
                 
                 Button(action: {
-                    createPost()
+                    updatePost()
                 }) {
-                    Text("Post")
+                    Text("Update Post")
                         .foregroundColor(.white)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color.green)
+                        .background(Color.blue)
                         .cornerRadius(10)
                 }
                 .padding(.top)
@@ -46,39 +53,38 @@ struct CreatePostView: View {
                 Spacer()
             }
             .padding()
-            .navigationTitle("Create Post")
+            .navigationTitle("Update Post")
         }
     }
     
-    private func createPost() {
-        guard let currentUser = Auth.auth().currentUser else {
-            print("No user logged in")
+    private func updatePost() {
+        guard let currentUser = Auth.auth().currentUser, currentUser.uid == post.authorId else {
+            print("Unauthorized user")
             return
         }
         
-        getUsername { username in
-            let post = Post(
-                id: UUID().uuidString,
-                eventId: event.id,
-                authorId: currentUser.uid,
-                authorName: username,
-                title: title,
-                content: content,
-                time: Date(),
-                isOnceEdited: false
-            )
-            
-            eventController.createPost(to: event, post: post)
-            presentationMode.wrappedValue.dismiss()
-            
+        let updatedContent: [String: Any] = [
+            "title": title,
+            "content": content,
+            "isOnceEdited": true
+        ]
+        
+        eventController.updatePost(eventID: post.eventId, postID: post.id, updatedContent: updatedContent) { success in
+            DispatchQueue.main.async {
+                if success {
+                    presentationMode.wrappedValue.dismiss()
+                } else {
+                    print("Failed to update post")
+                }
+            }
         }
     }
 }
 
-struct CreatePostView_Previews: PreviewProvider {
+struct UpdatePostView_Previews: PreviewProvider {
     static var previews: some View {
-        CreatePostView(
-            event: Event(id: "1", name: "Sample Event 1", start: "10:00", end: "11:00", date: Date(), type: "Conference", description: "A sample conference event", organizerId: "123", organizerName: "Organizer 1", location: "Location 1", photo: "", posts: []),
+        UpdatePostView(
+            post: Post(id: "post1", eventId: "1", authorId: "456", authorName: "Max Muster", title: "Sample Title", content: "Sample content", time: Date(), isOnceEdited: false),
             eventController: EventController()
         )
     }

@@ -1,4 +1,5 @@
 import SwiftUI
+import FirebaseAuth
 
 struct EventsView: View {
     @State private var events: [Event] = []
@@ -45,7 +46,6 @@ struct EventsView: View {
                                         .frame(maxWidth: .infinity)
                                 }
                                 
-                                
                                 VStack {
                                     HStack {
                                         Text(event.name)
@@ -54,18 +54,16 @@ struct EventsView: View {
                                             .frame(maxWidth: .infinity, alignment: .leading)
                                     }
                                     VStack {
-                                        Text("\(event.organizer)")
+                                        Text(event.organizerName)
                                             .frame(maxWidth: .infinity, alignment: .leading)
                                             .font(.system(size: 12))
                                             .padding(.top, 1)
-                                        
                                         
                                         Text("\(event.start) - \(event.end)")
                                             .frame(maxWidth: .infinity, alignment: .leading)
                                             .font(.system(size: 12))
                                             .padding(.top, 8)
                                             
-                                        
                                         Text(dateFormatter.string(from: event.date))
                                             .padding(.top, 2)
                                             .font(.system(size: 12))
@@ -79,13 +77,25 @@ struct EventsView: View {
                             }
                             .cornerRadius(10)
                             .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.gray, lineWidth: 0.5))
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.gray, lineWidth: 0.5)
+                            )
                             .listRowSeparator(.hidden)
                         }
                         .buttonStyle(PlainButtonStyle())
+                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                            if event.organizerId == Auth.auth().currentUser?.uid {
+                                Button(role: .destructive) {
+                                    deleteEvent(event: event)
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
+                                }
+                            }
+                        }
                     }
-                    .onDelete(perform: deleteEvent)
+                }
+                .refreshable {
+                    reloadEvents()
                 }
                 .listStyle(.plain)
                 .frame(alignment: .center)
@@ -131,10 +141,9 @@ struct EventsView: View {
         }
     }
     
-    private func deleteEvent(at offsets: IndexSet) {
-        for index in offsets {
-            let event = events[index]
-            eventController.deleteEvent(eventID: event.id)
+    private func deleteEvent(event: Event) {
+        eventController.deleteEvent(eventID: event.id)
+        if let index = events.firstIndex(where: { $0.id == event.id }) {
             events.remove(at: index)
         }
         eventController.shouldReloadEvents = true
@@ -144,9 +153,9 @@ struct EventsView: View {
 struct EventsView_Previews: PreviewProvider {
     static var previews: some View {
         EventsView(events: [
-            Event(id: "1", name: "Sample Event 1", start: "10:00 AM", end: "11:00 AM", date: Date(), type: "Conference", description: "A sample conference event", organizer: "Organizer 1", location: "Location 1", photo: "", posts: []),
-             Event(id: "2", name: "Sample Event 2", start: "11:00 AM", end: "12:00 PM", date: Date(), type: "Workshop", description: "A sample workshop event", organizer: "Organizer 2", location: "Location 2", photo: "", posts: []),
-             Event(id: "3", name: "Sample Event 3", start: "12:00 PM", end: "1:00 PM", date: Date(), type: "Meetup", description: "A sample meetup event", organizer: "Organizer 3", location: "Location 3", photo: "", posts: [])
-         ])
+            Event(id: "1", name: "Sample Event 1", start: "10:00 AM", end: "11:00 AM", date: Date(), type: "Conference", description: "A sample conference event", organizerId: "123", organizerName: "Organizer 1", location: "Location 1", photo: "", posts: []),
+            Event(id: "2", name: "Sample Event 2", start: "11:00 AM", end: "12:00 PM", date: Date(), type: "Workshop", description: "A sample workshop event", organizerId: "124", organizerName: "Organizer 2", location: "Location 2", photo: "", posts: []),
+            Event(id: "3", name: "Sample Event 3", start: "12:00 PM", end: "1:00 PM", date: Date(), type: "Meetup", description: "A sample meetup event", organizerId: "125", organizerName: "Organizer 3", location: "Location 3", photo: "", posts: [])
+        ])
     }
 }
