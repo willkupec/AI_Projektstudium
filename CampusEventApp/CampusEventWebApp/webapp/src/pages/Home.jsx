@@ -5,7 +5,7 @@ import { Grid, Paper, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 
 const getEvents = async (setEvents) => {
-  return fetch("http://malina.f4.htw-berlin.de/events", {
+  return fetch("http://malina.f4.htw-berlin.de:8080/events", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

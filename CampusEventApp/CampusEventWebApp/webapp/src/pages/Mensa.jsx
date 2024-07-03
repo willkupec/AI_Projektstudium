@@ -1,24 +1,22 @@
-import Header from "../components/Header";
-import { Grid, Paper, Typography } from "@mui/material";
+import Header from "../components/Header"
+import { Grid, Paper } from "@mui/material"
 
 const getSrc = async () => {
   const res = await fetch(
     "https://www.stw.berlin/mensen/einrichtungen/hochschule-für-technik-und-wirtschaft-berlin/mensa-htw-treskowallee.html",
     {
       method: "GET",
-      headers: {
-        
-      },
+      headers: {},
     }
-  );
-  const blob = await res.blob();
-  const urlObject = URL.createObjectURL(blob);
-  //document.querySelector('iframe').setAttribute("src", urlObject)
-  return urlObject;
-};
+  )
+  const blob = await res.blob()
+  const urlObject = URL.createObjectURL(blob)
+
+  return urlObject
+}
 
 const Mensa = () => {
-  const src = getSrc();
+  const src = getSrc()
 
   return (
     <>
@@ -51,7 +49,7 @@ const Mensa = () => {
         </Grid>
       </Grid>
     </>
-  );
-};
+  )
+}
 
-export default Mensa;
+export default Mensa
