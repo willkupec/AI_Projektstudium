@@ -18,42 +18,71 @@ const getEvents = async (setEvents) => {
 const Home = () => {
   const [events, setEvents] = useState([])
 
-
   useEffect(() => {
     getEvents(setEvents)
   }, [])
 
-
   return (
-    <Box sx={{overflow: "hidden", minHeight: "99vh"}}>
+    <Container
+      maxWidth="false"
+      maxHeight="false"
+      disableGutters
+      sx={{ height: "100vh", position: "absolute" }}
+    >
       <Header />
-      <Grid container padding={2} sx={{bgcolor: "black"}}>
-        <Grid container item direction="column" rowSpacing={2} xs={3}>
-          <Grid item>
+      <Grid container padding={2} sx={{ bgcolor: "black" }}>
+        <Grid
+          container
+          item
+          direction="column"
+          rowSpacing={2}
+          xs={3}
+          sx={{ height: "100%" }}
+        >
+          <Grid
+            item
+            sx={{
+              width: "96.5%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <Paper
               component="img"
               alt="htw_logo"
               src="https://i.imgur.com/K1Jc19l.png"
-              width="96.5%"
-              //height="100%"
               borderRadius="10px"
               elevation={5}
+              sx={{ overflow: "hidden" }}
             ></Paper>
           </Grid>
-          <Grid item>
+          <Grid
+            item
+            sx={{
+              width: "96.5%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <Paper
               component="img"
               alt="campus_banner"
               src="https://i.imgur.com/omsunDN.jpg"
-              width="96.5%"
-              //height="100%"
               borderRadius="10px"
               elevation={5}
+              sx={{ overflow: "hidden" }}
             ></Paper>
           </Grid>
         </Grid>
         <Grid item xs={9}>
-          <Paper borderRadius="10px" sx={{ backgroundColor: "#6FD95D", height: "100%" }}>
+          <Paper
+            borderRadius="10px"
+            sx={{ backgroundColor: "#6FD95D", height: "100%" }}
+          >
             <Paper
               elevation={10}
               sx={{
@@ -76,14 +105,13 @@ const Home = () => {
               sx={{ overflowY: "hidden" }}
             >
               {map(events, (event) => {
-
                 return <ListEvent event={event} />
               })}
             </Grid>
           </Paper>
         </Grid>
       </Grid>
-    </Box>
+    </Container>
   )
 }
 
