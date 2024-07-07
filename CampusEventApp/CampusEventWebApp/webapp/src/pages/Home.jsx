@@ -1,8 +1,8 @@
 import { map } from "lodash"
 import Header from "../components/Header"
-import ListEvent from "../components/ListEvent"
 import { Container, Grid, Paper, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
+import Event from "../components/Event"
 
 /* const event1 = {
   _id: 1,
@@ -63,7 +63,7 @@ const getEvents = async (setEvents) => {
 const Home = () => {
   const [events, setEvents] = useState([])
 
-    useEffect(() => {
+  useEffect(() => {
     getEvents(setEvents)
   }, [])
 
@@ -155,7 +155,7 @@ const Home = () => {
                 }}
               >
                 {map(events, (event) => {
-                  return <ListEvent event={event} />
+                  return <Event event={event} />
                 })}
               </Grid>
             </Paper>

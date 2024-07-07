@@ -1,10 +1,31 @@
 import { Grid, Paper, Typography } from "@mui/material"
+import { map } from "lodash"
+import Bahn from "./Bahn"
 
-const BahnList = ({name}) => {
+const bahn1 = {
+  _id: 1,
+  nummer: 27,
+  richtung: "Krankenhaus Köpenick",
+  abfahrtszeit: "1:51",
+  fahrradmitnahme: true,
+  barrierefrei: false,
+}
 
-    return (
-        <Grid item xs={4.5}>
-        <Paper
+const bahn2 = {
+  _id: 2,
+  nummer: 296,
+  richtung: "S + U Lichtenberg",
+  abfahrtszeit: "1:53",
+  fahrradmitnahme: false,
+  barrierefrei: true,
+}
+
+const dummyBahns = [bahn1, bahn1, bahn2, bahn1, bahn1, bahn2, bahn1]
+
+const BahnList = ({ name }) => {
+  return (
+    <Grid item xs={4.5}>
+      <Paper
         borderRadius="10px"
         sx={{ backgroundColor: "#6FD95D", height: "100%" }}
       >
@@ -18,7 +39,7 @@ const BahnList = ({name}) => {
           }}
         >
           <Typography variant="h2" color="white">
-          {name}
+            {name}
           </Typography>
         </Paper>
         <Grid
@@ -33,10 +54,13 @@ const BahnList = ({name}) => {
             scrollbarWidth: "none",
           }}
         >
+          {map(dummyBahns, (bahn) => {
+            return <Bahn bahn={bahn} />
+          })}
         </Grid>
       </Paper>
-      </Grid>
-    )
+    </Grid>
+  )
 }
 
 export default BahnList

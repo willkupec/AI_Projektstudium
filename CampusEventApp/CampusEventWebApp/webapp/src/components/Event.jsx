@@ -9,7 +9,7 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 import moment from "moment"
 
-const ListEvent = ({ event }) => {
+const Event = ({ event }) => {
   const { _id, titel, tag, start, ende, foto, beschreibung } = event
   const tagMoment = moment(tag)
   const formattedDate = tagMoment.utc().format("DD.MM.YYYY")
@@ -56,4 +56,4 @@ const ListEvent = ({ event }) => {
   )
 }
 
-export default ListEvent
+export default Event
