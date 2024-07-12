@@ -1,24 +1,14 @@
 import SwiftUI
-import UIKit
+import Firebase
 
 struct ChatUser {
     let name, username, email, uid, bio, profileImageURL: String
     let links: [String]
 }
 
-struct User {
-    var name: String?
-    var username: String
-    var email: String
-    var bio: String?
-    var links: [String]? = ["", ""]
-    var imageURL: URL?
-}
-
 class ProfileViewModel: ObservableObject {
     @Published var chatUser: ChatUser?
 
-    
     init() {
         fetchCurrentUser()
     }
@@ -29,7 +19,6 @@ class ProfileViewModel: ObservableObject {
             return
         }
         
-        print("\(uid)")
         FirebaseManager.shared.firestore.collection("users").document(uid).getDocument { snapshot, error in
             if let error = error {
                 print("Failed to fetch current user: ", error)
@@ -40,7 +29,6 @@ class ProfileViewModel: ObservableObject {
                 print("No data found")
                 return
             }
-            print("Data: \(data.description)")
             
             let name = data["name"] as? String ?? ""
             let username = data["username"] as? String ?? ""
@@ -49,7 +37,6 @@ class ProfileViewModel: ObservableObject {
             let bio = data["bio"] as? String ?? ""
             let profileImageURL = data["profileImageURL"] as? String ?? ""
             let links = data["links"] as? [String] ?? ["", ""]
-            
             
             DispatchQueue.main.async {
                 self.chatUser = ChatUser(name: name, username: username, email: email, uid: uid, bio: bio, profileImageURL: profileImageURL, links: links)
@@ -60,25 +47,17 @@ class ProfileViewModel: ObservableObject {
 
 struct AccountView: View {
     @ObservedObject private var vm = ProfileViewModel()
-    
     @Binding var isLoggedIn: Bool
-    
     
     @State private var name: String = ""
     @State private var username: String = ""
     @State private var email: String = ""
     @State private var bio: String = ""
     @State private var links: [String] = ["", ""]
-    @State private var imageURL: URL?
-    
+    @State private var selectedImage: UIImage?
     @State private var showAlert = false
-    
-    //@State private var selectedImage: UIImage?
-    
     @State private var isImagePickerPresented = false
     
-
-
     var body: some View {
         ZStack(alignment: .top) {
             Color.white.edgesIgnoringSafeArea(.all)
@@ -97,36 +76,17 @@ struct AccountView: View {
                 
                 VStack {
                     VStack {
-                        if let imageURL = imageURL {
-                            AsyncImage(url: imageURL) { phase in
-                                switch phase {
-                                case .empty:
-                                    Image(systemName: "person.circle")
-                                        .resizable()
-                                        .frame(width: 100, height: 100, alignment: .center)
-                                case .success(let image):
-                                    image
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(width: 100, height: 100, alignment: .center)
-                                        .clipShape(Circle())
-                                        .overlay(Circle().stroke(Color.white, lineWidth: 2))
-                                        .shadow(radius: 5)
-                                case .failure(let error):
-                                    Text("Failed to load image: \(error.localizedDescription)")
-                                        .foregroundColor(.red)
-                                @unknown default:
-                                    Text("Unknown error")
-                                        .foregroundColor(.red)
+                        if let selectedImage = selectedImage {
+                            Image(uiImage: selectedImage)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 100, height: 100, alignment: .center)
+                                .clipShape(Circle())
+                                .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                                .shadow(radius: 5)
+                                .onTapGesture {
+                                    isImagePickerPresented = true
                                 }
-                            }
-                            .onTapGesture {
-                                isImagePickerPresented = true
-                            }
-                            .padding(.top, 10)
-                            .clipShape(Circle())
-                            .overlay(Circle().stroke(Color.white, lineWidth: 2))
-                            .shadow(radius: 5)
                         } else {
                             Image(systemName: "person.circle")
                                 .resizable()
@@ -143,7 +103,7 @@ struct AccountView: View {
                         }
                     }
                     .sheet(isPresented: $isImagePickerPresented) {
-                        ImagePicker(selectedImageURL: $imageURL)
+                        ImagePicker(selectedImage: $selectedImage)
                     }
                 }
                 .frame(width: .infinity, height: 150)
@@ -219,21 +179,22 @@ struct AccountView: View {
                         TextField("Bio", text: $bio)
                     }.padding(.top, 20)
                     
-                    
                     // Gap between Info and Buttons
                     Spacer()
                         .frame(height: 20)
                     
-                    
                     HStack {
                         Button(action: {
-                            if let imageURL = imageURL {
-                                    storeUserInformation(imageProfileURL: imageURL)
-                                } else {
-                                    print("ImageURL hat nicht geklappt")
-                                    storeUserInformation(imageProfileURL: nil)
+                            if let selectedImage = selectedImage {
+                                uploadProfileImage(selectedImage) { url in
+                                    if let url = url {
+                                        storeUserInformation(imageProfileURL: url)
+                                    }
                                 }
-                                showAlert = true
+                            } else {
+                                storeUserInformation(imageProfileURL: nil)
+                            }
+                            showAlert = true
                         }, label: {
                             Text("Speichern")
                                 .frame(width: 200, height: 40)
@@ -245,7 +206,6 @@ struct AccountView: View {
                         
                         Button(action: {
                             logOut()
-                    
                         }, label: {
                             Text("Log Out")
                                 .frame(width: 100, height: 40)
@@ -268,11 +228,9 @@ struct AccountView: View {
         }
         .navigationBarTitle("Title")
         .alert(isPresented: $showAlert) {
-                    Alert(title: Text("Gespeichert"), message: Text("Ihre Änderungen wurden erfolgreich gespeichert"), dismissButton: .default(Text("OK")))
-                }
+            Alert(title: Text("Gespeichert"), message: Text("Ihre Änderungen wurden erfolgreich gespeichert"), dismissButton: .default(Text("OK")))
+        }
     }
-    
-    
     
     private func updateStateWithChatUser(_ chatUser: ChatUser) {
         name = chatUser.name
@@ -280,46 +238,21 @@ struct AccountView: View {
         email = chatUser.email
         bio = chatUser.bio
         links = chatUser.links
-        
-        if let profileImageURL = URL(string: chatUser.profileImageURL) {
-            imageURL = profileImageURL
-        } else {
-            print("Ungültige URL oder profileImageURL ist leer")
+        if let url = URL(string: chatUser.profileImageURL) {
+            fetchImage(from: url) { image in
+                self.selectedImage = image
+            }
         }
     }
-    
-    /*
-    private func persistImageStorage() {
-        guard let uid = FirebaseManager.shared.auth.currentUser?.uid
-            else { return }
-        let ref = FirebaseManager.shared.storage.reference(withPath: uid)
-        guard let imageData = self.selectedImage?.jpegData(compressionQuality: 0.5)
-            else { return }
-        ref.putData(imageData, metadata: nil?) { metadata, err in
-            if let err = err {
-                print("Failed to push image to Storage:  \(err)")
-                return
-            }
-            ref.downloadURL {url, err in
-                if let err = err {
-                    print("Failed to retrieve downloadURL:  \(err)")
-                    return
-                }
-                print("Successfully stored image with url: \(url?.absoluteString ?? "")")
-            }
-        }
-     }
-     */
     
     private func storeUserInformation(imageProfileURL: URL?) {
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
             return
         }
         
-        // Falls imageProfileURL nil ist, setze einen Standardwert (leerer String)
         let imageURLString = imageProfileURL?.absoluteString ?? ""
         
-        let userData = ["name" : self.name, "username" : self.username, "email" : self.email, "uid" : uid, "bio" : self.bio, "profileImageURL": imageURLString , "links" : self.links] as [String : Any]
+        let userData = ["name" : self.name, "username" : self.username, "email" : self.email, "uid" : uid, "bio" : self.bio, "profileImageURL": imageURLString, "links" : self.links] as [String : Any]
         FirebaseManager.shared.firestore.collection("users")
             .document(uid).setData(userData) { err in
                 if let err = err {
@@ -330,7 +263,7 @@ struct AccountView: View {
             }
     }
     
-    func logOut() {
+    private func logOut() {
         do {
             try FirebaseManager.shared.auth.signOut()
             isLoggedIn = false
@@ -340,8 +273,7 @@ struct AccountView: View {
         }
     }
     
-    // Function to fetch UIImage from URL asynchronously
-    func fetchImage(from url: URL, completion: @escaping (UIImage?) -> Void) {
+    private func fetchImage(from url: URL, completion: @escaping (UIImage?) -> Void) {
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data, error == nil else {
                 print("Failed to fetch image:", error?.localizedDescription ?? "Unknown error")
@@ -358,35 +290,46 @@ struct AccountView: View {
         }.resume()
     }
     
-    
-    // Funktion, um ein UIImage in eine Datei zu speichern und die URL zurückzugeben
-    func saveImageToDocumentsDirectory(image: UIImage) -> URL? {
-        // Erhalte das Dokumentenverzeichnis der App
-        let fileManager = FileManager.default
-        guard let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            return nil
+    private func uploadProfileImage(_ image: UIImage, completion: @escaping (URL?) -> Void) {
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
+            completion(nil)
+            return
         }
         
-        // Erstelle einen Dateinamen für das Bild
-        let fileName = UUID().uuidString
-        let fileURL = documentsURL.appendingPathComponent("\(fileName).png")
+        let ref = FirebaseManager.shared.storage.reference().child("profile_images/\(uid).jpg")
         
-        // Konvertiere UIImage in Data
-        guard let imageData = image.pngData() else {
-            return nil
+        guard let imageData = image.jpegData(compressionQuality: 0.5) else {
+            completion(nil)
+            return
         }
         
-        // Speichere die Daten im Dokumentenverzeichnis
-        do {
-            try imageData.write(to: fileURL)
-            return fileURL
-        } catch {
-            print("Error saving image: \(error)")
-            return nil
+        ref.putData(imageData, metadata: nil) { metadata, error in
+            if let error = error {
+                print("Error uploading image:", error)
+                completion(nil)
+                return
+            }
+            
+            ref.downloadURL { url, error in
+                if let error = error {
+                    print("Error getting download URL:", error)
+                    completion(nil)
+                    return
+                }
+                
+                if let url = url {
+                    completion(url)
+                } else {
+                    print("Download URL is nil")
+                    completion(nil)
+                }
+            }
         }
     }
-    
 
 }
+
+
+
 
 

@@ -9,22 +9,7 @@ import SwiftUI
 import Firebase
 
 
-class FirebaseManager: NSObject {    //This is a fix for previewing the ios app otherwise it would not load
-    
-    let auth: Auth
-    
-    let firestore: Firestore
-    
-    static let shared = FirebaseManager()  //Singelton object
-    
-    override init() {
-        FirebaseApp.configure()
-        self.auth = Auth.auth()
-        self.firestore = Firestore.firestore()
-        
-        super.init()
-    }
-}
+
 
 struct LoginSignUpView: View {
     @State private var email = ""

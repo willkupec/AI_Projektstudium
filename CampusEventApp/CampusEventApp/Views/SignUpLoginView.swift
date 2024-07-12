@@ -1,22 +1,25 @@
 import SwiftUI
 import Firebase
+import FirebaseStorage
 
-//Erst wenn wir das auch nehmen als View brauchen wir das
 
-/*class FirebaseManager: NSObject {
+class FirebaseManager: NSObject {    //This is a fix for previewing the ios app otherwise it would not load
+    
     let auth: Auth
     let firestore: Firestore
+    let storage: Storage
     
-    static let shared = FirebaseManager()
+    static let shared = FirebaseManager()  //Singelton object
     
     override init() {
         FirebaseApp.configure()
         self.auth = Auth.auth()
         self.firestore = Firestore.firestore()
+        self.storage = Storage.storage()
         
         super.init()
     }
-}*/
+}
 
 struct SignUpLoginView: View {
     @State private var email = ""
@@ -95,6 +98,33 @@ struct SignUpLoginView: View {
         }
     }
     
+    private func fetchRandomUsername(completion: @escaping (String) -> Void) {
+        let url = URL(string: "https://randomuser.me/api/")!
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                print("Failed to fetch random username: ", error ?? "Unknown error")
+                completion("DefaultUsername")
+                return
+            }
+            
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                   let results = json["results"] as? [[String: Any]],
+                   let login = results.first?["login"] as? [String: Any],
+                   let username = login["username"] as? String {
+                    completion(username)
+                } else {
+                    completion("DefaultUsername")
+                }
+            } catch {
+                print("Failed to parse random username: ", error)
+                completion("DefaultUsername")
+            }
+        }
+        
+        task.resume()
+    }
     
     private func createNewAccount(){
         FirebaseManager.shared.auth.createUser(withEmail: email, password: password){
@@ -106,15 +136,20 @@ struct SignUpLoginView: View {
             
             print("Successfully created user: \(result?.user.uid ?? "")")
             
-            let userData = ["name" : "", "username" : "", "email" : email, "uid" : result?.user.uid ?? "", "bio" : "", "profileImageURL": "", "links" : ["", ""]] as [String : Any]
-            FirebaseManager.shared.firestore.collection("users")
-                .document(result?.user.uid ?? "").setData(userData) { err in
-                    if let err = err {
-                        print(err)
-                        return
+            
+            fetchRandomUsername { randomUsername in
+                let userData = ["name" : "", "username" : randomUsername, "email" : email, "uid" : result?.user.uid ?? "", "bio" : "", "profileImageURL": "", "links" : ["", ""]] as [String : Any]
+                
+                FirebaseManager.shared.firestore.collection("users")
+                    .document(result?.user.uid ?? "").setData(userData) { err in
+                        if let err = err {
+                            print(err)
+                            return
+                        }
+                        print("Successfully stored UserData")
+                        loginUser()
                     }
-                    print("Successfully stored UserData")
-                }
+            }
         }
     }
     
