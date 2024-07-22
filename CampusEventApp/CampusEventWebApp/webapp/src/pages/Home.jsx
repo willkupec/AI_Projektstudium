@@ -166,12 +166,28 @@ const Home = () => {
                       HTW Berlin Campus Events
                     </Typography>
                   </Grid>
-                  <Grid item sx={{ mr: 8, mt: 1, width: "400px" }}>
+                  <Grid item sx={{ mr: 8, width: "400px" }}>
                     <TextField
                       variant="outlined"
-                      label="Search"
+                      placeholder="Search"
                       fullWidth
                       onChange={handleSearch}
+                      sx={{
+                        color: "white",
+                        bgcolor: "white",
+                        borderRadius: "10px",
+                        "& .MuiOutlinedInput-root": {
+                          "& fieldset": {
+                            borderColor: "transparent",
+                          },
+                          "&:hover fieldset": {
+                            borderColor: "transparent",
+                          },
+                          "&.Mui-focused fieldset": {
+                            borderColor: "transparent",
+                          },
+                        },
+                      }}
                     />
                   </Grid>
                 </Grid>
