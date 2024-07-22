@@ -1,7 +1,8 @@
 import { Box, Grid, Paper, Typography } from "@mui/material"
 
 const Bahn = ({ bahn }) => {
-  const { art, richtung, abfahrtszeit, fahrradmitnahme, barrierefrei } = bahn
+  const { art, nummer, richtung, abfahrtszeit, fahrradmitnahme, barrierefrei } =
+    bahn
   const iconColor = art === "bus" ? "#a5027d" : "#d92120"
   return (
     <Grid item xs={12}>
@@ -16,9 +17,22 @@ const Bahn = ({ bahn }) => {
       >
         <Grid container columnSpacing={0} sx={{ alignItems: "center" }}>
           <Grid item xs={3}>
-            <Box
-              sx={{ width: "50px", height: "50px", bgcolor: iconColor, ml: 2 }}
-            ></Box>
+            <Paper
+              elevation={5}
+              sx={{
+                width: "100px",
+                height: "100px",
+                bgcolor: iconColor,
+                ml: 2,
+                alignItems: "center",
+                justifyContent: "center",
+                display: "flex",
+              }}
+            >
+              <Typography variant="h3" color="white" fontWeight={900}>
+                {nummer}
+              </Typography>
+            </Paper>
           </Grid>
           <Grid container item xs={8} rowSpacing="4px" sx={{ ml: 1 }}>
             <Grid item xs={12}>
