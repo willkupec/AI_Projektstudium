@@ -76,8 +76,6 @@ const BahnList = ({ name }) => {
     )
   }, [transportTypeFilter])
 
-  console.log("filteredBahns:", filteredBahns)
-
   return (
     <Grid item xs={4.5}>
       <Paper
@@ -93,7 +91,7 @@ const BahnList = ({ name }) => {
             alignContent: "center",
           }}
         >
-          <Typography variant="h2" color="white">
+          <Typography variant="h2" color="white" fontWeight="bold">
             {name}
           </Typography>
         </Paper>

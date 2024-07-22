@@ -1,10 +1,10 @@
-import { map } from "lodash"
+import { filter, map } from "lodash"
 import Header from "../components/Header"
-import { Container, Grid, Paper, Typography } from "@mui/material"
+import { Container, Grid, Paper, TextField, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 import Event from "../components/Event"
 
-/* const event1 = {
+const event1 = {
   _id: 1,
   titel: "Jazz Party",
   tag: "10.02.2024",
@@ -47,9 +47,9 @@ const event4 = {
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores totam est facilis quod impedit perferendis mollitia consequuntur nemo sit eligendi odio consectetur, qui expedita. Laboriosam quae voluptates esse eligendi expedita!",
 }
 
-const dummyEvents = [event1, event2, event3, event4, event4, event4, event4] */
+const dummyEvents = [event1, event2, event3, event4, event4, event4, event4]
 
-const getEvents = async (setEvents) => {
+/* const getEvents = async (setEvents) => {
   return fetch("http://malina.f4.htw-berlin.de:8080/events", {
     method: "GET",
     headers: {
@@ -58,14 +58,29 @@ const getEvents = async (setEvents) => {
   })
     .then((response) => response.json())
     .then((data) => setEvents(data))
-}
+} */
 
 const Home = () => {
-  const [events, setEvents] = useState([])
+  const [filteredEvents, setFilteredEvents] = useState([])
+  const [searchText, setSearchText] = useState("")
 
+  /*
   useEffect(() => {
     getEvents(setEvents)
-  }, [])
+  }, []) */
+
+  const handleSearch = (e) => {
+    const lowerCase = e.target.value.toLowerCase()
+    setSearchText(lowerCase)
+  }
+
+  useEffect(() => {
+    setFilteredEvents(
+      filter(dummyEvents, (event) =>
+        event.titel.toLowerCase().includes(searchText)
+      )
+    )
+  }, [searchText])
 
   return (
     <>
@@ -133,14 +148,33 @@ const Home = () => {
                 sx={{
                   backgroundColor: "#15A46E",
                   height: "150px",
-                  textAlign: "start",
-                  alignContent: "center",
+                  display: "flex",
                   pl: "60px",
                 }}
               >
-                <Typography variant="h2" color="white">
-                  HTW Berlin Campus Events
-                </Typography>
+                <Grid
+                  container
+                  sx={{
+                    textAlign: "start",
+                    alignContent: "center",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Grid item>
+                    <Typography variant="h2" color="white" fontWeight="bold">
+                      HTW Berlin Campus Events
+                    </Typography>
+                  </Grid>
+                  <Grid item sx={{ mr: 8, mt: 1, width: "400px" }}>
+                    <TextField
+                      variant="outlined"
+                      label="Search"
+                      fullWidth
+                      onChange={handleSearch}
+                    />
+                  </Grid>
+                </Grid>
               </Paper>
               <Grid
                 container
@@ -154,9 +188,9 @@ const Home = () => {
                   scrollbarWidth: "none",
                 }}
               >
-                {map(events, (event) => {
-                  return <Event event={event} />
-                })}
+                {map(filteredEvents, (event) => (
+                  <Event event={event} />
+                ))}
               </Grid>
             </Paper>
           </Grid>
