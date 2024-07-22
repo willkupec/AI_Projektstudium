@@ -52,7 +52,7 @@ const Home = () => {
               <Paper
                 component="img"
                 alt="tram"
-                src="https://i.imgur.com/mN5tVkt.jpg"
+                src="https://i.imgur.com/i6Untg3.jpg"
                 borderRadius="10px"
                 elevation={5}
                 sx={{ width: "100%", height: "auto" }}
