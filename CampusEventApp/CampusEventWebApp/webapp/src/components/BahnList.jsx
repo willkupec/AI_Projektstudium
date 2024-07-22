@@ -1,18 +1,12 @@
-import {
-  Box,
-  FormControlLabel,
-  FormGroup,
-  Grid,
-  Paper,
-  Typography,
-} from "@mui/material"
-import { map } from "lodash"
+import { Box, FormGroup, Grid, Paper, Typography } from "@mui/material"
+import { filter, get, map } from "lodash"
 import Bahn from "./Bahn"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Checkbox from "./Checkbox"
 
 const bahn1 = {
   _id: 1,
+  art: "tram",
   nummer: "27",
   richtung: "Krankenhaus Köpenick",
   abfahrtszeit: "1:51",
@@ -22,6 +16,7 @@ const bahn1 = {
 
 const bahn2 = {
   _id: 2,
+  art: "bus",
   nummer: "296",
   richtung: "S + U Lichtenberg",
   abfahrtszeit: "1:53",
@@ -31,6 +26,7 @@ const bahn2 = {
 
 const bahn3 = {
   _id: 3,
+  art: "tram",
   nummer: "M17",
   richtung: "Karlshorst",
   abfahrtszeit: "1:53",
@@ -41,7 +37,47 @@ const bahn3 = {
 const dummyBahns = [bahn1, bahn1, bahn2, bahn3, bahn3, bahn2, bahn1]
 
 const BahnList = ({ name }) => {
-  const [currFilters, setCurrFilters] = useState([])
+  const [filteredBahns, setFilteredBahns] = useState(dummyBahns)
+  const [numberFilter, setNumberFilter] = useState({
+    21: true,
+    27: true,
+    37: true,
+    60: true,
+    67: true,
+    M17: true,
+    296: true,
+  })
+  const [transportTypeFilter, setTransportTypeFilter] = useState({
+    tram: true,
+    bus: true,
+  })
+
+  const changeNumberFilter = (number) =>
+    setNumberFilter((prev) => ({
+      ...prev,
+      [number]: !get(numberFilter, number),
+    }))
+
+  const changeTransportTypeFilter = (transportType) =>
+    setTransportTypeFilter((prev) => ({
+      ...prev,
+      [transportType]: !get(transportTypeFilter, transportType),
+    }))
+
+  useEffect(() => {
+    setFilteredBahns(
+      filter(dummyBahns, (bahn) => numberFilter[bahn.nummer] === true)
+    )
+  }, [numberFilter])
+
+  useEffect(() => {
+    setFilteredBahns(
+      filter(dummyBahns, (bahn) => transportTypeFilter[bahn.art] === true)
+    )
+  }, [transportTypeFilter])
+
+  console.log("filteredBahns:", filteredBahns)
+
   return (
     <Grid item xs={4.5}>
       <Paper
@@ -73,7 +109,7 @@ const BahnList = ({ name }) => {
             scrollbarWidth: "none",
           }}
         >
-          {map(dummyBahns, (bahn) => {
+          {map(filteredBahns, (bahn) => {
             return <Bahn bahn={bahn} />
           })}
         </Grid>
@@ -97,8 +133,16 @@ const BahnList = ({ name }) => {
             row="false"
             sx={{ display: "flex", justifyContent: "space-around" }}
           >
-            <Checkbox label="Tram" defaultChecked />
-            <Checkbox label="Bus" defaultChecked />
+            <Checkbox
+              label="Tram"
+              checked={get(transportTypeFilter, "tram")}
+              onChange={() => changeTransportTypeFilter("tram")}
+            />
+            <Checkbox
+              label="Bus"
+              checked={get(transportTypeFilter, "bus")}
+              onChange={() => changeTransportTypeFilter("bus")}
+            />
           </FormGroup>
         </Box>
         <Box
@@ -118,13 +162,41 @@ const BahnList = ({ name }) => {
           }}
         >
           <FormGroup row="false" sx={{ ml: 2 }}>
-            <Checkbox label="21" />
-            <Checkbox label="27" />
-            <Checkbox label="37" />
-            <Checkbox label="60" />
-            <Checkbox label="67" />
-            <Checkbox label="M17" />
-            <Checkbox label="296" />
+            <Checkbox
+              label="21"
+              checked={get(numberFilter, "21")}
+              onChange={() => changeNumberFilter("21")}
+            />
+            <Checkbox
+              label="27"
+              checked={get(numberFilter, "27")}
+              onChange={() => changeNumberFilter("27")}
+            />
+            <Checkbox
+              label="37"
+              checked={get(numberFilter, "37")}
+              onChange={() => changeNumberFilter("37")}
+            />
+            <Checkbox
+              label="60"
+              checked={get(numberFilter, "60")}
+              onChange={() => changeNumberFilter("60")}
+            />
+            <Checkbox
+              label="67"
+              checked={get(numberFilter, "67")}
+              onChange={() => changeNumberFilter("67")}
+            />
+            <Checkbox
+              label="M17"
+              checked={get(numberFilter, "M17")}
+              onChange={() => changeNumberFilter("M17")}
+            />
+            <Checkbox
+              label="296"
+              checked={get(numberFilter, "296")}
+              onChange={() => changeNumberFilter("296")}
+            />
           </FormGroup>
         </Box>
       </Paper>

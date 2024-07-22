@@ -1,8 +1,8 @@
 import { Box, Grid, Paper, Typography } from "@mui/material"
 
 const Bahn = ({ bahn }) => {
-  const { nummer, richtung, abfahrtszeit, fahrradmitnahme, barrierefrei } = bahn
-  const iconColor = nummer === "296" ? "#a5027d" : "#d92120"
+  const { art, richtung, abfahrtszeit, fahrradmitnahme, barrierefrei } = bahn
+  const iconColor = art === "bus" ? "#a5027d" : "#d92120"
   return (
     <Grid item xs={12}>
       <Paper
