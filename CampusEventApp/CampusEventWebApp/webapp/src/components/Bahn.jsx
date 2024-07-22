@@ -1,4 +1,4 @@
-import { Box, Grid, Paper, Typography } from "@mui/material"
+import { Grid, Paper, Typography } from "@mui/material"
 
 const Bahn = ({ bahn }) => {
   const { art, nummer, richtung, abfahrtszeit, fahrradmitnahme, barrierefrei } =
