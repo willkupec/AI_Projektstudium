@@ -1,9 +1,22 @@
 import SwiftUI
 import Firebase
 
-struct ChatUser {
+struct ChatUser : Identifiable{
+    
+    var id: String{ uid } //getter mach die uid zur identifiable id
+    
     let name, username, email, uid, bio, profileImageURL: String
     let links: [String]
+    
+    init(data: [String: Any]){
+        self.name = data["name"] as? String ?? ""
+        self.username = data["username"] as? String ?? ""
+        self.email = data["email"] as? String ?? ""
+        self.uid = data["uid"] as? String ?? ""
+        self.bio = data["bio"] as? String ?? ""
+        self.profileImageURL = data["profileImageURL"] as? String ?? ""
+        self.links = data["links"] as? [String] ?? ["", ""]
+    }
 }
 
 class ProfileViewModel: ObservableObject {
@@ -29,7 +42,6 @@ class ProfileViewModel: ObservableObject {
                 print("No data found")
                 return
             }
-            
             let name = data["name"] as? String ?? ""
             let username = data["username"] as? String ?? ""
             let email = data["email"] as? String ?? ""
@@ -39,7 +51,7 @@ class ProfileViewModel: ObservableObject {
             let links = data["links"] as? [String] ?? ["", ""]
             
             DispatchQueue.main.async {
-                self.chatUser = ChatUser(name: name, username: username, email: email, uid: uid, bio: bio, profileImageURL: profileImageURL, links: links)
+                self.chatUser = ChatUser(data: data)
             }
         }
     }

@@ -53,11 +53,13 @@ struct SignUpLoginView: View {
                         .padding(.horizontal)
                     
                     Button(action: {
-                        if isLoginMode {
-                            loginUser()
-                        } else {
-                            createNewAccount()
-                            showAlert = true
+                        Task {
+                            if isLoginMode {
+                                await loginUser()
+                            } else {
+                                await createNewAccount()
+                                showAlert = true
+                            }
                         }
                     }) {
                         Text(isLoginMode ? "Login" : "Sign Up")
@@ -98,6 +100,7 @@ struct SignUpLoginView: View {
         }
     }
     
+    /*
     private func fetchRandomUsername(completion: @escaping (String) -> Void) {
         let url = URL(string: "https://randomuser.me/api/")!
         
@@ -125,6 +128,63 @@ struct SignUpLoginView: View {
         
         task.resume()
     }
+     */
+    
+    //Same Function only with Async and Await
+    
+    func fetchRandomUsername() async -> String {
+        let url = URL(string: "https://randomuser.me/api/")!
+        
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+               let results = json["results"] as? [[String: Any]],
+               let login = results.first?["login"] as? [String: Any],
+               let username = login["username"] as? String {
+                return username
+            } else {
+                return "DefaultUsername"
+            }
+        } catch {
+            print("Failed to fetch random username: ", error)
+            return "DefaultUsername"
+        }
+    }
+    
+    
+    private func createNewAccount() async {
+        do {
+            // Erstelle einen neuen Benutzer
+            let result = try await FirebaseManager.shared.auth.createUser(withEmail: email, password: password)
+            let userId = result.user.uid
+            print("Successfully created user: \(userId)")
+
+            // Hole einen zufälligen Benutzernamen
+            let randomUsername = await fetchRandomUsername()
+
+            // Erstelle die Benutzerdaten
+            let userData: [String: Any] = [
+                "name": "",
+                "username": randomUsername,
+                "email": email,
+                "uid": userId,
+                "bio": "",
+                "profileImageURL": "",
+                "links": ["", ""]
+            ]
+
+            // Speichere die Benutzerdaten in Firestore
+            try await FirebaseManager.shared.firestore.collection("users").document(userId).setData(userData)
+            print("Successfully stored UserData")
+
+            // Melde den Benutzer an
+            loginUser()
+        } catch {
+            print("Failed to create user or store user data: \(error)")
+        }
+    }
+    
+    /*
     
     private func createNewAccount(){
         FirebaseManager.shared.auth.createUser(withEmail: email, password: password){
@@ -152,6 +212,7 @@ struct SignUpLoginView: View {
             }
         }
     }
+     */
     
     
     

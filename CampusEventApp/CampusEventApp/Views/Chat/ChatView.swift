@@ -6,71 +6,203 @@
 //
 
 import SwiftUI
+import Firebase
 
-struct ChatView: View {
+import Combine
+
+class ImageLoader: ObservableObject {
+    @Published var image: UIImage?
+    private var cancellable: AnyCancellable?
     
-    @StateObject var viewModel = ChatsViewModel()
+    func load(from url: URL) {
+        cancellable = URLSession.shared.dataTaskPublisher(for: url)
+            .map { UIImage(data: $0.data) }
+            .replaceError(with: nil)
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.image, on: self)
+    }
     
-    @State private var query = ""
-    
+    deinit {
+        cancellable?.cancel()
+    }
+}
+
+struct URLImage: View {
+    @StateObject private var loader = ImageLoader()
+    let url: URL?
+    let placeholder: Image
+
     var body: some View {
-        NavigationView {
-            List {
-                /*ForEach(0 ..< 10) {i in
-                    ChatRow()
-                }*/
-                
-                ForEach(viewModel.getSortedFilteredChats(query: query)) { chat in
-                    
-                    NavigationLink(destination: {     //Naviagtion link zum Chat
-                        MessageView(chat: chat)
-                            .environmentObject(viewModel)
-                    }){
-                        ChatRow(chat: chat)
-                    }
-                    .swipeActions(edge: .leading, allowsFullSwipe: true) { //swipe to mark as Unread
-                        Button(action: {
-                            viewModel.markAsUnread(!chat.hasUnreadMessage, chat: chat)
-                        }) {
-                            if chat.hasUnreadMessage {
-                                Label("Read", systemImage: "text.bubble")
-                            } else {
-                                Label("Unread", systemImage: "circle.fill")
-                            }
-                        }
-                        .tint(.green)
-                        
-                    }
-                    
-                    /* Zum Verstecken des Link Buttons dem Pfeil
-                     
-                     ZStack {
-                     
-                        ChatRow(chat: chat)
-                     
-                        NavigationLink(destination: {
-                            Text(chat.person.name)
-                        }){
-                            EmptyView()
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                        .frame(width: 0)
-                        .opacity(0)
-                     }
-                     
-                     */
-                    
-                }
+        Group {
+            if let image = loader.image {
+                Image(uiImage: image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .clipped()
+            } else {
+                placeholder
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .clipped()
             }
-            .listStyle(PlainListStyle())
-            .searchable(text: $query)
-            .navigationTitle("Chats")
-            .navigationBarItems(trailing: Button(action: {}) {
-                Image(systemName: "square.and.pencil")
-            })
+        }
+        .onAppear {
+            if let url = url {
+                loader.load(from: url)
+            }
         }
     }
 }
+
+struct ChatView: View {
+    
+    @StateObject var viewModel = CreateNewMessageViewModel()
+    
+    @State private var query = ""
+    
+    @State var chatUser: ChatUser?
+    
+    @State var shouldShowNewMessageScreen: Bool = false
+    
+    @State var shouldNavigateToChatLogView: Bool = false
+    
+    
+    var body: some View {
+        NavigationView {
+            VStack {
+                HStack {
+                    Text("Chats")
+                        .font(.largeTitle)
+                        .bold()
+                    
+                    Spacer()
+                    
+                    Button(action: { shouldShowNewMessageScreen.toggle() }) {
+                        Image(systemName: "square.and.pencil")
+                            .font(.title)
+                    }
+                }
+                .padding()
+                
+                HStack {
+                    TextField("Search", text: $query)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding([.leading, .trailing])
+                    
+                    Button(action: {
+                        viewModel.filterMessages(query: query)
+                    }) {
+                        Image(systemName: "magnifyingglass")
+                            .font(.title)
+                            .padding([.trailing])
+                    }
+                }
+                
+                List(viewModel.filteredMessages) { recentMessage in
+                    VStack {
+                        NavigationLink(destination: ChatLogView(chatUser: viewModel.getUser(matching: recentMessage))) {
+                            HStack(spacing: 16) {
+                                URLImage(url: URL(string: recentMessage.profileImageURL),
+                                         placeholder: Image(systemName: "person.fill"))
+                                .scaledToFill()
+                                .frame(width: 64, height: 64)
+                                .clipped()
+                                .cornerRadius(64)
+                                .overlay(RoundedRectangle(cornerRadius: 64).stroke(Color.black, lineWidth: 2))
+                                .shadow(radius: 5)
+                                
+                                VStack(alignment: .leading, spacing: 8) {
+                                    Text(recentMessage.username)
+                                        .font(.system(size: 16, weight: .bold))
+                                        .foregroundColor(Color(.label))
+                                    Text(recentMessage.text)
+                                        .font(.system(size: 14))
+                                        .foregroundColor(Color(.darkGray))
+                                        .multilineTextAlignment(.leading)
+                                }
+                                
+                                Spacer()
+                                
+                                Text(recentMessage.timestamp.dateValue().descriptiveString())
+                                    .font(.system(size: 14, weight: .semibold))
+                            }
+                        }
+                        Divider()
+                    }
+                }
+                .listStyle(PlainListStyle())
+                
+                NavigationLink("", isActive: $shouldNavigateToChatLogView) {
+                    if let chatUser = chatUser {
+                        ChatLogView(chatUser: chatUser)
+                    }
+                }.hidden()
+                
+                .fullScreenCover(isPresented: $shouldShowNewMessageScreen) {
+                    NewMessageScreen(didSelectNewUser: { user in
+                        print(user.username)
+                        self.shouldNavigateToChatLogView.toggle()
+                        self.chatUser = user
+                    })
+                }
+            }
+        }
+    }
+            
+            
+        
+    
+        
+        
+        
+        private var messagesView: some View {
+            ScrollView {
+                ForEach(viewModel.filteredMessages) { recentMessage in
+                    VStack {
+                        NavigationLink{
+                            let navigationChatUser = viewModel.getUser(matching: recentMessage)
+                            ChatLogView(chatUser: navigationChatUser)
+                        }label: {
+                            HStack(spacing: 16) {
+                                
+                                
+                                URLImage(url: URL(string: recentMessage.profileImageURL),
+                                         placeholder: Image(systemName: "person.fill"))
+                                .scaledToFill()
+                                .frame(width: 64, height: 64)
+                                .clipped()
+                                .cornerRadius(64)
+                                .overlay(RoundedRectangle(cornerRadius: 64).stroke(Color.black, lineWidth: 2))
+                                .shadow(radius: 5)
+                                
+                            }
+                            
+                            VStack(alignment: .leading, spacing: 8){
+                                Text(recentMessage.username)
+                                    .font(.system(size: 16, weight: .bold))
+                                    .foregroundColor(Color(.label))
+                                Text(recentMessage.text)
+                                    .font(.system(size: 14))
+                                    .foregroundColor(Color(.darkGray))
+                                    .multilineTextAlignment(.leading)
+                            }
+                            Spacer()
+                            
+                            Text(recentMessage.timestamp.dateValue().descriptiveString())
+                                .font(.system(size: 14, weight: .semibold))
+                        }
+                        Divider()
+                    }
+                            
+                }
+            }
+        }
+    }
+
+
+
+
+
 
 
 
