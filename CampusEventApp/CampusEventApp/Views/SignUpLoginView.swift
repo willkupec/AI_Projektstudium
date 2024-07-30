@@ -28,6 +28,7 @@ struct SignUpLoginView: View {
     @State private var isLoginMode: Bool = true
     
     @State private var showAlert = false
+    @State private var alertMessage = ""
     
     var body: some View {
         NavigationView {
@@ -37,28 +38,27 @@ struct SignUpLoginView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(maxWidth: 200, maxHeight: 200)
                     .padding(.bottom, 20)
-                
+
                 VStack(spacing: 16) {
                     Text(isLoginMode ? "Login" : "Sign Up")
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .padding(.bottom, 20)
-                    
+
                     TextField("Email", text: $email)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .padding(.horizontal)
-                    
+
                     SecureField("Password", text: $password)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .padding(.horizontal)
-                    
+
                     Button(action: {
                         Task {
                             if isLoginMode {
                                 await loginUser()
                             } else {
-                                await createNewAccount()
-                                showAlert = true
+                                await validateAndCreateNewAccount()
                             }
                         }
                     }) {
@@ -70,7 +70,7 @@ struct SignUpLoginView: View {
                             .cornerRadius(10)
                     }
                     .padding(.horizontal)
-                    
+
                     Button(action: {
                         isLoginMode.toggle()
                     }) {
@@ -96,45 +96,13 @@ struct SignUpLoginView: View {
             }
         }
         .alert(isPresented: $showAlert) {
-            Alert(title: Text("Account erstellt!"), message: Text("Ihr Account wurde erstellt und erfolgreich gespeichert"), dismissButton: .default(Text("OK")))
+            Alert(title: Text("Hinweis"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
         }
     }
-    
-    /*
-    private func fetchRandomUsername(completion: @escaping (String) -> Void) {
-        let url = URL(string: "https://randomuser.me/api/")!
-        
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data, error == nil else {
-                print("Failed to fetch random username: ", error ?? "Unknown error")
-                completion("DefaultUsername")
-                return
-            }
-            
-            do {
-                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                   let results = json["results"] as? [[String: Any]],
-                   let login = results.first?["login"] as? [String: Any],
-                   let username = login["username"] as? String {
-                    completion(username)
-                } else {
-                    completion("DefaultUsername")
-                }
-            } catch {
-                print("Failed to parse random username: ", error)
-                completion("DefaultUsername")
-            }
-        }
-        
-        task.resume()
-    }
-     */
-    
-    //Same Function only with Async and Await
-    
+
     func fetchRandomUsername() async -> String {
         let url = URL(string: "https://randomuser.me/api/")!
-        
+
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
             if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
@@ -150,19 +118,31 @@ struct SignUpLoginView: View {
             return "DefaultUsername"
         }
     }
-    
-    
+
+    private func validateAndCreateNewAccount() async {
+        if password.count < 6 {
+            alertMessage = "Das Passwort muss mindestens 6 Zeichen lang sein."
+            showAlert = true
+            return
+        }
+
+        if !isValidEmail(email) {
+            alertMessage = "Bitte geben Sie eine gültige E-Mail-Adresse ein."
+            showAlert = true
+            return
+        }
+
+        await createNewAccount()
+    }
+
     private func createNewAccount() async {
         do {
-            // Erstelle einen neuen Benutzer
             let result = try await FirebaseManager.shared.auth.createUser(withEmail: email, password: password)
             let userId = result.user.uid
             print("Successfully created user: \(userId)")
 
-            // Hole einen zufälligen Benutzernamen
             let randomUsername = await fetchRandomUsername()
 
-            // Erstelle die Benutzerdaten
             let userData: [String: Any] = [
                 "name": "",
                 "username": randomUsername,
@@ -173,59 +153,32 @@ struct SignUpLoginView: View {
                 "links": ["", ""]
             ]
 
-            // Speichere die Benutzerdaten in Firestore
             try await FirebaseManager.shared.firestore.collection("users").document(userId).setData(userData)
             print("Successfully stored UserData")
 
-            // Melde den Benutzer an
-            loginUser()
+            alertMessage = "Ihr Account wurde erfolgreich erstellt."
+            showAlert = true
+            await loginUser()
         } catch {
-            print("Failed to create user or store user data: \(error)")
+            alertMessage = "Fehler beim Erstellen des Kontos: \(error.localizedDescription)"
+            showAlert = true
         }
     }
-    
-    /*
-    
-    private func createNewAccount(){
-        FirebaseManager.shared.auth.createUser(withEmail: email, password: password){
-            result, err in
-            if let err = err {
-                print("failed to create user: ", err)
-                return;
-            }
-            
-            print("Successfully created user: \(result?.user.uid ?? "")")
-            
-            
-            fetchRandomUsername { randomUsername in
-                let userData = ["name" : "", "username" : randomUsername, "email" : email, "uid" : result?.user.uid ?? "", "bio" : "", "profileImageURL": "", "links" : ["", ""]] as [String : Any]
-                
-                FirebaseManager.shared.firestore.collection("users")
-                    .document(result?.user.uid ?? "").setData(userData) { err in
-                        if let err = err {
-                            print(err)
-                            return
-                        }
-                        print("Successfully stored UserData")
-                        loginUser()
-                    }
-            }
-        }
-    }
-     */
-    
-    
-    
-    func loginUser() {
-        FirebaseManager.shared.auth.signIn(withEmail: email, password: password) { result, err in
-            if let err = err {
-                print("Failed to log in", err)
-                return
-            }
-            print("Successfully logged in as user: \(result?.user.uid ?? "")")
+
+    func loginUser() async {
+        do {
+            let result = try await FirebaseManager.shared.auth.signIn(withEmail: email, password: password)
+            print("Successfully logged in as user: \(result.user.uid)")
             isLoggedIn = true
+        } catch {
+            alertMessage = "Fehler beim Anmelden: \(error.localizedDescription)"
+            showAlert = true
         }
     }
-    
-    
+
+    private func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
+    }
 }

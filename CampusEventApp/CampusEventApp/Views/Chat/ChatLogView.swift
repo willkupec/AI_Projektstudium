@@ -157,30 +157,23 @@ class ChatLogViewModel: ObservableObject {
     }
     
     private func persistRecentMessage() {
-        
         guard let chatUser = chatUser else { return }
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
         
-        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {return}
+        let chatTextToSend = self.chatText
         
-        @StateObject var userViewModel = UserViewModel()
-        
-        
-        
-        guard let toId = self.chatUser?.uid else {return}
-        
-        
-        
+        // Daten für den aktuellen Benutzer speichern
         let document = FirebaseManager.shared.firestore
             .collection("recent_messages")
             .document(uid)
             .collection("messages")
-            .document(toId)
+            .document(chatUser.uid)
         
         let data = [
             FirebaseConstants.timestamp: Timestamp(),
-            FirebaseConstants.text: self.chatText,
+            FirebaseConstants.text: chatTextToSend,
             FirebaseConstants.fromId: uid,
-            FirebaseConstants.toId: toId,
+            FirebaseConstants.toId: chatUser.uid,
             FirebaseConstants.profileImageURL: chatUser.profileImageURL,
             FirebaseConstants.username: chatUser.username
         ] as [String : Any]
@@ -192,21 +185,34 @@ class ChatLogViewModel: ObservableObject {
             }
         }
         
-        
+        // Daten für den Empfänger speichern
         let recipientDocument = FirebaseManager.shared.firestore
             .collection("recent_messages")
-            .document(toId)
+            .document(chatUser.uid)
             .collection("messages")
             .document(uid)
         
-        if let user = userViewModel.chatUser {
+        // Aktuellen Benutzer abrufen
+        FirebaseManager.shared.firestore.collection("users").document(uid).getDocument { snapshot, error in
+            if let error = error {
+                self.errorMessage = "Failed to fetch current user: \(error)"
+                return
+            }
+            
+            guard let data = snapshot?.data(),
+                  let profileImageURL = data[FirebaseConstants.profileImageURL] as? String,
+                  let username = data[FirebaseConstants.username] as? String else {
+                self.errorMessage = "Failed to fetch user data"
+                return
+            }
+            
             let recipientData = [
                 FirebaseConstants.timestamp: Timestamp(),
-                FirebaseConstants.text: self.chatText,
-                FirebaseConstants.fromId: toId,
-                FirebaseConstants.toId: uid,
-                FirebaseConstants.profileImageURL: user.profileImageURL,
-                FirebaseConstants.username: user.username
+                FirebaseConstants.text: chatTextToSend,
+                FirebaseConstants.fromId: uid,
+                FirebaseConstants.toId: chatUser.uid,
+                FirebaseConstants.profileImageURL: profileImageURL,
+                FirebaseConstants.username: username
             ] as [String : Any]
             
             recipientDocument.setData(recipientData) { error in
@@ -215,13 +221,9 @@ class ChatLogViewModel: ObservableObject {
                     return
                 }
             }
-            
-        } else {
-            self.errorMessage = "Failed to get the current User"
         }
-        
-         
     }
+
     
     @Published var count = 0
 }
