@@ -274,8 +274,71 @@ struct AccountView: View {
             updateEventsOrganizerName(userID: uid, newOrganizerName: self.name)
         }
     }
+
+    private func updatePostsAuthorName(userID: String, newAuthorName: String) {
+        guard let url = URL(string: "http://canwrobel.de:8090/users/\(userID)/update-posts") else {
+            print("Invalid URL")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let json: [String: Any] = ["newAuthorName": newAuthorName]
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: json) else {
+            print("Error serializing JSON")
+            return
+        }
+        request.httpBody = jsonData
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error updating posts author name: \(error.localizedDescription)")
+                return
+            }
+            
+            if let response = response as? HTTPURLResponse, response.statusCode == 200 {
+                print("Successfully updated posts author name")
+            } else {
+                print("Failed to update posts author name")
+            }
+        }.resume()
+    }
+
+    private func updateEventsOrganizerName(userID: String, newOrganizerName: String) {
+        guard let url = URL(string: "http://canwrobel.de:8090/users/\(userID)/update-events") else {
+            print("Invalid URL")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let json: [String: Any] = ["newOrganizerName": newOrganizerName]
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: json) else {
+            print("Error serializing JSON")
+            return
+        }
+        request.httpBody = jsonData
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error updating events organizer name: \(error.localizedDescription)")
+                return
+            }
+            
+            if let response = response as? HTTPURLResponse, response.statusCode == 200 {
+                print("Successfully updated events organizer name")
+            } else {
+                print("Failed to update events organizer name")
+            }
+        }.resume()
+    }
+
     
-    private func logOut() {
+    func logOut() {
         do {
             try FirebaseManager.shared.auth.signOut()
             isLoggedIn = false

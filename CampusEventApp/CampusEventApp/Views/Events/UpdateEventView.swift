@@ -10,14 +10,18 @@ struct UpdateEventView: View {
     @State private var organizerId: String
     @State private var organizerName: String
     @State private var location: String
-    //@State private var photo: UIImage? = nil
-    @State private var photo: String = ""
+    @State private var photo: String
     @State private var showImagePicker: Bool = false
     @State private var showTypePicker: Bool = false
+
+    @State private var typeError: String? = nil
+    @State private var descriptionError: String? = nil
+    @State private var locationError: String? = nil
+
     var event: Event
     var eventController: EventController
     @Environment(\.presentationMode) var presentationMode
-    
+
     private let timeFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
@@ -54,6 +58,7 @@ struct UpdateEventView: View {
                                 .background(Color(UIColor.systemGray6))
                                 .cornerRadius(10)
                                 .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
+                                .disabled(true)
                         }
 
                         VStack(alignment: .leading) {
@@ -66,9 +71,13 @@ struct UpdateEventView: View {
                                     .frame(maxWidth: .infinity)
                                     .foregroundColor(type.isEmpty ? .gray : .black)
                                     .padding()
-                                    .background(Color(UIColor.systemGray6))
                                     .cornerRadius(10)
                                     .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
+                            }
+                            if let error = typeError {
+                                Text(error)
+                                    .foregroundColor(.red)
+                                    .font(.caption)
                             }
                         }
 
@@ -76,11 +85,15 @@ struct UpdateEventView: View {
                             Text("Description")
                                 .font(.headline)
                             TextEditor(text: $description)
-                                .background(Color(UIColor.systemGray6))
-                                    .padding()
-                                    .frame(minHeight: 100)
-                                    .cornerRadius(10)
-                                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
+                                .padding()
+                                .frame(minHeight: 100)
+                                .cornerRadius(10)
+                                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
+                            if let error = descriptionError {
+                                Text(error)
+                                    .foregroundColor(.red)
+                                    .font(.caption)
+                            }
                         }
 
                         VStack(alignment: .leading) {
@@ -88,9 +101,13 @@ struct UpdateEventView: View {
                                 .font(.headline)
                             TextField("Enter event location", text: $location)
                                 .padding()
-                                .background(Color(UIColor.systemGray6))
                                 .cornerRadius(10)
                                 .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
+                            if let error = locationError {
+                                Text(error)
+                                    .foregroundColor(.red)
+                                    .font(.caption)
+                            }
                         }
                     }
 
@@ -107,9 +124,8 @@ struct UpdateEventView: View {
                         Text("Event Photo")
                             .font(.headline)
                         
-                        TextField("Enter photo base64", text: $photo)
+                        TextField("Enter photo URL", text: $photo)
                             .padding()
-                            .background(Color(UIColor.systemGray6))
                             .cornerRadius(10)
                             .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
                     }
@@ -160,7 +176,38 @@ struct UpdateEventView: View {
         }
     }
 
+    private func validateFields() -> Bool {
+        var isValid = true
+
+        if type.isEmpty {
+            typeError = "Event type is required."
+            isValid = false
+        } else {
+            typeError = nil
+        }
+
+        if description.isEmpty {
+            descriptionError = "Event description is required."
+            isValid = false
+        } else {
+            descriptionError = nil
+        }
+
+        if location.isEmpty {
+            locationError = "Event location is required."
+            isValid = false
+        } else {
+            locationError = nil
+        }
+
+        return isValid
+    }
+
     private func updateEvent() {
+        if !validateFields() {
+            return
+        }
+
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "HH:mm"
 

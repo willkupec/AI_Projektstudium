@@ -7,6 +7,8 @@ struct UpdatePostView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var title: String
     @State private var content: String
+
+    @State private var contentError: String? = nil
     
     init(post: Post, eventController: EventController) {
         self.post = post
@@ -25,7 +27,9 @@ struct UpdatePostView: View {
                     TextField("Enter post title", text: $title)
                         .padding()
                         .cornerRadius(10)
+                        .background(Color(UIColor.systemGray6))
                         .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
+                        .disabled(true)
                 }
                 
                 VStack(alignment: .leading) {
@@ -36,6 +40,11 @@ struct UpdatePostView: View {
                         .cornerRadius(10)
                         .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
                         .frame(maxHeight: 200)
+                    if let error = contentError {
+                        Text(error)
+                            .foregroundColor(.red)
+                            .font(.caption)
+                    }
                 }
                 
                 Button(action: {
@@ -57,9 +66,26 @@ struct UpdatePostView: View {
         }
     }
     
+    private func validateFields() -> Bool {
+        var isValid = true
+
+        if content.isEmpty {
+            contentError = "Post content is required."
+            isValid = false
+        } else {
+            contentError = nil
+        }
+
+        return isValid
+    }
+
     private func updatePost() {
         guard let currentUser = Auth.auth().currentUser, currentUser.uid == post.authorId else {
             print("Unauthorized user")
+            return
+        }
+        
+        if !validateFields() {
             return
         }
         

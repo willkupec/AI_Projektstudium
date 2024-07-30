@@ -5,6 +5,8 @@ struct CreatePostView: View {
     let event: Event
     @State private var title: String = ""
     @State private var content: String = ""
+    @State private var titleError: String? = nil
+    @State private var contentError: String? = nil
     var eventController: EventController
     @Environment(\.presentationMode) var presentationMode
     
@@ -19,6 +21,11 @@ struct CreatePostView: View {
                         .padding()
                         .cornerRadius(10)
                         .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
+                    if let error = titleError {
+                        Text(error)
+                            .foregroundColor(.red)
+                            .font(.caption)
+                    }
                 }
                 
                 VStack(alignment: .leading) {
@@ -29,6 +36,11 @@ struct CreatePostView: View {
                         .cornerRadius(10)
                         .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
                         .frame(maxHeight: 200)
+                    if let error = contentError {
+                        Text(error)
+                            .foregroundColor(.red)
+                            .font(.caption)
+                    }
                 }
                 
                 Button(action: {
@@ -50,12 +62,35 @@ struct CreatePostView: View {
         }
     }
     
+    private func validateFields() -> Bool {
+        var isValid = true
+        if title.isEmpty {
+            titleError = "Post title is required."
+            isValid = false
+        } else {
+            titleError = nil
+        }
+
+        if content.isEmpty {
+            contentError = "Post content is required."
+            isValid = false
+        } else {
+            contentError = nil
+        }
+
+        return isValid
+    }
+
     private func createPost() {
         guard let currentUser = Auth.auth().currentUser else {
             print("No user logged in")
             return
         }
-        
+
+        if !validateFields() {
+            return
+        }
+
         getUsername { username in
             let post = Post(
                 id: UUID().uuidString,
@@ -70,7 +105,6 @@ struct CreatePostView: View {
             
             eventController.createPost(to: event, post: post)
             presentationMode.wrappedValue.dismiss()
-            
         }
     }
 }

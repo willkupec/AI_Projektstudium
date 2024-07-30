@@ -40,8 +40,6 @@ struct PostView: View {
                             .multilineTextAlignment(.leading)
                             .padding(.top, 1)
                         
-                        
-                        // TODO edit & delete; only when authorized user
                         HStack(spacing: 25) {
                             Image(systemName: "pencil")
                                 .frame(width: 20, height: 20)

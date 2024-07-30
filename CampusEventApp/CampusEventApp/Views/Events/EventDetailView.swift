@@ -8,32 +8,37 @@ struct EventDetailView: View {
     @Environment(\.presentationMode) var presentationMode
     var eventController: EventController
 
-    private let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter
-    }()
-
     var body: some View {
         VStack {
             ZStack {
                 ScrollView {
                     VStack {
                         if let url = URL(string: event.photo), !event.photo.isEmpty {
-                            AsyncImage(url: url) { image in
-                                image
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(height: 200)
-                                    .cornerRadius(10)
-                                    .padding()
-                            } placeholder: {
-                                Image(systemName: "photo")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(height: 200)
-                                    .cornerRadius(10)
-                                    .padding()
+                            AsyncImage(url: url) { phase in
+                                switch phase {
+                                case .empty:
+                                    ProgressView()
+                                        .frame(height: 200)
+                                        .frame(maxWidth: .infinity)
+                                        .cornerRadius(10)
+                                        .padding()
+                                case .success(let image):
+                                    image
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(height: 200)
+                                        .cornerRadius(10)
+                                        .padding()
+                                case .failure:
+                                    Image(systemName: "photo")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(height: 200)
+                                        .cornerRadius(10)
+                                        .padding()
+                                @unknown default:
+                                    EmptyView()
+                                }
                             }
                         } else {
                             Image(systemName: "photo")
@@ -47,28 +52,32 @@ struct EventDetailView: View {
                         VStack(alignment: .leading, spacing: 10) {
                             Text("\(event.name)")
                                 .font(.system(size: 50))
+                                .multilineTextAlignment(.leading)
                             Text("\(event.description)")
-                                .lineLimit(10)
-                                .fixedSize(horizontal: false, vertical: true)
                                 .font(.system(size: 20))
+                                .multilineTextAlignment(.leading)
                             Text("\(event.type) von \(event.organizerName)")
                                 .padding(.top, 20)
+                                .multilineTextAlignment(.leading)
                             Text("\(event.location)")
-                            Text("\(event.start) - \(event.end) Uhr, \(dateFormatter.string(from: event.date))")
-                        }
-
-                        if event.organizerId == Auth.auth().currentUser?.uid {
-                            VStack {
+                                .multilineTextAlignment(.leading)
+                            Text("\(event.start) - \(event.end) Uhr, \(event.date.formatDatum(event.date))")
+                                .multilineTextAlignment(.leading)
+                            
+                            if event.organizerId == Auth.auth().currentUser?.uid {
                                 NavigationLink(destination: UpdateEventView(event: event, eventController: eventController)) {
                                     HStack {
                                         Image(systemName: "pencil")
                                             .frame(width: 30, height: 30)
                                     }
                                     .frame(maxWidth: .infinity, alignment: .trailing)
+                                    .padding(.top)
+                                    .padding(.trailing, 5)
                                 }
                             }
-                            .padding(.top)
                         }
+                        .padding(.horizontal, 25)
+                        .frame(maxWidth: .infinity, alignment: .leading)
 
                         VStack(alignment: .leading) {
                             Text("All event posts")
@@ -161,6 +170,7 @@ struct EventDetailView: View {
                         }
                     }
                 }
+                .padding(5)
                 .refreshable {
                     reloadEvent(event.id)
                 }

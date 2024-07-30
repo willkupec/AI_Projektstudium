@@ -8,12 +8,16 @@ struct CreateEventView: View {
     @State private var date: Date = Date()
     @State private var type: String = "Lehrveranstaltung"
     @State private var description: String = ""
-    @State private var organizer: String = ""
     @State private var location: String = ""
     @State private var photo: String = ""
     @State private var showImagePicker: Bool = false
     @State private var showTypePicker: Bool = false
     @State private var errorMessage: String? = nil
+    
+    @State private var nameError: String? = nil
+    @State private var typeError: String? = nil
+    @State private var descriptionError: String? = nil
+    @State private var locationError: String? = nil
     
     var eventController: EventController
     @Environment(\.presentationMode) var presentationMode
@@ -30,9 +34,13 @@ struct CreateEventView: View {
                                 .font(.headline)
                             TextField("Enter event name", text: $name)
                                 .padding()
-                                .background(Color(UIColor.systemGray6))
                                 .cornerRadius(10)
                                 .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
+                            if let error = nameError {
+                                Text(error)
+                                    .foregroundColor(.red)
+                                    .font(.caption)
+                            }
                         }
 
                         VStack(alignment: .leading) {
@@ -45,9 +53,13 @@ struct CreateEventView: View {
                                     .frame(maxWidth: .infinity)
                                     .foregroundColor(type.isEmpty ? .gray : .black)
                                     .padding()
-                                    .background(Color(UIColor.systemGray6))
                                     .cornerRadius(10)
                                     .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
+                            }
+                            if let error = typeError {
+                                Text(error)
+                                    .foregroundColor(.red)
+                                    .font(.caption)
                             }
                         }
 
@@ -55,11 +67,15 @@ struct CreateEventView: View {
                             Text("Description")
                                 .font(.headline)
                             TextEditor(text: $description)
-                                .background(Color(UIColor.systemGray6))
                                 .padding()
                                 .frame(minHeight: 100)
                                 .cornerRadius(10)
                                 .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
+                            if let error = descriptionError {
+                                Text(error)
+                                    .foregroundColor(.red)
+                                    .font(.caption)
+                            }
                         }
 
                         VStack(alignment: .leading) {
@@ -67,9 +83,13 @@ struct CreateEventView: View {
                                 .font(.headline)
                             TextField("Enter event location", text: $location)
                                 .padding()
-                                .background(Color(UIColor.systemGray6))
                                 .cornerRadius(10)
                                 .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
+                            if let error = locationError {
+                                Text(error)
+                                    .foregroundColor(.red)
+                                    .font(.caption)
+                            }
                         }
                     }
 
@@ -86,9 +106,8 @@ struct CreateEventView: View {
                         Text("Event Photo")
                             .font(.headline)
                         
-                        TextField("Enter photo base64", text: $photo)
+                        TextField("Enter photo URL", text: $photo)
                             .padding()
-                            .background(Color(UIColor.systemGray6))
                             .cornerRadius(10)
                             .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
                     }
@@ -96,7 +115,7 @@ struct CreateEventView: View {
                     Button(action: {
                         do {
                             try createEvent()
-                            errorMessage = nil // Clear error message on success
+                            errorMessage = nil 
                         } catch {
                             errorMessage = error.localizedDescription
                         }
@@ -150,17 +169,52 @@ struct CreateEventView: View {
         }
     }
 
+    private func validateFields() -> Bool {
+        var isValid = true
+        if name.isEmpty {
+            nameError = "Event name is required."
+            isValid = false
+        } else {
+            nameError = nil
+        }
+
+        if type.isEmpty {
+            typeError = "Event type is required."
+            isValid = false
+        } else {
+            typeError = nil
+        }
+
+        if description.isEmpty {
+            descriptionError = "Event description is required."
+            isValid = false
+        } else {
+            descriptionError = nil
+        }
+
+        if location.isEmpty {
+            locationError = "Event location is required."
+            isValid = false
+        } else {
+            locationError = nil
+        }
+
+        return isValid
+    }
+
     private func createEvent() throws {
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "HH:mm"
         
         guard let uid = Auth.auth().currentUser?.uid else {
-            print("No user logged in")
+            throw EventCreationError.missingUserInfo
+        }
+        
+        if !validateFields() {
             return
         }
         
         getUsername { username in
-            
             let event = Event(
                 id: UUID().uuidString,
                 name: name,
@@ -176,11 +230,9 @@ struct CreateEventView: View {
                 posts: []
             )
             
-            
             eventController.createEvent(event: event)
             eventController.shouldReloadEvents = true
             presentationMode.wrappedValue.dismiss()
-            
         }
     }
     

@@ -148,8 +148,6 @@ app.put('/events/:eventID/posts/:postID', async (req, res) => {
     }
 });
 
-// UPDATE AUTHOR INFO for posts and events when user updates name
-
 app.delete('/events/:eventID/posts/:postID', async (req, res) => {
     const { postID } = req.params;
     
@@ -163,6 +161,8 @@ app.delete('/events/:eventID/posts/:postID', async (req, res) => {
         res.status(500).send(error);
     }
 });
+
+// UPDATE AUTHOR INFO for posts and events when user updates name
 
 app.put('/users/:userID/update-posts', async (req, res) => {
     const { userID } = req.params;

@@ -6,12 +6,6 @@ struct EventsView: View {
     @State private var searchText = ""
     private let eventController = EventController()
     
-    private let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter
-    }()
-    
     init(events: [Event] = []) {
         _events = State(initialValue: events)
     }
@@ -24,18 +18,27 @@ struct EventsView: View {
                         NavigationLink(destination: EventDetailView(event: event, eventController: eventController)) {
                             VStack {
                                 if let url = URL(string: event.photo), !event.photo.isEmpty {
-                                    AsyncImage(url: url) { image in
-                                        image
-                                            .resizable()
-                                            .scaledToFill()
-                                            .frame(height: 100)
-                                            .clipped()
-                                    } placeholder: {
-                                        Image(systemName: "photo")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(height: 100)
-                                            .frame(maxWidth: .infinity)
+                                    AsyncImage(url: url) { phase in
+                                        switch phase {
+                                        case .empty:
+                                            ProgressView()
+                                                .frame(height: 100)
+                                                .frame(maxWidth: .infinity)
+                                        case .success(let image):
+                                            image
+                                                .resizable()
+                                                .scaledToFill()
+                                                .frame(height: 100)
+                                                .clipped()
+                                        case .failure:
+                                            Image(systemName: "photo")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(height: 100)
+                                                .frame(maxWidth: .infinity)
+                                        @unknown default:
+                                            EmptyView()
+                                        }
                                     }
                                     .frame(maxWidth: .infinity)
                                 } else {
@@ -64,7 +67,7 @@ struct EventsView: View {
                                             .font(.system(size: 12))
                                             .padding(.top, 8)
                                             
-                                        Text(dateFormatter.string(from: event.date))
+                                        Text(event.date.formatDatum(event.date))
                                             .padding(.top, 2)
                                             .font(.system(size: 12))
                                             .frame(maxWidth: .infinity, alignment: .leading)

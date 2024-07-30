@@ -183,7 +183,6 @@
 			children = (
 				E00E1D542C0774AE00FD87C1 /* ChatModel.swift */,
 				E00E1D552C0774AE00FD87C1 /* ChatViewModel.swift */,
-				E00E1D562C0774AE00FD87C1 /* DateHelpers.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -217,6 +216,8 @@
 		E0AE481D2C34081000026FCF /* Events */ = {
 			isa = PBXGroup;
 			children = (
+				E04C34EB2C0E421C00F986FA /* Model */,
+				E04C34EE2C0E42B800F986FA /* Controller */,
 				E0AE48232C340AF000026FCF /* CreateEventView.swift */,
 				E0AE48182C34081000026FCF /* CreatePostView.swift */,
 				E0AE48192C34081000026FCF /* EventDetailView.swift */,
@@ -231,6 +232,7 @@
 		E0AE482A2C34474D00026FCF /* util */ = {
 			isa = PBXGroup;
 			children = (
+				E00E1D562C0774AE00FD87C1 /* DateHelpers.swift */,
 				E0AE482B2C34475E00026FCF /* AuthUtil.swift */,
 			);
 			path = util;
@@ -277,9 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				E0AE482A2C34474D00026FCF /* util */,
-				E04C34EE2C0E42B800F986FA /* Controller */,
 				E00E1D462C07678E00FD87C1 /* Info.plist */,
-				E04C34EB2C0E421C00F986FA /* Model */,
 				E0C9308D2BFD23860098DB5B /* MainView.swift */,
 				E0C9308C2BFD23860098DB5B /* Views */,
 				E0EF5AEF2BFBD6EA00F99C59 /* LoginView.swift */,
