@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A06F3EB42C3562FE0019FB70 /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06F3EB32C3562FE0019FB70 /* QRCodeView.swift */; };
+		A06F3EB62C3563C60019FB70 /* QRCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06F3EB52C3563C60019FB70 /* QRCodeGenerator.swift */; };
+		A0F88A7D2C3569CB002A97F5 /* QRCodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F88A7C2C3569CB002A97F5 /* QRCodeScannerView.swift */; };
 		E00E1D482C0770F800FD87C1 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00E1D472C0770F700FD87C1 /* SignUpView.swift */; };
 		E00E1D5A2C0774AE00FD87C1 /* HomeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00E1D4C2C0774AE00FD87C1 /* HomeInfo.swift */; };
 		E00E1D5B2C0774AE00FD87C1 /* HomeTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00E1D4D2C0774AE00FD87C1 /* HomeTokens.swift */; };
@@ -67,6 +70,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A06F3EB32C3562FE0019FB70 /* QRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
+		A06F3EB52C3563C60019FB70 /* QRCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGenerator.swift; sourceTree = "<group>"; };
+		A0F88A7C2C3569CB002A97F5 /* QRCodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerView.swift; sourceTree = "<group>"; };
 		E00E1D462C07678E00FD87C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E00E1D472C0770F700FD87C1 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		E00E1D4C2C0774AE00FD87C1 /* HomeInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeInfo.swift; sourceTree = "<group>"; };
@@ -141,6 +147,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A06F3EB22C3562E40019FB70 /* QRCode */ = {
+			isa = PBXGroup;
+			children = (
+				A06F3EB32C3562FE0019FB70 /* QRCodeView.swift */,
+				A06F3EB52C3563C60019FB70 /* QRCodeGenerator.swift */,
+				A0F88A7C2C3569CB002A97F5 /* QRCodeScannerView.swift */,
+			);
+			path = QRCode;
+			sourceTree = "<group>";
+		};
 		E00E1D4B2C07747300FD87C1 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -241,6 +257,7 @@
 		E0C9308C2BFD23860098DB5B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A06F3EB22C3562E40019FB70 /* QRCode */,
 				E60C23A52C1F361D00B2F7FE /* LoginSignUpView.swift */,
 				E67AAE4F2C0FB6DA00DFE963 /* AccountView */,
 				E00E1D592C0774AE00FD87C1 /* Chat */,
@@ -496,9 +513,12 @@
 				E0EF5AF22BFBD6EA00F99C59 /* LoginView.swift in Sources */,
 				E00E1D622C0774AE00FD87C1 /* ChatView.swift in Sources */,
 				E0AE48202C34081000026FCF /* EventsView.swift in Sources */,
+				A06F3EB62C3563C60019FB70 /* QRCodeGenerator.swift in Sources */,
 				E0AE481F2C34081000026FCF /* EventDetailView.swift in Sources */,
 				E0AE48222C34081000026FCF /* UpdateEventView.swift in Sources */,
 				E0C9308E2BFD23860098DB5B /* AccountView.swift in Sources */,
+				A06F3EB42C3562FE0019FB70 /* QRCodeView.swift in Sources */,
+				A0F88A7D2C3569CB002A97F5 /* QRCodeScannerView.swift in Sources */,
 				E00E1D5E2C0774AE00FD87C1 /* MessageView.swift in Sources */,
 				E0C930912BFD23860098DB5B /* NewsView.swift in Sources */,
 				E00E1D612C0774AE00FD87C1 /* DateHelpers.swift in Sources */,
@@ -668,6 +688,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CampusEventApp/Preview Content\"";
+				DEVELOPMENT_TEAM = P34ZMF5WAT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CampusEventApp/Info.plist;
@@ -697,6 +718,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CampusEventApp/Preview Content\"";
+				DEVELOPMENT_TEAM = P34ZMF5WAT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CampusEventApp/Info.plist;

@@ -29,7 +29,7 @@ struct MainView: View {
                 
                 EventsView()
                     .tabItem {
-                        Image(systemName: "bell.fill")
+                        Image(systemName: "calendar")
                         Text("Events")
                     }
                 

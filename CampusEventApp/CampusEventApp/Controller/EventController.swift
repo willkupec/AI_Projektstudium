@@ -1,7 +1,7 @@
 import Foundation
 
 class EventController {
-    let MONGO_URL = "http://localhost:80/events"
+    let MONGO_URL = "http://canwrobel.de:8090/events"//"http://localhost:80/events"
     var shouldReloadEvents: Bool = true
     var shouldReloadEventDetail: Bool = true
 

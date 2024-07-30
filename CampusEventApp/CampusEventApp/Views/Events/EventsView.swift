@@ -4,6 +4,8 @@ import FirebaseAuth
 struct EventsView: View {
     @State private var events: [Event] = []
     @State private var searchText = ""
+    @State private var showQRCodeScanner = false
+    @State private var scannedCode: ScannedCode?
     private let eventController = EventController()
     
     init(events: [Event] = []) {
@@ -12,119 +14,115 @@ struct EventsView: View {
     
     var body: some View {
         NavigationStack {
-            ZStack {
-                List {
-                    ForEach(searchResults) { event in
-                        NavigationLink(destination: EventDetailView(event: event, eventController: eventController)) {
-                            VStack {
-                                if let url = URL(string: event.photo), !event.photo.isEmpty {
-                                    AsyncImage(url: url) { phase in
+            List {
+                ForEach(searchResults) { event in
+                    NavigationLink(destination: EventDetailView(event: event, eventController: eventController)) {
+                        VStack {
+                            if let url = URL(string: event.photo), !event.photo.isEmpty {
+                                AsyncImage(url: url) { phase in
                                         switch phase {
                                         case .empty:
                                             ProgressView()
                                                 .frame(height: 100)
                                                 .frame(maxWidth: .infinity)
                                         case .success(let image):
-                                            image
-                                                .resizable()
-                                                .scaledToFill()
-                                                .frame(height: 100)
-                                                .clipped()
-                                        case .failure:
-                                            Image(systemName: "photo")
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(height: 100)
-                                                .frame(maxWidth: .infinity)
+                                        image
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(height: 100)
+                                            .clipped()
+                                    case .failure:
+                                        Image(systemName: "photo")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(height: 100)
+                                            .frame(maxWidth: .infinity)
                                         @unknown default:
                                             EmptyView()
                                         }
-                                    }
+                                }
+                                .frame(maxWidth: .infinity)
+                            } else {
+                                Image(systemName: "photo")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(height: 100)
                                     .frame(maxWidth: .infinity)
-                                } else {
-                                    Image(systemName: "photo")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(height: 100)
-                                        .frame(maxWidth: .infinity)
+                            }
+                            
+                            VStack {
+                                HStack {
+                                    Text(event.name)
+                                        .font(.system(size: 18))
+                                        .fontWeight(.bold)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
                                 }
-                                
                                 VStack {
-                                    HStack {
-                                        Text(event.name)
-                                            .font(.system(size: 18))
-                                            .fontWeight(.bold)
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                    }
-                                    VStack {
-                                        Text(event.organizerName)
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                            .font(.system(size: 12))
-                                            .padding(.top, 1)
+                                    Text(event.organizerName)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .font(.system(size: 12))
+                                        .padding(.top, 1)
+                                    
+                                    Text("\(event.start) - \(event.end)")
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .font(.system(size: 12))
+                                        .padding(.top, 8)
                                         
-                                        Text("\(event.start) - \(event.end)")
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                            .font(.system(size: 12))
-                                            .padding(.top, 8)
-                                            
-                                        Text(event.date.formatDatum(event.date))
-                                            .padding(.top, 2)
-                                            .font(.system(size: 12))
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                    }
-                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    Text(event.date.formatDatum(event.date))
+                                        .padding(.top, 2)
+                                        .font(.system(size: 12))
+                                        .frame(maxWidth: .infinity, alignment: .leading)
                                 }
-                                .padding(.vertical, 10)
-                                .padding(.horizontal, 20)
-                                .frame(alignment: .leading)
+                                .frame(maxWidth: .infinity, alignment: .leading)
                             }
-                            .cornerRadius(10)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.gray, lineWidth: 0.5)
-                            )
-                            .listRowSeparator(.hidden)
+                            .padding(.vertical, 10)
+                            .padding(.horizontal, 20)
+                            .frame(alignment: .leading)
                         }
-                        .buttonStyle(PlainButtonStyle())
-                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                            if event.organizerId == Auth.auth().currentUser?.uid {
-                                Button(role: .destructive) {
-                                    deleteEvent(event: event)
-                                } label: {
-                                    Label("Delete", systemImage: "trash")
-                                }
+                        .cornerRadius(10)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.gray, lineWidth: 0.5)
+                        )
+                        .listRowSeparator(.hidden)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                        if event.organizerId == Auth.auth().currentUser?.uid {
+                            Button(role: .destructive) {
+                                deleteEvent(event: event)
+                            } label: {
+                                Label("Delete", systemImage: "trash")
                             }
                         }
                     }
                 }
-                .refreshable {
+            }
+            .refreshable {
+                reloadEvents()
+            }
+            .listStyle(.plain)
+            .frame(alignment: .center)
+            .navigationTitle("Events")
+            .navigationBarItems(trailing: Button(action: {
+                showQRCodeScanner.toggle()
+            }) {
+                Image(systemName: "qrcode.viewfinder")
+            })
+            .onAppear {
+                if eventController.shouldReloadEvents {
                     reloadEvents()
+                    eventController.shouldReloadEvents = false
                 }
-                .listStyle(.plain)
-                .frame(alignment: .center)
-                .navigationTitle("Events")
-                .onAppear {
-                    if eventController.shouldReloadEvents {
-                        reloadEvents()
-                        eventController.shouldReloadEvents = false
-                    }
+            }
+            .sheet(isPresented: $showQRCodeScanner) {
+                QRCodeScannerView { result in
+                    scannedCode = ScannedCode(code: result)
+                    showQRCodeScanner = false
                 }
-                
-                VStack {
-                    Spacer()
-                    HStack {
-                        Spacer()
-                        NavigationLink(destination: CreateEventView(eventController: eventController)) {
-                            Image(systemName: "plus")
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(Color.green)
-                                .clipShape(Circle())
-                                .shadow(radius: 5)
-                        }
-                        .padding()
-                    }
-                }
+            }
+            .sheet(item: $scannedCode) { code in
+                ScannedCodeView(scannedCode: code)
             }
         }
         .searchable(text: $searchText)
@@ -150,6 +148,30 @@ struct EventsView: View {
             events.remove(at: index)
         }
         eventController.shouldReloadEvents = true
+    }
+}
+
+struct ScannedCode: Identifiable {
+    let id = UUID()
+    let code: String
+}
+
+struct ScannedCodeView: View {
+    let scannedCode: ScannedCode
+
+    var body: some View {
+        VStack {
+            Text("Scanned QR Code:")
+                .font(.headline)
+                .padding()
+            Text(scannedCode.code)
+                .padding()
+                .background(Color.gray.opacity(0.2))
+                .cornerRadius(10)
+                .padding()
+            
+        }
+        .padding()
     }
 }
 
