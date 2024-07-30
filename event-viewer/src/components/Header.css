@@ -1,0 +1,21 @@
+.header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px;
+    z-index: 1000;
+  }
+  
+  .header-image {
+    width: 66.6%; /* 2:1 ratio */
+    height: auto;
+  }
+  
+  .header-text {
+    flex: 1;
+    font-size: 24px;
+    padding-left: 20px;
+  }
+  
