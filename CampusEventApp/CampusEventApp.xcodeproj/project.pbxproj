@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		13975D712C5A5EE30049C352 /* InAppCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13975D702C5A5EE30049C352 /* InAppCalendarView.swift */; };
+		13975D732C5A5F360049C352 /* ImportCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13975D722C5A5F360049C352 /* ImportCalendarView.swift */; };
+		13975D752C5A5FB30049C352 /* ICSEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13975D742C5A5FB30049C352 /* ICSEvent.swift */; };
+		13975D772C5A5FC90049C352 /* ICSEventParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13975D762C5A5FC90049C352 /* ICSEventParser.swift */; };
+		13975D792C5A600E0049C352 /* TextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13975D782C5A600E0049C352 /* TextFieldAlert.swift */; };
 		E00E1D482C0770F800FD87C1 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00E1D472C0770F700FD87C1 /* SignUpView.swift */; };
 		E00E1D5A2C0774AE00FD87C1 /* HomeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00E1D4C2C0774AE00FD87C1 /* HomeInfo.swift */; };
 		E00E1D5B2C0774AE00FD87C1 /* HomeTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00E1D4D2C0774AE00FD87C1 /* HomeTokens.swift */; };
@@ -67,7 +72,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E00E1D462C07678E00FD87C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		13975D702C5A5EE30049C352 /* InAppCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppCalendarView.swift; sourceTree = "<group>"; };
+		13975D722C5A5F360049C352 /* ImportCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportCalendarView.swift; sourceTree = "<group>"; };
+		13975D742C5A5FB30049C352 /* ICSEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICSEvent.swift; sourceTree = "<group>"; };
+		13975D762C5A5FC90049C352 /* ICSEventParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICSEventParser.swift; sourceTree = "<group>"; };
+		13975D782C5A600E0049C352 /* TextFieldAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldAlert.swift; sourceTree = "<group>"; };
+		E00E1D462C07678E00FD87C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E00E1D472C0770F700FD87C1 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		E00E1D4C2C0774AE00FD87C1 /* HomeInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeInfo.swift; sourceTree = "<group>"; };
 		E00E1D4D2C0774AE00FD87C1 /* HomeTokens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTokens.swift; sourceTree = "<group>"; };
@@ -165,6 +175,10 @@
 			children = (
 				E00E1D4E2C0774AE00FD87C1 /* Components */,
 				E00E1D4F2C0774AE00FD87C1 /* HomeView.swift */,
+				13975D722C5A5F360049C352 /* ImportCalendarView.swift */,
+				13975D742C5A5FB30049C352 /* ICSEvent.swift */,
+				13975D762C5A5FC90049C352 /* ICSEventParser.swift */,
+				13975D782C5A600E0049C352 /* TextFieldAlert.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -248,6 +262,7 @@
 				E0AE481D2C34081000026FCF /* Events */,
 				E0C9308A2BFD23860098DB5B /* NewsView.swift */,
 				E60C23A72C1F79A000B2F7FE /* SignUpLoginView.swift */,
+				13975D702C5A5EE30049C352 /* InAppCalendarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -478,7 +493,7 @@
 				E0AE48252C340B2B00026FCF /* Event.swift in Sources */,
 				E0AE48292C343DE400026FCF /* UpdatePostView.swift in Sources */,
 				E00E1D5C2C0774AE00FD87C1 /* HomeView.swift in Sources */,
-				E04C34F02C0E42D000F986FA /* EventController.swift in Sources */,
+				13975D752C5A5FB30049C352 /* ICSEvent.swift in Sources */,
 				E00E1D5B2C0774AE00FD87C1 /* HomeTokens.swift in Sources */,
 				E0C930932BFD23860098DB5B /* MainView.swift in Sources */,
 				E00E1D5F2C0774AE00FD87C1 /* ChatModel.swift in Sources */,
@@ -488,20 +503,19 @@
 				E60C23A82C1F79A000B2F7FE /* SignUpLoginView.swift in Sources */,
 				E67AAE522C0FB77E00DFE963 /* ImagePicker.swift in Sources */,
 				E6451F272BF7D2A800E8F481 /* CampusEventAppApp.swift in Sources */,
-				E0AE481E2C34081000026FCF /* CreatePostView.swift in Sources */,
-				E0AE48242C340AF000026FCF /* CreateEventView.swift in Sources */,
+				13975D792C5A600E0049C352 /* TextFieldAlert.swift in Sources */,
+				13975D712C5A5EE30049C352 /* InAppCalendarView.swift in Sources */,
 				E00E1D5A2C0774AE00FD87C1 /* HomeInfo.swift in Sources */,
 				E00E1D482C0770F800FD87C1 /* SignUpView.swift in Sources */,
 				E0AE482C2C34475E00026FCF /* AuthUtil.swift in Sources */,
 				E0EF5AF22BFBD6EA00F99C59 /* LoginView.swift in Sources */,
 				E00E1D622C0774AE00FD87C1 /* ChatView.swift in Sources */,
-				E0AE48202C34081000026FCF /* EventsView.swift in Sources */,
-				E0AE481F2C34081000026FCF /* EventDetailView.swift in Sources */,
-				E0AE48222C34081000026FCF /* UpdateEventView.swift in Sources */,
+				13975D772C5A5FC90049C352 /* ICSEventParser.swift in Sources */,
 				E0C9308E2BFD23860098DB5B /* AccountView.swift in Sources */,
 				E00E1D5E2C0774AE00FD87C1 /* MessageView.swift in Sources */,
 				E0C930912BFD23860098DB5B /* NewsView.swift in Sources */,
 				E00E1D612C0774AE00FD87C1 /* DateHelpers.swift in Sources */,
+				13975D732C5A5F360049C352 /* ImportCalendarView.swift in Sources */,
 				E00E1D5D2C0774AE00FD87C1 /* ChatRow.swift in Sources */,
 				E00E1D602C0774AE00FD87C1 /* ChatViewModel.swift in Sources */,
 				E0AE48212C34081000026FCF /* PostView.swift in Sources */,
@@ -671,6 +685,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CampusEventApp/Info.plist;
+				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -700,6 +715,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CampusEventApp/Info.plist;
+				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
