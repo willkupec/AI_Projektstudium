@@ -14,6 +14,12 @@ Zugangsdaten bekommen
 ### Wie kommt man an die Haltestellendaten?
 1. Erstmal schauen was kommt denn da für Info bei dem Endpoint<br>
 GET https://vbb.demo.hafas.de/fahrinfo/restproxy/2.32<br>
+
+oder
+```
+curl https://vbb.demo.hafas.de/fahrinfo/restproxy/2.32
+```
+
 <details>
 <summary>Sieht so aus</summary>
 <body><ul><li><a href="https://vbb.demo.hafas.de//fahrinfo/restproxy/2.32/arrivalBoard?wadl" target="_blank">Arrival Board</a></li><li><a href="https://vbb.demo.hafas.de//fahrinfo/restproxy/2.32/departureBoard?wadl" target="_blank">Departure Board</a></li><li><a href="https://vbb.demo.hafas.de//fahrinfo/restproxy/2.32/gisroute?wadl" target="_blank">GIS Route by Context</a></li><li><a href="https://vbb.demo.hafas.de//fahrinfo/restproxy/2.32/himsearch?wadl" target="_blank">HIM Search</a></li><li><a href="https://vbb.demo.hafas.de//fahrinfo/restproxy/2.32/journeyDetail?wadl" target="_blank">Journey detail</a></li><li><a href="https://vbb.demo.hafas.de//fahrinfo/restproxy/2.32/journeypos?wadl" target="_blank">Journey Position</a></li><li><a href="https://vbb.demo.hafas.de//fahrinfo/restproxy/2.32/location.nearbystops?wadl" target="_blank">Location Search by Coordinate</a></li><li><a href="https://vbb.demo.hafas.de//fahrinfo/restproxy/2.32/location.name?wadl" target="_blank">Location Search by Name</a></li><li><a href="https://vbb.demo.hafas.de//fahrinfo/restproxy/2.32/recon?wadl" target="_blank">Reconstruction</a></li><li><a href="https://vbb.demo.hafas.de//fahrinfo/restproxy/2.32/trip?wadl" target="_blank">Trip Search</a></li><li><a href="https://vbb.demo.hafas.de//fahrinfo/restproxy/2.32/xsd" target="_blank">XSD</a></li></ul><a id="mycustomimage" href="#" download=""></a></body>
