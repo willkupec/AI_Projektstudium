@@ -41,7 +41,6 @@ struct EventsView: View {
                                             EmptyView()
                                         }
                                 }
-                                .frame(maxWidth: .infinity)
                             } else {
                                 Image(systemName: "photo")
                                     .resizable()
