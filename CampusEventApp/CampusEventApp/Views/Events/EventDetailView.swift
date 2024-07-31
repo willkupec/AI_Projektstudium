@@ -5,6 +5,7 @@ struct EventDetailView: View {
     @State var event: Event
     @State private var showAlert = false
     @State private var posts: [Post] = []
+    @State private var showQRCodeGenerator = false
     @Environment(\.presentationMode) var presentationMode
     var eventController: EventController
 
@@ -189,6 +190,21 @@ struct EventDetailView: View {
                                 .shadow(radius: 5)
                         }
                         .padding()
+                        Button(action: {
+                            showQRCodeGenerator.toggle()
+                        }) {
+                            Image(systemName: "qrcode")
+                                .font(.system(size: 24))
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.blue)
+                                .clipShape(Circle())
+                                .shadow(radius: 5)
+                        }
+                        .padding()
+                        .sheet(isPresented: $showQRCodeGenerator) {
+                            QRCodeView(event: event)
+                        }
                     }
                 }
             }

@@ -12,6 +12,9 @@
 		13975D752C5A5FB30049C352 /* ICSEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13975D742C5A5FB30049C352 /* ICSEvent.swift */; };
 		13975D772C5A5FC90049C352 /* ICSEventParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13975D762C5A5FC90049C352 /* ICSEventParser.swift */; };
 		13975D792C5A600E0049C352 /* TextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13975D782C5A600E0049C352 /* TextFieldAlert.swift */; };
+		A06F3EB42C3562FE0019FB70 /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06F3EB32C3562FE0019FB70 /* QRCodeView.swift */; };
+		A06F3EB62C3563C60019FB70 /* QRCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06F3EB52C3563C60019FB70 /* QRCodeGenerator.swift */; };
+		A0F88A7D2C3569CB002A97F5 /* QRCodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F88A7C2C3569CB002A97F5 /* QRCodeScannerView.swift */; };
 		E00E1D482C0770F800FD87C1 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00E1D472C0770F700FD87C1 /* SignUpView.swift */; };
 		E00E1D5A2C0774AE00FD87C1 /* HomeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00E1D4C2C0774AE00FD87C1 /* HomeInfo.swift */; };
 		E00E1D5B2C0774AE00FD87C1 /* HomeTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00E1D4D2C0774AE00FD87C1 /* HomeTokens.swift */; };
@@ -23,18 +26,18 @@
 		E00E1D612C0774AE00FD87C1 /* DateHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00E1D562C0774AE00FD87C1 /* DateHelpers.swift */; };
 		E00E1D622C0774AE00FD87C1 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00E1D582C0774AE00FD87C1 /* ChatView.swift */; };
 		E00E1D662C07777300FD87C1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E00E1D652C07777200FD87C1 /* GoogleService-Info.plist */; };
-		E04C34F02C0E42D000F986FA /* EventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C34EF2C0E42D000F986FA /* EventController.swift */; };
-		E0AE481E2C34081000026FCF /* CreatePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AE48182C34081000026FCF /* CreatePostView.swift */; };
+		E0113FDE2C5A879700538FD5 /* EventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C34EF2C0E42D000F986FA /* EventController.swift */; };
+		E0113FDF2C5A879B00538FD5 /* CreatePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AE48182C34081000026FCF /* CreatePostView.swift */; };
+		E0113FE02C5A879E00538FD5 /* CreateEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AE48232C340AF000026FCF /* CreateEventView.swift */; };
+		E0113FE22C5A8E8100538FD5 /* CalendarTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0113FE12C5A8E8100538FD5 /* CalendarTabView.swift */; };
 		E0AE481F2C34081000026FCF /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AE48192C34081000026FCF /* EventDetailView.swift */; };
 		E0AE48202C34081000026FCF /* EventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AE481A2C34081000026FCF /* EventsView.swift */; };
 		E0AE48212C34081000026FCF /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AE481B2C34081000026FCF /* PostView.swift */; };
 		E0AE48222C34081000026FCF /* UpdateEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AE481C2C34081000026FCF /* UpdateEventView.swift */; };
-		E0AE48242C340AF000026FCF /* CreateEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AE48232C340AF000026FCF /* CreateEventView.swift */; };
 		E0AE48252C340B2B00026FCF /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C34EC2C0E423800F986FA /* Event.swift */; };
 		E0AE48292C343DE400026FCF /* UpdatePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AE48282C343DE400026FCF /* UpdatePostView.swift */; };
 		E0AE482C2C34475E00026FCF /* AuthUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AE482B2C34475E00026FCF /* AuthUtil.swift */; };
 		E0C9308E2BFD23860098DB5B /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C930872BFD23860098DB5B /* AccountView.swift */; };
-		E0C930912BFD23860098DB5B /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C9308A2BFD23860098DB5B /* NewsView.swift */; };
 		E0C930932BFD23860098DB5B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C9308D2BFD23860098DB5B /* MainView.swift */; };
 		E0EF5AF22BFBD6EA00F99C59 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EF5AEF2BFBD6EA00F99C59 /* LoginView.swift */; };
 		E0EF5AF52BFBD74500F99C59 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = E0EF5AF42BFBD74500F99C59 /* .gitignore */; };
@@ -77,6 +80,9 @@
 		13975D742C5A5FB30049C352 /* ICSEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICSEvent.swift; sourceTree = "<group>"; };
 		13975D762C5A5FC90049C352 /* ICSEventParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICSEventParser.swift; sourceTree = "<group>"; };
 		13975D782C5A600E0049C352 /* TextFieldAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldAlert.swift; sourceTree = "<group>"; };
+		A06F3EB32C3562FE0019FB70 /* QRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
+		A06F3EB52C3563C60019FB70 /* QRCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGenerator.swift; sourceTree = "<group>"; };
+		A0F88A7C2C3569CB002A97F5 /* QRCodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerView.swift; sourceTree = "<group>"; };
 		E00E1D462C07678E00FD87C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E00E1D472C0770F700FD87C1 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		E00E1D4C2C0774AE00FD87C1 /* HomeInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeInfo.swift; sourceTree = "<group>"; };
@@ -89,6 +95,7 @@
 		E00E1D562C0774AE00FD87C1 /* DateHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelpers.swift; sourceTree = "<group>"; };
 		E00E1D582C0774AE00FD87C1 /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		E00E1D652C07777200FD87C1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "CampusEventApp/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E0113FE12C5A8E8100538FD5 /* CalendarTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTabView.swift; sourceTree = "<group>"; };
 		E04C34EC2C0E423800F986FA /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		E04C34EF2C0E42D000F986FA /* EventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventController.swift; sourceTree = "<group>"; };
 		E060B46A2C0F3A4D009EA2BC /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
@@ -102,7 +109,6 @@
 		E0AE48282C343DE400026FCF /* UpdatePostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePostView.swift; sourceTree = "<group>"; };
 		E0AE482B2C34475E00026FCF /* AuthUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUtil.swift; sourceTree = "<group>"; };
 		E0C930872BFD23860098DB5B /* AccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
-		E0C9308A2BFD23860098DB5B /* NewsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
 		E0C9308D2BFD23860098DB5B /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		E0EF5AEF2BFBD6EA00F99C59 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		E0EF5AF42BFBD74500F99C59 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -151,6 +157,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A06F3EB22C3562E40019FB70 /* QRCode */ = {
+			isa = PBXGroup;
+			children = (
+				A06F3EB32C3562FE0019FB70 /* QRCodeView.swift */,
+				A06F3EB52C3563C60019FB70 /* QRCodeGenerator.swift */,
+				A0F88A7C2C3569CB002A97F5 /* QRCodeScannerView.swift */,
+			);
+			path = QRCode;
+			sourceTree = "<group>";
+		};
 		E00E1D4B2C07747300FD87C1 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,14 +271,15 @@
 		E0C9308C2BFD23860098DB5B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A06F3EB22C3562E40019FB70 /* QRCode */,
 				E60C23A52C1F361D00B2F7FE /* LoginSignUpView.swift */,
 				E67AAE4F2C0FB6DA00DFE963 /* AccountView */,
 				E00E1D592C0774AE00FD87C1 /* Chat */,
 				E00E1D502C0774AE00FD87C1 /* HomeView */,
 				E0AE481D2C34081000026FCF /* Events */,
-				E0C9308A2BFD23860098DB5B /* NewsView.swift */,
 				E60C23A72C1F79A000B2F7FE /* SignUpLoginView.swift */,
 				13975D702C5A5EE30049C352 /* InAppCalendarView.swift */,
+				E0113FE12C5A8E8100538FD5 /* CalendarTabView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -490,6 +507,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0113FE02C5A879E00538FD5 /* CreateEventView.swift in Sources */,
+				E0113FDF2C5A879B00538FD5 /* CreatePostView.swift in Sources */,
+				E0113FDE2C5A879700538FD5 /* EventController.swift in Sources */,
 				E0AE48252C340B2B00026FCF /* Event.swift in Sources */,
 				E0AE48292C343DE400026FCF /* UpdatePostView.swift in Sources */,
 				E00E1D5C2C0774AE00FD87C1 /* HomeView.swift in Sources */,
@@ -510,10 +530,16 @@
 				E0AE482C2C34475E00026FCF /* AuthUtil.swift in Sources */,
 				E0EF5AF22BFBD6EA00F99C59 /* LoginView.swift in Sources */,
 				E00E1D622C0774AE00FD87C1 /* ChatView.swift in Sources */,
+				E0AE48202C34081000026FCF /* EventsView.swift in Sources */,
+				A06F3EB62C3563C60019FB70 /* QRCodeGenerator.swift in Sources */,
+				E0AE481F2C34081000026FCF /* EventDetailView.swift in Sources */,
+				E0AE48222C34081000026FCF /* UpdateEventView.swift in Sources */,
 				13975D772C5A5FC90049C352 /* ICSEventParser.swift in Sources */,
 				E0C9308E2BFD23860098DB5B /* AccountView.swift in Sources */,
+				A06F3EB42C3562FE0019FB70 /* QRCodeView.swift in Sources */,
+				A0F88A7D2C3569CB002A97F5 /* QRCodeScannerView.swift in Sources */,
 				E00E1D5E2C0774AE00FD87C1 /* MessageView.swift in Sources */,
-				E0C930912BFD23860098DB5B /* NewsView.swift in Sources */,
+				E0113FE22C5A8E8100538FD5 /* CalendarTabView.swift in Sources */,
 				E00E1D612C0774AE00FD87C1 /* DateHelpers.swift in Sources */,
 				13975D732C5A5F360049C352 /* ImportCalendarView.swift in Sources */,
 				E00E1D5D2C0774AE00FD87C1 /* ChatRow.swift in Sources */,
@@ -682,6 +708,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CampusEventApp/Preview Content\"";
+				DEVELOPMENT_TEAM = P34ZMF5WAT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CampusEventApp/Info.plist;
@@ -712,6 +739,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CampusEventApp/Preview Content\"";
+				DEVELOPMENT_TEAM = P34ZMF5WAT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CampusEventApp/Info.plist;

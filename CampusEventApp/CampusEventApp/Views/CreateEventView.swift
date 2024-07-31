@@ -115,7 +115,7 @@ struct CreateEventView: View {
                     Button(action: {
                         do {
                             try createEvent()
-                            errorMessage = nil 
+                            errorMessage = nil
                         } catch {
                             errorMessage = error.localizedDescription
                         }
