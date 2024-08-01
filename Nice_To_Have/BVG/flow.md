@@ -44,7 +44,7 @@ curl -G 'https://vbb.demo.hafas.de/fahrinfo/restproxy/2.32/location.name' \
 für bash die chevrons mit \ ersetzen!!
 ```
 curl -G "https://vbb.demo.hafas.de/fahrinfo/restproxy/2.32/location.name" ^
-     --data-urlencode "accessId=htw-6e3e-4a39-86ac-1c6222a26f0b" ^
+     --data-urlencode "accessId=REDACTED" ^
      --data-urlencode "input=HTW" ^
      --data-urlencode "format=json" > output.json
 
@@ -73,7 +73,7 @@ Rathenaustr./HTW (Berlin): 900181503<br>
 ```
 SUCCESS: PLS GIB ALLE ABFAHRTEN für Treskowallee. Rathenaustr ersetze ID mit der der Rathenaustr
 curl -G 'https://vbb.demo.hafas.de/fahrinfo/restproxy/2.32/departureBoard' \
-     --data-urlencode 'accessId=htw-6e3e-4a39-86ac-1c6222a26f0b' \
+     --data-urlencode 'accessId=REDACTED' \
      --data-urlencode 'id=900162004' \
      --data-urlencode 'type=DEP' \
      --data-urlencode 'format=json'
@@ -82,7 +82,7 @@ curl -G 'https://vbb.demo.hafas.de/fahrinfo/restproxy/2.32/departureBoard' \
 jetzt nochmal cmd gerecht:
 ```
 curl -G "https://vbb.demo.hafas.de/fahrinfo/restproxy/2.32/departureBoard" ^
-     --data-urlencode "accessId=htw-6e3e-4a39-86ac-1c6222a26f0b" ^
+     --data-urlencode "accessId=REDACTED" ^
      --data-urlencode "id=900162004" ^
      --data-urlencode "type=DEP" ^
      --data-urlencode "format=json" > departures.json
@@ -90,7 +90,7 @@ curl -G "https://vbb.demo.hafas.de/fahrinfo/restproxy/2.32/departureBoard" ^
 ```
 ```
 curl -G "https://vbb.demo.hafas.de/fahrinfo/restproxy/2.32/departureBoard" ^
-     --data-urlencode "accessId=htw-6e3e-4a39-86ac-1c6222a26f0b" ^
+     --data-urlencode "accessId=REDACTED" ^
      --data-urlencode "id=900181503" ^
      --data-urlencode "duration=10" ^
      --data-urlencode "type=DEP" ^
@@ -101,7 +101,7 @@ diesen Curl in git bash ausführen für die aktuelle Zeit:
 ```
 
 curl -G "https://vbb.demo.hafas.de/fahrinfo/restproxy/2.32/departureBoard" \
-     --data-urlencode "accessId=htw-6e3e-4a39-86ac-1c6222a26f0b" \
+     --data-urlencode "accessId=REDACTED" \
      --data-urlencode "id=900181503" \
      --data-urlencode "date=2024-07-31" \
      --data-urlencode "time=13:45" \
@@ -112,7 +112,7 @@ curl -G "https://vbb.demo.hafas.de/fahrinfo/restproxy/2.32/departureBoard" \
 
 ```
 curl -G "https://vbb.demo.hafas.de/fahrinfo/restproxy/2.32/departureBoard" ^
-     --data-urlencode "accessId=htw-6e3e-4a39-86ac-1c6222a26f0b" ^
+     --data-urlencode "accessId=REDACTED" ^
      --data-urlencode "id=900181503" ^
      --data-urlencode "date=2024-07-31" ^  
      --data-urlencode "time=13:30" ^
@@ -125,7 +125,7 @@ curl -G "https://vbb.demo.hafas.de/fahrinfo/restproxy/2.32/departureBoard" ^
 finde den Fehler:
 ```
 curl -G "https://vbb.demo.hafas.de/fahrinfo/restproxy/2.32/departureBoard" ^
-     --data-urlencode "accessID=htw-6e3e-4a39-86ac-1c6222a26f0b" ^
+     --data-urlencode "accessID=REDACTED" ^
      --data-urlencode "id=900181503" ^
      --data-urlencode "duration=10" ^
      --data-urlencode "type=DEP" ^
