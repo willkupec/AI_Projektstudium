@@ -4,70 +4,29 @@ import { Container, Grid, Paper, TextField, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 import Event from "../components/Event"
 
-const event1 = {
-  _id: 1,
-  titel: "Jazz Party",
-  tag: "10.02.2024",
-  start: "14:30",
-  ende: "20:00",
-  foto: "https://i.imgur.com/c9c4U2q.png",
-  beschreibung:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores totam est facilis quod impedit perferendis mollitia consequuntur nemo sit eligendi odio consectetur, qui expedita. Laboriosam quae voluptates esse eligendi expedita!",
+const getEvents = async (setEvents) => {
+  try {
+    const response = await fetch("http://canwrobel.de:8090/events", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    const data = await response.json()
+    setEvents(data)
+  } catch (error) {
+    console.error("Error fetching events:", error)
+  }
 }
-const event2 = {
-  _id: 2,
-  titel: "Quiz Night",
-  tag: "12.02.2024",
-  start: "19:00",
-  ende: "20:00",
-  foto: "https://i.imgur.com/vQ6q3Xq.jpg",
-  beschreibung:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores totam est facilis quod impedit perferendis mollitia consequuntur nemo sit eligendi odio consectetur, qui expedita. Laboriosam quae voluptates esse eligendi expedita!",
-}
-
-const event3 = {
-  _id: 3,
-  titel: "Jazz Party",
-  tag: "10.02.2024",
-  start: "14:30",
-  ende: "20:00",
-  foto: "https://i.imgur.com/c9c4U2q.png",
-  beschreibung:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores totam est facilis quod impedit perferendis mollitia consequuntur nemo sit eligendi odio consectetur, qui expedita. Laboriosam quae voluptates esse eligendi expedita!",
-}
-
-const event4 = {
-  _id: 4,
-  titel: "Quiz Night",
-  tag: "12.02.2024",
-  start: "19:00",
-  ende: "20:00",
-  foto: "https://i.imgur.com/vQ6q3Xq.jpg",
-  beschreibung:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores totam est facilis quod impedit perferendis mollitia consequuntur nemo sit eligendi odio consectetur, qui expedita. Laboriosam quae voluptates esse eligendi expedita!",
-}
-
-const dummyEvents = [event1, event2, event3, event4, event4, event4, event4]
-
-/* const getEvents = async (setEvents) => {
-  return fetch("http://malina.f4.htw-berlin.de:8080/events", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => setEvents(data))
-} */
 
 const Home = () => {
+  const [events, setEvents] = useState([])
   const [filteredEvents, setFilteredEvents] = useState([])
   const [searchText, setSearchText] = useState("")
 
-  /*
   useEffect(() => {
     getEvents(setEvents)
-  }, []) */
+  }, [])
 
   const handleSearch = (e) => {
     const lowerCase = e.target.value.toLowerCase()
@@ -76,11 +35,9 @@ const Home = () => {
 
   useEffect(() => {
     setFilteredEvents(
-      filter(dummyEvents, (event) =>
-        event.titel.toLowerCase().includes(searchText)
-      )
+      filter(events, (event) => event.titel.toLowerCase().includes(searchText))
     )
-  }, [searchText])
+  }, [events, searchText])
 
   return (
     <>
