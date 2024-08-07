@@ -1,4 +1,8 @@
 import { Grid, Paper, Typography } from "@mui/material"
+import AccessibleIcon from "@mui/icons-material/Accessible"
+import NotAccessibleIcon from "@mui/icons-material/NotAccessible"
+import CheckCircleIcon from "@mui/icons-material/CheckCircle"
+import CancelIcon from "@mui/icons-material/Cancel"
 
 const Bahn = ({ bahn }) => {
   const { art, nummer, richtung, abfahrtszeit, fahrradmitnahme, barrierefrei } =
@@ -112,10 +116,12 @@ const Bahn = ({ bahn }) => {
                         Fahrradmitnahme
                       </Typography>
                     </Grid>
-                    <Grid item>
-                      <Typography variant="h6" color="black">
-                        {fahrradmitnahme ? "true" : "false"}
-                      </Typography>
+                    <Grid item sx={{ mt: 0.4 }}>
+                      {fahrradmitnahme ? (
+                        <CheckCircleIcon sx={{ color: "#27b372" }} />
+                      ) : (
+                        <CancelIcon sx={{ color: "#c42237" }} />
+                      )}
                     </Grid>
                   </Grid>
                 </Paper>
@@ -140,10 +146,12 @@ const Bahn = ({ bahn }) => {
                         Barrierefrei
                       </Typography>
                     </Grid>
-                    <Grid item>
-                      <Typography variant="h6" color="black">
-                        {barrierefrei ? "true" : "false"}
-                      </Typography>
+                    <Grid item sx={{ mt: 0.4 }}>
+                      {barrierefrei ? (
+                        <AccessibleIcon sx={{ color: "black" }} />
+                      ) : (
+                        <NotAccessibleIcon sx={{ color: "black" }} />
+                      )}
                     </Grid>
                   </Grid>
                 </Paper>

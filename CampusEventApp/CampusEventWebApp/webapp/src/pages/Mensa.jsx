@@ -10,7 +10,7 @@ const Mensa = () => {
         disableGutters
         sx={{ height: "100%", position: "fixed" }}
       >
-        <Grid container paddingY={2} paddingRight={2} sx={{ height: "93%", bgcolor: "white" }}>
+        <Grid container paddingY={2} paddingRight={2} sx={{ height: "93%", bgcolor: "black" }}>
           <Grid
             container
             item
