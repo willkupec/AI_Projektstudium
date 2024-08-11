@@ -38,7 +38,7 @@ const Bahn = ({ bahn }) => {
               </Typography>
             </Paper>
           </Grid>
-          <Grid container item xs={8} rowSpacing="4px" sx={{ ml: 1 }}>
+          <Grid container item xs={8} rowSpacing="4px" sx={{ ml: 2.5 }}>
             <Grid item xs={12}>
               <Paper
                 sx={{
@@ -52,7 +52,7 @@ const Bahn = ({ bahn }) => {
                 <Grid
                   container
                   xs={11}
-                  sx={{ justifyContent: "space-between", ml: 2.5 }}
+                  sx={{ justifyContent: "space-between", ml: 1 }}
                 >
                   <Grid item>
                     <Typography variant="h6" color="black">
@@ -80,7 +80,7 @@ const Bahn = ({ bahn }) => {
                 <Grid
                   container
                   xs={11}
-                  sx={{ justifyContent: "space-between", ml: 2.5 }}
+                  sx={{ justifyContent: "space-between", ml: 1 }}
                 >
                   <Grid item>
                     <Typography variant="h6" color="black">
@@ -109,10 +109,11 @@ const Bahn = ({ bahn }) => {
                   <Grid
                     container
                     xs={11}
-                    sx={{ justifyContent: "space-between", ml: 2.5, pr: 1 }}
+                    justifyContent="space-between"
+                    alignItems="center"
                   >
                     <Grid item>
-                      <Typography variant="h6" color="black">
+                      <Typography variant="body2" color="black" sx={{ ml: 1, mb: 0.5 }}>
                         Fahrradmitnahme
                       </Typography>
                     </Grid>
@@ -139,10 +140,11 @@ const Bahn = ({ bahn }) => {
                   <Grid
                     container
                     xs={11}
-                    sx={{ justifyContent: "space-between", ml: 2.5, pr: 1 }}
+                    justifyContent="space-between"
+                    alignItems="center"
                   >
                     <Grid item>
-                      <Typography variant="h6" color="black">
+                      <Typography variant="body2" color="black" sx={{ ml: 1, mb: 0.5 }}>
                         Barrierefrei
                       </Typography>
                     </Grid>

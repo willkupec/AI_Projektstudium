@@ -8,7 +8,7 @@ const bahn1 = {
   _id: 1,
   art: "tram",
   nummer: "27",
-  richtung: "Krankenhaus Köpenick",
+  richtung: "Köpenick",
   abfahrtszeit: "1:51",
   fahrradmitnahme: true,
   barrierefrei: false,
@@ -91,7 +91,7 @@ const BahnList = ({ name }) => {
             alignContent: "center",
           }}
         >
-          <Typography variant="h2" color="white" fontWeight="bold">
+          <Typography variant="h3" color="white" fontWeight="bold">
             {name}
           </Typography>
         </Paper>
@@ -105,6 +105,7 @@ const BahnList = ({ name }) => {
             overflowY: "scroll",
             height: "72vh",
             scrollbarWidth: "none",
+            display: "block"
           }}
         >
           {map(filteredBahns, (bahn) => {
@@ -117,8 +118,8 @@ const BahnList = ({ name }) => {
             width: "220px",
             height: "40px",
             bgcolor: "white",
-            bottom: 170,
-            left: "72%",
+            bottom: 190,
+            left: "61%",
             opacity: "20%",
             borderRadius: "15px",
             transition: "opacity 0.3s ease",
@@ -149,8 +150,8 @@ const BahnList = ({ name }) => {
             width: "220px",
             height: "124px",
             bgcolor: "white",
-            bottom: 160,
-            left: "72%",
+            bottom: 180,
+            left: "61%",
             opacity: "20%",
             borderRadius: "15px",
             transition: "opacity 0.3s ease",
