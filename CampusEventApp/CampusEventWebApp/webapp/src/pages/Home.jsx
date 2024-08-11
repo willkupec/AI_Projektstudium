@@ -119,11 +119,11 @@ const Home = () => {
                   }}
                 >
                   <Grid item>
-                    <Typography variant="h2" color="white" fontWeight="bold">
+                    <Typography variant="h3" color="white" fontWeight="bold">
                       HTW Berlin Campus Events
                     </Typography>
                   </Grid>
-                  <Grid item sx={{ mr: 8, width: "400px" }}>
+                  <Grid item sx={{ mr: 8, width: "310px" }}>
                     <TextField
                       variant="outlined"
                       placeholder="Search"
@@ -159,6 +159,7 @@ const Home = () => {
                   overflowY: "scroll",
                   height: "70vh",
                   scrollbarWidth: "none",
+                  display: "block",
                 }}
               >
                 {map(filteredEvents, (event) => (
